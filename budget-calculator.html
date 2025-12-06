@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Calculator - Create Your Monthly Budget | WealthPathfinder</title>
+    <meta name="description" content="Free budget calculator to create your monthly budget, track expenses, and optimize your spending. Get personalized budgeting recommendations and insights.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://wealthpathfinder.com/budget-calculator.html">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-icon">💰</span>
+                        <span class="logo-text">WealthPathfinder</span>
+                    </a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="banking.html" class="nav-link">Banking & Savings</a></li>
+                        <li><a href="investing.html" class="nav-link">Investing Basics</a></li>
+                        <li><a href="credit.html" class="nav-link">Credit & Debt</a></li>
+                        <li><a href="budgeting.html" class="nav-link">Budgeting</a></li>
+                        <li><a href="side-hustles.html" class="nav-link">Making Money</a></li>
+                        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                        <li><a href="calculators.html" class="nav-link">Calculators</a></li>
+                        <li><a href="tools.html" class="nav-link">Tools</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Ad -->
+    <section class="ad-section">
+        <div class="container">
+            <div class="ad-unit header-ad">
+                <div class="ad-placeholder">
+                    <span>Advertisement</span>
+                    <div class="ad-size">728 x 90</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Hero -->
+    <section class="calculator-hero budget-hero">
+        <div class="container">
+            <div class="calculator-hero-content">
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a> > 
+                    <a href="calculators.html">Calculators</a> > 
+                    <span>Budget Calculator</span>
+                </nav>
+                
+                <h1 class="calculator-title">Budget Calculator</h1>
+                <p class="calculator-subtitle">Create your personalized monthly budget and get insights to optimize your spending and savings.</p>
+                
+                <div class="calculator-stats">
+                    <div class="stat">
+                        <span class="stat-number">50/30/20 Rule</span>
+                        <span class="stat-label">Guidelines</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Spending Insights</span>
+                        <span class="stat-label">Optimization</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Free</span>
+                        <span class="stat-label">No Signup</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Main -->
+    <main class="calculator-main">
+        <div class="container">
+            <div class="calculator-layout">
+                <!-- Calculator Form -->
+                <section class="calculator-form-section">
+                    <h2>Create Your Monthly Budget</h2>
+                    <p>Enter your income and expenses to create a balanced budget and get personalized recommendations.</p>
+                    
+                    <form class="calculator-form" id="budgetForm">
+                        <!-- Income Section -->
+                        <div class="budget-section">
+                            <h3>💰 Monthly Income</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="salaryIncome">Salary/Wages ($)</label>
+                                    <input type="number" id="salaryIncome" value="4000" min="0" step="100">
+                                </div>
+                                <div class="form-group">
+                                    <label for="otherIncome">Other Income ($)</label>
+                                    <input type="number" id="otherIncome" value="500" min="0" step="100">
+                                </div>
+                            </div>
+                            <div class="total-display">
+                                <strong>Total Monthly Income: <span id="totalIncome">$4,500</span></strong>
+                            </div>
+                        </div>
+
+                        <!-- Expenses Section -->
+                        <div class="budget-section">
+                            <h3>📊 Monthly Expenses</h3>
+                            
+                            <div class="expense-category">
+                                <h4>🏠 Housing</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="rentMortgage">Rent/Mortgage ($)</label>
+                                        <input type="number" id="rentMortgage" value="1200" min="0" step="50">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="utilities">Utilities ($)</label>
+                                        <input type="number" id="utilities" value="300" min="0" step="25">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="expense-category">
+                                <h4>🚗 Transportation</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="carPayment">Car Payment ($)</label>
+                                        <input type="number" id="carPayment" value="350" min="0" step="25">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gasMaintenance">Gas & Maintenance ($)</label>
+                                        <input type="number" id="gasMaintenance" value="200" min="0" step="25">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="expense-category">
+                                <h4>🍎 Living Expenses</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="groceries">Groceries ($)</label>
+                                        <input type="number" id="groceries" value="400" min="0" step="25">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="diningOut">Dining Out ($)</label>
+                                        <input type="number" id="diningOut" value="200" min="0" step="25">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="expense-category">
+                                <h4>💳 Debt & Bills</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="creditCardPayments">Credit Card Payments ($)</label>
+                                        <input type="number" id="creditCardPayments" value="150" min="0" step="25">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="studentLoans">Student Loans ($)</label>
+                                        <input type="number" id="studentLoans" value="200" min="0" step="25">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="expense-category">
+                                <h4>🎯 Savings & Goals</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="emergencySavings">Emergency Savings ($)</label>
+                                        <input type="number" id="emergencySavings" value="300" min="0" step="25">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="retirementSavings">Retirement Savings ($)</label>
+                                        <input type="number" id="retirementSavings" value="400" min="0" step="25">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="expense-category">
+                                <h4>🎉 Lifestyle & Entertainment</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="entertainment">Entertainment ($)</label>
+                                        <input type="number" id="entertainment" value="150" min="0" step="25">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="personalCare">Personal Care ($)</label>
+                                        <input type="number" id="personalCare" value="100" min="0" step="25">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="expense-category">
+                                <h4>📱 Other Expenses</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="healthInsurance">Health Insurance ($)</label>
+                                        <input type="number" id="healthInsurance" value="250" min="0" step="25">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="miscellaneous">Miscellaneous ($)</label>
+                                        <input type="number" id="miscellaneous" value="100" min="0" step="25">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="total-display">
+                                <strong>Total Monthly Expenses: <span id="totalExpenses">$4,300</span></strong>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-primary calculate-btn" onclick="calculateBudget()">
+                                Analyze My Budget
+                            </button>
+                            <button type="button" class="btn btn-outline" onclick="resetBudgetCalculator()">
+                                Reset
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Calculator Results -->
+                <section class="calculator-results" id="budgetResults" style="display: none;">
+                    <h2>Your Budget Analysis</h2>
+                    
+                    <!-- Budget Summary -->
+                    <div class="results-summary">
+                        <div class="result-card" id="incomeCard">
+                            <div class="result-value" id="totalIncomeResult">$0</div>
+                            <div class="result-label">Total Income</div>
+                        </div>
+                        <div class="result-card" id="expensesCard">
+                            <div class="result-value" id="totalExpensesResult">$0</div>
+                            <div class="result-label">Total Expenses</div>
+                        </div>
+                        <div class="result-card highlight" id="remainingCard">
+                            <div class="result-value" id="remainingBalance">$0</div>
+                            <div class="result-label">Remaining Balance</div>
+                        </div>
+                    </div>
+
+                    <!-- Budget Status -->
+                    <div class="budget-status" id="budgetStatus">
+                        <h3>Budget Status: <span id="statusText">Balanced</span></h3>
+                        <p id="statusMessage">Your budget is well balanced with money left for additional savings or spending.</p>
+                    </div>
+
+                    <!-- Expense Breakdown -->
+                    <div class="breakdown-section">
+                        <h3>Expense Breakdown</h3>
+                        <div class="chart-container">
+                            <canvas id="expenseChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- 50/30/20 Analysis -->
+                    <div class="rule-analysis">
+                        <h3>50/30/20 Rule Analysis</h3>
+                        <div class="rule-breakdown">
+                            <div class="rule-category needs">
+                                <h4>Needs (50%)</h4>
+                                <div class="rule-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="needsProgress" style="width: 0%"></div>
+                                    </div>
+                                    <span class="rule-percentage" id="needsPercentage">0%</span>
+                                </div>
+                                <p class="rule-feedback" id="needsFeedback"></p>
+                            </div>
+                            <div class="rule-category wants">
+                                <h4>Wants (30%)</h4>
+                                <div class="rule-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="wantsProgress" style="width: 0%"></div>
+                                    </div>
+                                    <span class="rule-percentage" id="wantsPercentage">0%</span>
+                                </div>
+                                <p class="rule-feedback" id="wantsFeedback"></p>
+                            </div>
+                            <div class="rule-category savings">
+                                <h4>Savings (20%)</h4>
+                                <div class="rule-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="savingsProgress" style="width: 0%"></div>
+                                    </div>
+                                    <span class="rule-percentage" id="savingsPercentage">0%</span>
+                                </div>
+                                <p class="rule-feedback" id="savingsFeedback"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div class="recommendations-section">
+                        <h3>Budget Recommendations</h3>
+                        <div class="recommendations-list" id="recommendationsList">
+                            <!-- Recommendations will be added here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Calculator Sidebar -->
+                <aside class="calculator-sidebar">
+                    <!-- Budgeting Tips -->
+                    <div class="sidebar-widget">
+                        <h3>Budgeting Tips</h3>
+                        <div class="tip-list">
+                            <div class="tip-item">
+                                <span class="tip-icon">📝</span>
+                                <span class="tip-text">Track every expense for 30 days to understand your spending</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-icon">🎯</span>
+                                <span class="tip-text">Use the 50/30/20 rule as a guideline, not a strict rule</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-icon">🔄</span>
+                                <span class="tip-text">Review and adjust your budget monthly</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-icon">💡</span>
+                                <span class="tip-text">Focus on reducing your biggest expenses first</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 50/30/20 Explanation -->
+                    <div class="sidebar-widget">
+                        <h3>50/30/20 Rule Explained</h3>
+                        <div class="rule-explanation">
+                            <div class="rule-item">
+                                <span class="rule-percent">50%</span>
+                                <span class="rule-category">Needs</span>
+                                <span class="rule-desc">Essential expenses: housing, food, utilities, transportation, insurance</span>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-percent">30%</span>
+                                <span class="rule-category">Wants</span>
+                                <span class="rule-desc">Discretionary spending: dining out, entertainment, hobbies, shopping</span>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-percent">20%</span>
+                                <span class="rule-category">Savings</span>
+                                <span class="rule-desc">Emergency fund, retirement, debt repayment, investments</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Calculators -->
+                    <div class="sidebar-widget">
+                        <h3>Related Calculators</h3>
+                        <div class="related-calculators">
+                            <a href="debt-payoff-calculator.html" class="related-calc">
+                                <span class="calc-icon">💸</span>
+                                <span class="calc-name">Debt Payoff Calculator</span>
+                            </a>
+                            <a href="emergency-fund-calculator.html" class="related-calc">
+                                <span class="calc-icon">🛡</span>
+                                <span class="calc-name">Emergency Fund Calculator</span>
+                            </a>
+                            <a href="savings-goal-calculator.html" class="related-calc">
+                                <span class="calc-icon">🎯</span>
+                                <span class="calc-name">Savings Goal Calculator</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Ad -->
+                    <div class="sidebar-widget ad-widget">
+                        <div class="ad-placeholder">
+                            <span>Advertisement</span>
+                            <div class="ad-size">300 x 250</div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Budgeting Methods -->
+    <section class="methods-section">
+        <div class="container">
+            <h2>Popular Budgeting Methods</h2>
+            <div class="methods-grid">
+                <div class="method-card">
+                    <h3>50/30/20 Rule</h3>
+                    <p>Simple percentage-based budgeting: 50% needs, 30% wants, 20% savings. Great for beginners and those who want flexibility.</p>
+                    <div class="method-pros-cons">
+                        <div class="pros">
+                            <strong>Pros:</strong> Simple, flexible, easy to remember
+                        </div>
+                        <div class="cons">
+                            <strong>Cons:</strong> May not work for high-cost areas
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h3>Zero-Based Budgeting</h3>
+                    <p>Every dollar has a job. Income minus expenses equals zero. Perfect for detailed financial control and maximizing savings.</p>
+                    <div class="method-pros-cons">
+                        <div class="pros">
+                            <strong>Pros:</strong> Complete control, no wasted money
+                        </div>
+                        <div class="cons">
+                            <strong>Cons:</strong> Time-consuming, requires discipline
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h3>Envelope System</h3>
+                    <p>Cash-based budgeting with physical envelopes for categories. Excellent for controlling spending and visual learners.</p>
+                    <div class="method-pros-cons">
+                        <div class="pros">
+                            <strong>Pros:</strong> Visual, prevents overspending
+                        </div>
+                        <div class="cons">
+                            <strong>Cons:</strong> Cash-only, inconvenient for online spending
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Budgeting FAQs</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>What if my expenses exceed my income?</h4>
+                    <p>Focus on reducing expenses in "wants" categories first. Consider increasing income through side hustles or career advancement. Temporary solutions include pausing savings or using a detailed spending freeze.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How often should I review my budget?</h4>
+                    <p>Review your budget monthly when you get paid. Do a comprehensive review quarterly. Major life changes (new job, moving, family changes) require immediate budget adjustments.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Should I include irregular expenses?</h4>
+                    <p>Yes! Create sinking funds for irregular expenses like car maintenance, holidays, or annual insurance payments. Divide the annual cost by 12 and save that amount monthly.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What's the best budgeting app?</h4>
+                    <p>Popular options include Mint (free), YNAB (zero-based), and EveryDollar (simple). Choose based on your budgeting style. Many people start with spreadsheets to understand their spending first.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="calculator-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h3>Take Control of Your Finances Today</h3>
+                <p>A budget isn't about restriction—it's about making your money work for you. Start budgeting today and watch your financial confidence grow.</p>
+                <div class="cta-buttons">
+                    <a href="tools.html" class="btn btn-primary">Download Budget Templates</a>
+                    <a href="budgeting.html" class="btn btn-outline">Learn More About Budgeting</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <a href="index.html" class="logo-link">
+                            <span class="logo-icon">💰</span>
+                            <span class="logo-text">WealthPathfinder</span>
+                        </a>
+                    </div>
+                    <p class="footer-description">Smart money moves for real life. Building financial freedom, one step at a time.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="banking.html">Banking & Savings</a></li>
+                            <li><a href="investing.html">Investing Basics</a></li>
+                            <li><a href="credit.html">Credit & Debt</a></li>
+                            <li><a href="budgeting.html">Budgeting</a></li>
+                            <li><a href="side-hustles.html">Making Money</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="calculators.html">Financial Calculators</a></li>
+                            <li><a href="tools.html">Free Tools</a></li>
+                            <li><a href="glossary.html">Financial Glossary</a></li>
+                            <li><a href="newsletter.html">Newsletter</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                            <li><a href="disclaimer.html">Disclaimer</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 WealthPathfinder. All rights reserved. </p>
+                <p class="disclaimer-note">WealthPathfinder is for educational purposes only and does not constitute financial advice. Please consult with a professional financial advisor before making any financial decisions.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Budget Calculator Functions
+        function calculateBudget() {
+            // Get income values
+            const salaryIncome = parseFloat(document.getElementById('salaryIncome').value) || 0;
+            const otherIncome = parseFloat(document.getElementById('otherIncome').value) || 0;
+            const totalIncome = salaryIncome + otherIncome;
+
+            // Get expense values
+            const rentMortgage = parseFloat(document.getElementById('rentMortgage').value) || 0;
+            const utilities = parseFloat(document.getElementById('utilities').value) || 0;
+            const carPayment = parseFloat(document.getElementById('carPayment').value) || 0;
+            const gasMaintenance = parseFloat(document.getElementById('gasMaintenance').value) || 0;
+            const groceries = parseFloat(document.getElementById('groceries').value) || 0;
+            const diningOut = parseFloat(document.getElementById('diningOut').value) || 0;
+            const creditCardPayments = parseFloat(document.getElementById('creditCardPayments').value) || 0;
+            const studentLoans = parseFloat(document.getElementById('studentLoans').value) || 0;
+            const emergencySavings = parseFloat(document.getElementById('emergencySavings').value) || 0;
+            const retirementSavings = parseFloat(document.getElementById('retirementSavings').value) || 0;
+            const entertainment = parseFloat(document.getElementById('entertainment').value) || 0;
+            const personalCare = parseFloat(document.getElementById('personalCare').value) || 0;
+            const healthInsurance = parseFloat(document.getElementById('healthInsurance').value) || 0;
+            const miscellaneous = parseFloat(document.getElementById('miscellaneous').value) || 0;
+
+            // Calculate totals
+            const totalExpenses = rentMortgage + utilities + carPayment + gasMaintenance + groceries + 
+                                diningOut + creditCardPayments + studentLoans + emergencySavings + 
+                                retirementSavings + entertainment + personalCare + healthInsurance + miscellaneous;
+            
+            const remainingBalance = totalIncome - totalExpenses;
+
+            // Categorize expenses for 50/30/20 analysis
+            const needs = rentMortgage + utilities + carPayment + gasMaintenance + groceries + healthInsurance;
+            const wants = diningOut + entertainment + personalCare + miscellaneous;
+            const savings = emergencySavings + retirementSavings + creditCardPayments + studentLoans;
+
+            // Calculate percentages
+            const needsPercentage = totalIncome > 0 ? (needs / totalIncome) * 100 : 0;
+            const wantsPercentage = totalIncome > 0 ? (wants / totalIncome) * 100 : 0;
+            const savingsPercentage = totalIncome > 0 ? (savings / totalIncome) * 100 : 0;
+
+            // Display results
+            displayBudgetResults(totalIncome, totalExpenses, remainingBalance);
+            displayRuleAnalysis(needsPercentage, wantsPercentage, savingsPercentage);
+            generateExpenseChart(needs, wants, savings, remainingBalance);
+            generateRecommendations(needsPercentage, wantsPercentage, savingsPercentage, remainingBalance);
+            updateBudgetStatus(remainingBalance);
+
+            // Show results section
+            document.getElementById('budgetResults').style.display = 'block';
+        }
+
+        function displayBudgetResults(income, expenses, remaining) {
+            document.getElementById('totalIncomeResult').textContent = formatCurrency(income);
+            document.getElementById('totalExpensesResult').textContent = formatCurrency(expenses);
+            document.getElementById('remainingBalance').textContent = formatCurrency(remaining);
+
+            // Update color based on remaining balance
+            const remainingCard = document.getElementById('remainingCard');
+            if (remaining < 0) {
+                remainingCard.classList.add('negative');
+                remainingCard.classList.remove('highlight', 'positive');
+            } else if (remaining > 0) {
+                remainingCard.classList.add('positive');
+                remainingCard.classList.remove('highlight', 'negative');
+            } else {
+                remainingCard.classList.add('highlight');
+                remainingCard.classList.remove('positive', 'negative');
+            }
+        }
+
+        function displayRuleAnalysis(needsPercent, wantsPercent, savingsPercent) {
+            // Update progress bars
+            document.getElementById('needsProgress').style.width = ${Math.min(needsPercent, 100)}%;
+            document.getElementById('wantsProgress').style.width = ${Math.min(wantsPercent, 100)}%;
+            document.getElementById('savingsProgress').style.width = ${Math.min(savingsPercent, 100)}%;
+
+            // Update percentages
+            document.getElementById('needsPercentage').textContent = ${needsPercent.toFixed(1)}%;
+            document.getElementById('wantsPercentage').textContent = ${wantsPercent.toFixed(1)}%;
+            document.getElementById('savingsPercentage').textContent = ${savingsPercent.toFixed(1)}%;
+
+            // Provide feedback
+            document.getElementById('needsFeedback').textContent = getNeedsFeedback(needsPercent);
+            document.getElementById('wantsFeedback').textContent = getWantsFeedback(wantsPercent);
+            document.getElementById('savingsFeedback').textContent = getSavingsFeedback(savingsPercent);
+        }
+
+        function getNeedsFeedback(percent) {
+            if (percent <= 45) return "Great! Your needs are well below the 50% guideline.";
+            if (percent <= 55) return "Good! Your needs are close to the 50% guideline.";
+            return "Consider ways to reduce essential expenses if possible.";
+        }
+
+        function getWantsFeedback(percent) {
+            if (percent <= 25) return "Excellent discipline on discretionary spending!";
+            if (percent <= 35) return "Good balance between enjoyment and responsibility.";
+            return "Consider reducing discretionary spending to increase savings.";
+        }
+
+        function getSavingsFeedback(percent) {
+            if (percent >= 25) return "Outstanding savings rate! You're building wealth quickly.";
+            if (percent >= 15) return "Good savings habits. Consider increasing if possible.";
+            return "Try to increase your savings rate for better financial security.";
+        }
+
+        function generateExpenseChart(needs, wants, savings, remaining) {
+            const ctx = document.getElementById('expenseChart').getContext('2d');
+            
+            const data = [needs, wants, savings];
+            if (remaining > 0) {
+                data.push(remaining);
+            }
+            
+            const labels = ['Needs', 'Wants', 'Savings/Debt'];
+            if (remaining > 0) {
+                labels.push('Remaining');
+            }
+            
+            const backgroundColors = ['#3b82f6', '#8b5cf6', '#10b981'];
+            if (remaining > 0) {
+                backgroundColors.push('#6b7280');
+            }
+            
+            // Destroy existing chart
+            const existingChart = Chart.getChart(ctx);
+            if (existingChart) {
+                existingChart.destroy();
+            }
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: backgroundColors,
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + formatCurrency(context.raw);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateRecommendations(needsPercent, wantsPercent, savingsPercent, remaining) {
+            const recommendations = [];
+            const list = document.getElementById('recommendationsList');
+            list.innerHTML = '';
+
+            if (remaining < 0) {
+                recommendations.push("Your expenses exceed your income. Focus on reducing discretionary spending first.");
+            }
+
+            if (needsPercent > 60) {
+                recommendations.push("Your essential expenses are high. Consider ways to reduce housing, transportation, or utility costs.");
+            }
+
+            if (wantsPercent > 35) {
+                recommendations.push("Discretionary spending is above recommended levels. Look for areas to cut back without sacrificing happiness.");
+            }
+
+            if (savingsPercent < 15) {
+                recommendations.push("Try to increase your savings rate to at least 15% for better financial security.");
+            }
+
+            if (savingsPercent >= 20 && remaining > 0) {
+                recommendations.push("Great savings rate! Consider investing your remaining funds for long-term growth.");
+            }
+
+            if (recommendations.length === 0) {
+                recommendations.push("Your budget looks well balanced! Keep up the good work.");
+            }
+
+            // Add recommendations to list
+            recommendations.forEach(rec => {
+                const item = document.createElement('div');
+                item.className = 'recommendation-item';
+                item.innerHTML = <span class="recommendation-icon">💡</span><span>${rec}</span>;
+                list.appendChild(item);
+            });
+        }
+
+        function updateBudgetStatus(remaining) {
+            const statusText = document.getElementById('statusText');
+            const statusMessage = document.getElementById('statusMessage');
+
+            if (remaining < 0) {
+                statusText.textContent = 'Over Budget';
+                statusText.className = 'status-negative';
+                statusMessage.textContent = 'Your expenses exceed your income. Focus on reducing discretionary spending and increasing income.';
+            } else if (remaining === 0) {
+                statusText.textContent = 'Balanced';
+                statusText.className = 'status-balanced';
+                statusMessage.textContent = 'Your budget is perfectly balanced. Every dollar has a job!';
+            } else {
+                statusText.textContent = 'Healthy Surplus';
+                statusText.className = 'status-positive';
+                statusMessage.textContent = You have ${formatCurrency(remaining)} remaining. Consider allocating this to savings, debt repayment, or investments.;
+            }
+        }
+
+        function resetBudgetCalculator() {
+            document.getElementById('budgetForm').reset();
+            document.getElementById('budgetResults').style.display = 'none';
+            
+            // Reset to default values
+            document.getElementById('salaryIncome').value = 4000;
+            document.getElementById('otherIncome').value = 500;
+            updateIncomeTotal();
+            
+            // Destroy chart
+            const ctx = document.getElementById('expenseChart');
+            const existingChart = Chart.getChart(ctx);
+            if (existingChart) {
+                existingChart.destroy();
+            }
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function updateIncomeTotal() {
+            const salary = parseFloat(document.getElementById('salaryIncome').value) || 0;
+            const other = parseFloat(document.getElementById('otherIncome').value) || 0;
+            document.getElementById('totalIncome').textContent = formatCurrency(salary + other);
+        }
+
+        function updateExpenseTotal() {
+            const expenses = [
+                'rentMortgage', 'utilities', 'carPayment', 'gasMaintenance', 'groceries',
+                'diningOut', 'creditCardPayments', 'studentLoans', 'emergencySavings',
+                'retirementSavings', 'entertainment', 'personalCare', 'healthInsurance', 'miscellaneous'
+            ];
+            
+            let total = 0;
+            expenses.forEach(id => {
+                total += parseFloat(document.getElementById(id).value) || 0;
+            });
+            
+            document.getElementById('totalExpenses').textContent = formatCurrency(total);
+        }
+
+        // Initialize calculator
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners to update totals in real-time
+            const incomeInputs = document.querySelectorAll('#salaryIncome, #otherIncome');
+            incomeInputs.forEach(input => {
+                input.addEventListener('input', updateIncomeTotal);
+            });
+
+            const expenseInputs = document.querySelectorAll('input[type="number"]:not(#salaryIncome):not(#otherIncome)');
+            expenseInputs.forEach(input => {
+                input.addEventListener('input', updateExpenseTotal);
+            });
+
+            // Set default values and update totals
+            updateIncomeTotal();
+            updateExpenseTotal();
+        });
+    </script>
+
+    <style>
+        .budget-hero {
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+        }
+
+        .budget-section {
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .budget-section:last-child {
+            border-bottom: none;
+        }
+
+        .budget-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: var(--space-lg);
+            font-size: 1.5rem;
+        }
+
+        .expense-category {
+            margin-bottom: var(--space-lg);
+        }
+
+        .expense-category h4 {
+            color: var(--dark-gray);
+            margin-bottom: var(--space-md);
+            font-size: 1.125rem;
+        }
+
+        .total-display {
+            text-align: center;
+            padding: var(--space-md);
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-lg);
+        }
+
+        .rule-analysis {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .rule-breakdown {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-lg);
+        }
+
+        .rule-category {
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .rule-category.needs {
+            border-left: 4px solid #3b82f6;
+        }
+
+        .rule-category.wants {
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .rule-category.savings {
+            border-left: 4px solid #10b981;
+        }
+
+        .rule-category h4 {
+            margin-bottom: var(--space-md);
+            font-size: 1.125rem;
+        }
+
+        .rule-progress {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-sm);
+        }
+
+        .rule-progress .progress-bar {
+            flex: 1;
+            background: var(--gray-200);
+            border-radius: var(--radius-full);
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .rule-progress .progress-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .needs .progress-fill {
+            background: #3b82f6;
+        }
+
+        .wants .progress-fill {
+            background: #8b5cf6;
+        }
+
+        .savings .progress-fill {
+            background: #10b981;
+        }
+
+        .rule-percentage {
+            font-weight: 600;
+            font-size: 0.875rem;
+            min-width: 50px;
+            text-align: right;
+        }
+
+        .rule-feedback {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .budget-status {
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+            text-align: center;
+        }
+
+        .budget-status h3 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .status-positive {
+            color: #10b981;
+        }
+
+        .status-negative {
+            color: #ef4444;
+        }
+
+        .status-balanced {
+            color: #f59e0b;
+        }
+
+        .result-card.positive {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: var(--white);
+        }
+
+        .result-card.negative {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: var(--white);
+        }
+
+        .result-card.positive .result-value,
+        .result-card.negative .result-value {
+            color: var(--white);
+        }
+
+        .result-card.positive .result-label,
+        .result-card.negative .result-label {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .recommendations-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .recommendation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+        }
+
+        .recommendation-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .rule-explanation {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+        }
+
+        .rule-percent {
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: var(--primary-blue);
+            min-width: 40px;
+        }
+
+        .rule-category {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--dark-gray);
+            min-width: 60px;
+        }
+
+        .rule-desc {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            line-height: 1.4;
+        }
+
+        .methods-section {
+            padding: var(--space-3xl) 0;
+            background: var(--gray-50);
+        }
+
+        .methods-section h2 {
+            text-align: center;
+            color: var(--dark-gray);
+            margin-bottom: var(--space-2xl);
+            font-size: 2.5rem;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-2xl);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .method-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .method-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: var(--space-md);
+            font-size: 1.25rem;
+        }
+
+        .method-card p {
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: var(--space-lg);
+        }
+
+        .method-pros-cons {
+            font-size: 0.875rem;
+        }
+
+        .pros {
+            color: #10b981;
+            margin-bottom: var(--space-sm);
+        }
+
+        .cons {
+            color: #ef4444;
+        }
+
+        @media (max-width: 768px) {
+            .rule-progress {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-sm);
+            }
+
+            .rule-percentage {
+                text-align: left;
+            }
+
+            .methods-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

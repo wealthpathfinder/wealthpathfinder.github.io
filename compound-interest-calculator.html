@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Calculator - Calculate Investment Growth | WealthPathfinder</title>
+    <meta name="description" content="Free compound interest calculator to see how your investments grow over time with regular contributions. Calculate future value, total contributions, and interest earned.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://wealthpathfinder.com/compound-interest-calculator.html">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-icon">💰</span>
+                        <span class="logo-text">WealthPathfinder</span>
+                    </a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="banking.html" class="nav-link">Banking & Savings</a></li>
+                        <li><a href="investing.html" class="nav-link">Investing Basics</a></li>
+                        <li><a href="credit.html" class="nav-link">Credit & Debt</a></li>
+                        <li><a href="budgeting.html" class="nav-link">Budgeting</a></li>
+                        <li><a href="side-hustles.html" class="nav-link">Making Money</a></li>
+                        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                        <li><a href="calculators.html" class="nav-link">Calculators</a></li>
+                        <li><a href="tools.html" class="nav-link">Tools</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Ad -->
+    <section class="ad-section">
+        <div class="container">
+            <div class="ad-unit header-ad">
+                <div class="ad-placeholder">
+                    <span>Advertisement</span>
+                    <div class="ad-size">728 x 90</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Hero -->
+    <section class="calculator-hero">
+        <div class="container">
+            <div class="calculator-hero-content">
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a> > 
+                    <a href="calculators.html">Calculators</a> > 
+                    <span>Compound Interest</span>
+                </nav>
+                
+                <h1 class="calculator-title">Compound Interest Calculator</h1>
+                <p class="calculator-subtitle">See how your money can grow over time through the power of compound interest. The most powerful force in building wealth.</p>
+                
+                <div class="calculator-stats">
+                    <div class="stat">
+                        <span class="stat-number">Easy to Use</span>
+                        <span class="stat-label">Simple Inputs</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Visual Results</span>
+                        <span class="stat-label">Interactive Charts</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100% Free</span>
+                        <span class="stat-label">No Signup</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Main -->
+    <main class="calculator-main">
+        <div class="container">
+            <div class="calculator-layout">
+                <!-- Calculator Form -->
+                <section class="calculator-form-section">
+                    <h2>Calculate Your Investment Growth</h2>
+                    <p>Enter your details below to see how compound interest can grow your savings or investments over time.</p>
+                    
+                    <form class="calculator-form" id="compoundInterestForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="initialInvestment">Initial Investment ($)</label>
+                                <input type="number" id="initialInvestment" value="1000" min="0" step="100">
+                                <small>The amount you're starting with</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="monthlyContribution">Monthly Contribution ($)</label>
+                                <input type="number" id="monthlyContribution" value="100" min="0" step="10">
+                                <small>Amount you'll add each month (optional)</small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="annualInterestRate">Annual Interest Rate (%)</label>
+                                <input type="number" id="annualInterestRate" value="7" min="0" step="0.1" max="50">
+                                <small>Expected annual return on investment</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="investmentYears">Investment Period (Years)</label>
+                                <input type="number" id="investmentYears" value="20" min="1" step="1" max="100">
+                                <small>How long you'll keep investing</small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="compoundFrequency">Compounding Frequency</label>
+                            <select id="compoundFrequency">
+                                <option value="1">Annually</option>
+                                <option value="2">Semi-Annually</option>
+                                <option value="4">Quarterly</option>
+                                <option value="12" selected>Monthly</option>
+                                <option value="365">Daily</option>
+                            </select>
+                            <small>How often interest is calculated and added</small>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-primary calculate-btn" onclick="calculateCompoundInterest()">
+                                Calculate Growth
+                            </button>
+                            <button type="button" class="btn btn-outline" onclick="resetCompoundInterestCalculator()">
+                                Reset
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Calculator Results -->
+                <section class="calculator-results" id="compoundInterestResults" style="display: none;">
+                    <h2>Your Investment Growth Results</h2>
+                    
+                    <div class="results-summary">
+                        <div class="result-card highlight">
+                            <div class="result-value" id="futureValue">$0</div>
+                            <div class="result-label">Future Value</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value" id="totalContributions">$0</div>
+                            <div class="result-label">Total Contributions</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value" id="interestEarned">$0</div>
+                            <div class="result-label">Interest Earned</div>
+                        </div>
+                    </div>
+
+                    <!-- Growth Chart -->
+                    <div class="chart-section">
+                        <h3>Investment Growth Over Time</h3>
+                        <div class="chart-container">
+                            <canvas id="growthChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Yearly Breakdown -->
+                    <div class="breakdown-section">
+                        <h3>Year-by-Year Breakdown</h3>
+                        <div class="table-container">
+                            <table class="breakdown-table">
+                                <thead>
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>Beginning Balance</th>
+                                        <th>Contributions</th>
+                                        <th>Interest Earned</th>
+                                        <th>Ending Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="yearlyBreakdown">
+                                    <!-- JavaScript will populate this -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Calculator Sidebar -->
+                <aside class="calculator-sidebar">
+                    <!-- What is Compound Interest -->
+                    <div class="sidebar-widget">
+                        <h3>What is Compound Interest?</h3>
+                        <p>Compound interest is interest calculated on the initial principal and also on the accumulated interest of previous periods. It's often called "interest on interest" and can cause wealth to grow exponentially over time.</p>
+                        
+                        <div class="example">
+                            <h4>Simple Example:</h4>
+                            <p>If you invest $1,000 at 7% annual interest:</p>
+                            <ul>
+                                <li>Year 1: $1,070</li>
+                                <li>Year 2: $1,145</li>
+                                <li>Year 10: $1,967</li>
+                                <li>Year 20: $3,870</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tips Widget -->
+                    <div class="sidebar-widget">
+                        <h3>Maximize Your Returns</h3>
+                        <div class="tip-list">
+                            <div class="tip-item">
+                                <span class="tip-icon">⏰</span>
+                                <span class="tip-text">Start early - time is your biggest advantage</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-icon">📈</span>
+                                <span class="tip-text">Consistent contributions boost growth</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-icon">🔄</span>
+                                <span class="tip-text">Reinvest dividends and interest</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-icon">🎯</span>
+                                <span class="tip-text">Choose investments with good long-term returns</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Calculators -->
+                    <div class="sidebar-widget">
+                        <h3>Related Calculators</h3>
+                        <div class="related-calculators">
+                            <a href="investment-return-calculator.html" class="related-calc">
+                                <span class="calc-icon">💹</span>
+                                <span class="calc-name">Investment Return Calculator</span>
+                            </a>
+                            <a href="retirement-calculator.html" class="related-calc">
+                                <span class="calc-icon">🏖</span>
+                                <span class="calc-name">Retirement Calculator</span>
+                            </a>
+                            <a href="savings-goal-calculator.html" class="related-calc">
+                                <span class="calc-icon">🎯</span>
+                                <span class="calc-name">Savings Goal Calculator</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Ad -->
+                    <div class="sidebar-widget ad-widget">
+                        <div class="ad-placeholder">
+                            <span>Advertisement</span>
+                            <div class="ad-size">300 x 250</div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Key Insights Section -->
+    <section class="insights-section">
+        <div class="container">
+            <h2>Key Insights About Compound Interest</h2>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-icon">⏰</div>
+                    <h3>The Power of Time</h3>
+                    <p>The longer your money compounds, the more dramatic the growth. Starting 10 years earlier can more than double your final balance.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">💰</div>
+                    <h3>Consistency Matters</h3>
+                    <p>Regular contributions, even small ones, significantly boost your results through dollar-cost averaging and compound growth.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">📊</div>
+                    <h3>Rate of Return</h3>
+                    <p>Small differences in returns create huge differences over time. A 2% higher return can double your money much faster.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>How often should interest compound?</h4>
+                    <p>More frequent compounding (daily vs. annually) results in slightly higher returns due to interest being calculated on previously earned interest more often. However, the difference is usually small for most investors.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What's a realistic interest rate to expect?</h4>
+                    <p>For long-term stock market investments, 7-10% annual returns are historical averages. For savings accounts, 3-5% is more typical. Conservative investments might yield 2-4%.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How does inflation affect compound interest?</h4>
+                    <p>Inflation reduces purchasing power. A 7% return with 3% inflation gives a 4% "real" return. Always consider inflation in long-term planning.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Should I focus on paying debt or investing?</h4>
+                    <p>Generally, pay off high-interest debt first (credit cards > 7-8%), then invest. For low-interest debt (mortgages < 5%), investing may provide better returns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="calculator-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h3>Start Building Your Wealth Today</h3>
+                <p>Don't wait to start investing. The power of compound interest works best when you give it time. Even small, regular investments can grow into significant wealth over decades.</p>
+                <div class="cta-buttons">
+                    <a href="investing.html" class="btn btn-primary">Learn About Investing</a>
+                    <a href="calculators.html" class="btn btn-outline">Explore More Calculators</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <a href="index.html" class="logo-link">
+                            <span class="logo-icon">💰</span>
+                            <span class="logo-text">WealthPathfinder</span>
+                        </a>
+                    </div>
+                    <p class="footer-description">Smart money moves for real life. Building financial freedom, one step at a time.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="banking.html">Banking & Savings</a></li>
+                            <li><a href="investing.html">Investing Basics</a></li>
+                            <li><a href="credit.html">Credit & Debt</a></li>
+                            <li><a href="budgeting.html">Budgeting</a></li>
+                            <li><a href="side-hustles.html">Making Money</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="calculators.html">Financial Calculators</a></li>
+                            <li><a href="tools.html">Free Tools</a></li>
+                            <li><a href="glossary.html">Financial Glossary</a></li>
+                            <li><a href="newsletter.html">Newsletter</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                            <li><a href="disclaimer.html">Disclaimer</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 WealthPathfinder. All rights reserved. </p>
+                <p class="disclaimer-note">WealthPathfinder is for educational purposes only and does not constitute financial advice. Please consult with a professional financial advisor before making any financial decisions.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Compound Interest Calculator Specific Functions
+        function calculateCompoundInterest() {
+            // Get input values
+            const principal = parseFloat(document.getElementById('initialInvestment').value) || 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const annualRate = parseFloat(document.getElementById('annualInterestRate').value) || 0;
+            const years = parseInt(document.getElementById('investmentYears').value) || 0;
+            const compoundFrequency = parseInt(document.getElementById('compoundFrequency').value) || 12;
+
+            // Validate inputs
+            if (principal < 0 || monthlyContribution < 0 || annualRate < 0 || years < 1) {
+                alert('Please enter valid positive numbers for all fields.');
+                return;
+            }
+
+            // Calculate compound interest
+            const ratePerPeriod = annualRate / 100 / compoundFrequency;
+            const totalPeriods = years * compoundFrequency;
+            
+            // Future value of initial investment
+            let futureValue = principal * Math.pow(1 + ratePerPeriod, totalPeriods);
+            
+            // Future value of monthly contributions
+            if (monthlyContribution > 0) {
+                const monthlyRate = annualRate / 100 / 12;
+                const totalMonths = years * 12;
+                futureValue += monthlyContribution * ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate);
+            }
+
+            // Calculate totals
+            const totalContributions = principal + (monthlyContribution * years * 12);
+            const interestEarned = futureValue - totalContributions;
+
+            // Display results
+            document.getElementById('futureValue').textContent = formatCurrency(futureValue);
+            document.getElementById('totalContributions').textContent = formatCurrency(totalContributions);
+            document.getElementById('interestEarned').textContent = formatCurrency(interestEarned);
+
+            // Show results section
+            document.getElementById('compoundInterestResults').style.display = 'block';
+
+            // Generate chart and table
+            generateGrowthChart(principal, monthlyContribution, annualRate, years, compoundFrequency);
+            generateYearlyBreakdown(principal, monthlyContribution, annualRate, years);
+        }
+
+        function generateGrowthChart(principal, monthlyContribution, annualRate, years, compoundFrequency) {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            
+            const data = [];
+            const contributionData = [];
+            const labels = [];
+            
+            let balance = principal;
+            let totalContributed = principal;
+            
+            for (let year = 0; year <= years; year++) {
+                labels.push(Year ${year});
+                
+                if (year > 0) {
+                    // Add monthly contributions and compound interest for the year
+                    for (let month = 1; month <= 12; month++) {
+                        // Add monthly contribution at beginning of month
+                        balance += monthlyContribution;
+                        totalContributed += monthlyContribution;
+                        
+                        // Apply monthly interest
+                        const monthlyRate = annualRate / 100 / 12;
+                        balance *= (1 + monthlyRate);
+                    }
+                }
+                
+                data.push(balance);
+                contributionData.push(totalContributed);
+            }
+            
+            // Destroy existing chart if it exists
+            const existingChart = Chart.getChart(ctx);
+            if (existingChart) {
+                existingChart.destroy();
+            }
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Total Value',
+                            data: data,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Total Contributions',
+                            data: contributionData,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Investment Growth Over Time'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatCurrency(context.raw);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateYearlyBreakdown(principal, monthlyContribution, annualRate, years) {
+            const tableBody = document.getElementById('yearlyBreakdown');
+            tableBody.innerHTML = '';
+            
+            let balance = principal;
+            const monthlyRate = annualRate / 100 / 12;
+            
+            for (let year = 1; year <= years; year++) {
+                let yearlyContributions = 0;
+                let yearlyInterest = 0;
+                const beginningBalance = balance;
+                
+                for (let month = 1; month <= 12; month++) {
+                    // Add monthly contribution
+                    balance += monthlyContribution;
+                    yearlyContributions += monthlyContribution;
+                    
+                    // Calculate monthly interest
+                    const monthlyInterest = balance * monthlyRate;
+                    balance += monthlyInterest;
+                    yearlyInterest += monthlyInterest;
+                }
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${year}</td>
+                    <td>${formatCurrency(beginningBalance)}</td>
+                    <td>${formatCurrency(yearlyContributions)}</td>
+                    <td>${formatCurrency(yearlyInterest)}</td>
+                    <td>${formatCurrency(balance)}</td>
+                `;
+                tableBody.appendChild(row);
+            }
+        }
+
+        function resetCompoundInterestCalculator() {
+            document.getElementById('compoundInterestForm').reset();
+            document.getElementById('compoundInterestResults').style.display = 'none';
+            
+            // Reset to default values
+            document.getElementById('initialInvestment').value = 1000;
+            document.getElementById('monthlyContribution').value = 100;
+            document.getElementById('annualInterestRate').value = 7;
+            document.getElementById('investmentYears').value = 20;
+            document.getElementById('compoundFrequency').value = 12;
+            
+            // Destroy chart if it exists
+            const ctx = document.getElementById('growthChart');
+            const existingChart = Chart.getChart(ctx);
+            if (existingChart) {
+                existingChart.destroy();
+            }
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Initialize calculator on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default values
+            document.getElementById('initialInvestment').value = 1000;
+            document.getElementById('monthlyContribution').value = 100;
+            document.getElementById('annualInterestRate').value = 7;
+            document.getElementById('investmentYears').value = 20;
+            document.getElementById('compoundFrequency').value = 12;
+        });
+    </script>
+</body>
+</html>

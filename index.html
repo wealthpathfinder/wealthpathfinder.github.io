@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WealthPathfinder - Your Path to Financial Freedom</title>
+    <meta name="description" content="Smart money moves for real life. Learn banking, investing, budgeting, and credit strategies to build wealth step by step.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "WealthPathfinder",
+      "url": "https://wealthpathfinder.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://wealthpathfinder.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "description": "Smart money moves for real life. Learn banking, investing, budgeting, and credit strategies to build wealth step by step.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "WealthPathfinder",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wealthpathfinder.com/logo.png"
+        }
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-icon">💰</span>
+                        <span class="logo-text">WealthPathfinder</span>
+                    </a>
+                </div>
+                
+                <!-- Main Navigation -->
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="banking.html" class="nav-link">Banking & Savings</a></li>
+                        <li><a href="investing.html" class="nav-link">Investing Basics</a></li>
+                        <li><a href="credit.html" class="nav-link">Credit & Debt</a></li>
+                        <li><a href="budgeting.html" class="nav-link">Budgeting</a></li>
+                        <li><a href="side-hustles.html" class="nav-link">Making Money</a></li>
+                        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Your Path to <span class="highlight">Financial Freedom</span> Starts Here</h1>
+                <p class="hero-subtitle">Smart money moves for real life. Learn banking, investing, budgeting, and credit strategies that actually work.</p>
+                
+                <div class="hero-cta">
+                    <a href="#featured-articles" class="btn btn-primary">Start Learning</a>
+                    <a href="#newsletter" class="btn btn-secondary">Get Weekly Tips</a>
+                </div>
+                
+                <!-- Trust Indicators -->
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <span class="trust-number">500+</span>
+                        <span class="trust-text">Readers Helped</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-number">50+</span>
+                        <span class="trust-text">Expert Guides</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-number">2024</span>
+                        <span class="trust-text">Updated Daily</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Header Ad Unit -->
+    <section class="ad-section">
+        <div class="container">
+            <div class="ad-unit header-ad">
+                <!-- AdSense Header Ad - 728x90 -->
+                <div class="ad-placeholder">
+                    <span>Advertisement</span>
+                    <div class="ad-size">728 x 90</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Where Do You Need Help?</h2>
+            <div class="categories-grid">
+                <a href="banking.html" class="category-card">
+                    <div class="category-icon">🏦</div>
+                    <h3>Banking & Savings</h3>
+                    <p>High-yield accounts, CD ladders, and smart banking strategies</p>
+                    <span class="category-cta">Learn More →</span>
+                </a>
+                
+                <a href="investing.html" class="category-card">
+                    <div class="category-icon">📈</div>
+                    <h3>Investing Basics</h3>
+                    <p>Start investing, retirement accounts, and growth strategies</p>
+                    <span class="category-cta">Learn More →</span>
+                </a>
+                
+                <a href="credit.html" class="category-card">
+                    <div class="category-icon">💳</div>
+                    <h3>Credit & Debt</h3>
+                    <p>Build credit, manage debt, and improve your financial health</p>
+                    <span class="category-cta">Learn More →</span>
+                </a>
+                
+                <a href="budgeting.html" class="category-card">
+                    <div class="category-icon">📊</div>
+                    <h3>Budgeting</h3>
+                    <p>Create budgets that stick and track your financial progress</p>
+                    <span class="category-cta">Learn More →</span>
+                </a>
+                
+                <a href="side-hustles.html" class="category-card">
+                    <div class="category-icon">💼</div>
+                    <h3>Making Money</h3>
+                    <p>Side hustles, career growth, and multiple income streams</p>
+                    <span class="category-cta">Learn More →</span>
+                </a>
+                
+                <a href="reviews.html" class="category-card">
+                    <div class="category-icon">⭐</div>
+                    <h3>Product Reviews</h3>
+                    <p>Unbiased reviews of financial products and services</p>
+                    <span class="category-cta">Learn More →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <!-- Featured Articles -->
+                <section class="featured-articles" id="featured-articles">
+                    <h2 class="section-title">Latest Expert Guides</h2>
+                    
+                    <!-- Article Grid -->
+                   
+<div class="articles-grid">
+    <!-- Article 1 -->
+    <article class="article-card">
+        <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/1e3a8a/ffffff?text=High-Yield+Savings" alt="High-Yield Savings Accounts" loading="lazy">
+        </div>
+        <div class="article-content">
+            <h3 class="article-title">
+                <a href="best-high-yield-savings-accounts.html">5 Best High-Yield Savings Accounts for 2024</a>
+            </h3>
+            <p class="article-excerpt">Compare the top savings accounts with highest APY rates and no hidden fees. Start earning more on your emergency fund today.</p>
+            <div class="article-meta">
+                <span class="read-time">8 min read</span>
+                <span class="publish-date">Updated Dec 2024</span>
+            </div>
+        </div>
+    </article>
+    
+    <!-- Article 2 -->
+    <article class="article-card">
+        <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/10b981/ffffff?text=Investing+$100" alt="Investing with $100" loading="lazy">
+        </div>
+        <div class="article-content">
+            <h3 class="article-title">
+                <a href="how-to-start-investing-with-100-dollars.html">How to Start Investing with Just $100</a>
+            </h3>
+            <p class="article-excerpt">Beginner-friendly guide to start building wealth with small amounts. No experience required, just motivation to grow.</p>
+            <div class="article-meta">
+                <span class="read-time">6 min read</span>
+                <span class="publish-date">Updated Dec 2024</span>
+            </div>
+        </div>
+    </article>
+    
+    <!-- Article 3 -->
+    <article class="article-card">
+        <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/f59e0b/ffffff?text=Credit+Score" alt="Credit Score Guide" loading="lazy">
+        </div>
+        <div class="article-content">
+            <h3 class="article-title">
+                <a href="how-to-build-credit-from-scratch.html">Build Credit from Scratch: 7 Proven Methods</a>
+            </h3>
+            <p class="article-excerpt">Go from no credit to excellent credit in 12 months. Step-by-step strategies that banks don't tell you about.</p>
+            <div class="article-meta">
+                <span class="read-time">10 min read</span>
+                <span class="publish-date">Updated Nov 2024</span>
+            </div>
+        </div>
+    </article>
+
+    <!-- Article 4 -->
+    <article class="article-card">
+        <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/7c3aed/ffffff?text=Budget+Template" alt="Budget Template" loading="lazy">
+        </div>
+        <div class="article-content">
+            <h3 class="article-title">
+                <a href="free-budget-templates-2024.html">Free Budget Templates That Actually Work</a>
+            </h3>
+            <p class="article-excerpt">Download our proven budget templates for Google Sheets and Excel. Track your money without complicated spreadsheets.</p>
+            <div class="article-meta">
+                <span class="read-time">5 min read</span>
+                <span class="publish-date">Updated Nov 2024</span>
+            </div>
+        </div>
+    </article>
+    
+    <!-- Article 5 -->
+    <article class="article-card">
+        <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/dc2626/ffffff?text=Side+Hustles" alt="Side Hustles" loading="lazy">
+        </div>
+        <div class="article-content">
+            <h3 class="article-title">
+                <a href="27-side-hustles-you-can-start-this-weekend.html">27 Side Hustles You Can Start This Weekend</a>
+            </h3>
+            <p class="article-excerpt">Make extra money without quitting your day job. Real opportunities with startup costs under $100.</p>
+            <div class="article-meta">
+                <span class="read-time">12 min read</span>
+                <span class="publish-date">Updated Nov 2024</span>
+            </div>
+        </div>
+    </article>
+    
+    <!-- Article 6 -->
+    <article class="article-card">
+        <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/0d9488/ffffff?text=Banking+Comparison" alt="Banking Comparison" loading="lazy">
+        </div>
+        <div class="article-content">
+            <h3 class="article-title">
+                <a href="online-banks-vs-traditional-banks-comparison.html">Online Banks vs Traditional Banks: Complete Comparison</a>
+            </h3>
+            <p class="article-excerpt">Should you choose online or traditional banks? We compare fees, rates, and convenience to help you decide.</p>
+            <div class="article-meta">
+                <span class="read-time">11 min read</span>
+                <span class="publish-date">Updated Dec 2024</span>
+            </div>
+        </div>
+    </article>
+
+    <!-- NEW: Article 7 -->
+    <article class="article-card">
+        <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/1e3a8a/ffffff?text=Index+Funds+vs+ETFs" alt="Index Funds vs ETFs" loading="lazy">
+        </div>
+        <div class="article-content">
+            <h3 class="article-title">
+                <a href="index-funds-vs-etfs-guide.html">Index Funds vs ETFs: Which is Better for Beginners?</a>
+            </h3>
+            <p class="article-excerpt">Understand the key differences, costs, and benefits of index funds versus ETFs to make smarter investment choices.</p>
+            <div class="article-meta">
+                <span class="read-time">9 min read</span>
+                <span class="publish-date">Coming Soon</span>
+            </div>
+        </div>
+    </article>
+
+    <!-- NEW: Article 8 -->
+    <article class="article-card">
+        <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/10b981/ffffff?text=Credit+Utilization" alt="Credit Utilization Guide" loading="lazy">
+        </div>
+        <div class="article-content">
+            <h3 class="article-title">
+                <a href="credit-utilization-ratio-guide.html">Credit Utilization: The 30% Myth Debunked</a>
+            </h3>
+            <p class="article-excerpt">Discover the truth about credit utilization and how to optimize your ratio for maximum credit score improvement.</p>
+            <div class="article-meta">
+                <span class="read-time">7 min read</span>
+                <span class="publish-date">Coming Soon</span>
+            </div>
+        </div>
+    </article>
+
+    <!-- NEW: Article 9 -->
+    <article class="article-card">
+        <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/f59e0b/ffffff?text=50-30-20+Budget" alt="50/30/20 Budget Rule" loading="lazy">
+        </div>
+        <div class="article-content">
+            <h3 class="article-title">
+                <a href="50-30-20-budget-rule-guide.html">50/30/20 Budget Rule: Does It Still Work in 2024?</a>
+            </h3>
+            <p class="article-excerpt">Learn how to apply the popular 50/30/20 budgeting method and whether it's still effective for modern financial planning.</p>
+            <div class="article-meta">
+                <span class="read-time">8 min read</span>
+                <span class="publish-date">Coming Soon</span>
+            </div>
+        </div>
+    </article>
+
+    <!-- NEW: Article 10 -->
+    <article class="article-card">
+        <div class="article-image">
+            <img src="https://via.placeholder.com/400x250/7c3aed/ffffff?text=Passive+Income" alt="Passive Income Ideas" loading="lazy">
+        </div>
+        <div class="article-content">
+            <h3 class="article-title">
+                <a href="passive-income-ideas-that-actually-work.html">15 Passive Income Ideas That Actually Work</a>
+            </h3>
+            <p class="article-excerpt">Discover legitimate passive income streams you can start building today to create long-term wealth while you sleep.</p>
+            <div class="article-meta">
+                <span class="read-time">10 min read</span>
+                <span class="publish-date">Coming Soon</span>
+            </div>
+        </div>
+    </article>
+</div>               
+ </section>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <!-- Newsletter Signup -->
+                    <div class="sidebar-widget newsletter-widget">
+                        <h3>Get Weekly Money Tips</h3>
+                        <p>Join 2,500+ readers getting actionable financial advice every Saturday.</p>
+                        <form class="newsletter-form" id="newsletter">
+                            <input type="email" placeholder="Your email address" required class="newsletter-input">
+                            <button type="submit" class="btn btn-primary">Subscribe Free</button>
+                        </form>
+                        <p class="privacy-note">No spam. Unsubscribe anytime.</p>
+                    </div>
+                    
+                    <!-- Sidebar Ad 1 -->
+                    <div class="sidebar-widget ad-widget">
+                        <div class="ad-placeholder">
+                            <span>Advertisement</span>
+                            <div class="ad-size">300 x 250</div>
+                        </div>
+                    </div>
+                    
+                   <!-- Popular Articles Widget -->
+<div class="sidebar-widget popular-widget">
+    <h3>Most Popular Guides</h3>
+    <div class="popular-list">
+        <a href="best-high-yield-savings-accounts.html" class="popular-item">
+            <span class="popular-rank">1</span>
+            <span class="popular-title">Best High-Yield Savings Accounts</span>
+        </a>
+        <a href="how-to-start-investing-with-100-dollars.html" class="popular-item">
+            <span class="popular-rank">2</span>
+            <span class="popular-title">Start Investing with $100</span>
+        </a>
+        <a href="27-side-hustles-you-can-start-this-weekend.html" class="popular-item">
+            <span class="popular-rank">3</span>
+            <span class="popular-title">27 Side Hustles for Weekend</span>
+        </a>
+        <a href="how-to-build-credit-from-scratch.html" class="popular-item">
+            <span class="popular-rank">4</span>
+            <span class="popular-title">Build Credit from Scratch</span>
+        </a>
+        <a href="online-banks-vs-traditional-banks-comparison.html" class="popular-item">
+            <span class="popular-rank">5</span>
+            <span class="popular-title">Online vs Traditional Banks</span>
+        </a>
+        <!-- NEW: Articles 7-10 -->
+        <a href="index-funds-vs-etfs-guide.html" class="popular-item">
+            <span class="popular-rank">6</span>
+            <span class="popular-title">Index Funds vs ETFs Guide</span>
+        </a>
+        <a href="credit-utilization-ratio-guide.html" class="popular-item">
+            <span class="popular-rank">7</span>
+            <span class="popular-title">Credit Utilization Truth</span>
+        </a>
+        <a href="50-30-20-budget-rule-guide.html" class="popular-item">
+            <span class="popular-rank">8</span>
+            <span class="popular-title">50/30/20 Budget Rule</span>
+        </a>
+        <a href="passive-income-ideas-that-actually-work.html" class="popular-item">
+            <span class="popular-rank">9</span>
+            <span class="popular-title">Passive Income Ideas</span>
+        </a>
+    </div>
+</div>
+                    
+                    <!-- Sidebar Ad 2 -->
+                    <div class="sidebar-widget ad-widget">
+                        <div class="ad-placeholder">
+                            <span>Advertisement</span>
+                            <div class="ad-size">300 x 600</div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Get Our Free Financial Planning Kit</h2>
+                <p>Join our newsletter and get instant access to:</p>
+                <ul class="newsletter-benefits">
+                    <li>✅ Budget templates & spreadsheets</li>
+                    <li>✅ Investment checklist for beginners</li>
+                    <li>✅ Debt payoff calculator</li>
+                    <li>✅ Weekly exclusive content</li>
+                </ul>
+                <form class="newsletter-form large-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Enter your email address" required class="form-input">
+                        <button type="submit" class="btn btn-primary">Get Free Kit</button>
+                    </div>
+                    <p class="privacy-note">We respect your privacy. Unsubscribe at any time.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <div class="logo">
+                        <a href="index.html" class="logo-link">
+                            <span class="logo-icon">💰</span>
+                            <span class="logo-text">WealthPathfinder</span>
+                        </a>
+                    </div>
+                    <p class="footer-description">Smart money moves for real life. Building financial freedom, one step at a time.</p>
+                </div>
+                
+                <!-- Footer Links -->
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="banking.html">Banking & Savings</a></li>
+                            <li><a href="investing.html">Investing Basics</a></li>
+                            <li><a href="credit.html">Credit & Debt</a></li>
+                            <li><a href="budgeting.html">Budgeting</a></li>
+                            <li><a href="side-hustles.html">Making Money</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="calculators.html">Financial Calculators</a></li>
+                            <li><a href="tools.html">Free Tools</a></li>
+                            <li><a href="glossary.html">Financial Glossary</a></li>
+                            <li><a href="newsletter.html">Newsletter</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                            <li><a href="disclaimer.html">Disclaimer</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2024 WealthPathfinder. All rights reserved. </p>
+                <p class="disclaimer-note">WealthPathfinder is for educational purposes only and does not constitute financial advice. Please consult with a professional financial advisor before making any investment decisions.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    
+    <!-- AdSense Script (Add after approval) -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</body>
+</html>

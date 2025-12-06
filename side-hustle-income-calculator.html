@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Hustle Income Calculator - Financial Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #F4A460 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .calculator-header {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .calculator-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .calculator-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .calculator-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 1.4em;
+        }
+
+        .section-title i {
+            color: #8B4513;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #8B4513;
+        }
+
+        .range-container {
+            margin-top: 10px;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        .toggle-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .toggle-option {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .toggle-option.active {
+            background: #8B4513;
+            color: white;
+            border-color: #8B4513;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #F4A460 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 20px;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .results-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .income-summary {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .income-amount {
+            font-size: 3em;
+            font-weight: 800;
+            margin: 10px 0;
+            color: #8B4513;
+        }
+
+        .income-description {
+            font-size: 1.2em;
+            color: #6c757d;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #8B4513;
+        }
+
+        .result-card h3 {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .result-card .value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .chart-container {
+            height: 300px;
+            margin: 30px 0;
+        }
+
+        .breakdown-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .breakdown-table th,
+        .breakdown-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breakdown-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .insights-section {
+            background: #e8f4fd;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+        }
+
+        .insights-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .insight-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #8B4513;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .print-btn, .reset-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .print-btn {
+            background: #3498db;
+            color: white;
+        }
+
+        .reset-btn {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .print-btn:hover, .reset-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .hustle-section {
+            margin-top: 30px;
+        }
+
+        .hustle-chart {
+            height: 250px;
+            margin-top: 20px;
+        }
+
+        .tab-container {
+            margin-top: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid #8B4513;
+            font-weight: 600;
+            color: #8B4513;
+        }
+
+        .tab-content {
+            padding: 20px 0;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .milestone-section {
+            margin-top: 30px;
+        }
+
+        .milestone-list {
+            margin-top: 15px;
+        }
+
+        .milestone-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .milestone-month {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .milestone-value {
+            font-weight: 600;
+            color: #8B4513;
+        }
+
+        .expense-section {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        .comparison-section {
+            margin-top: 30px;
+        }
+
+        .comparison-chart {
+            height: 250px;
+            margin-top: 20px;
+        }
+
+        .hustle-type {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .hustle-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .hustle-rate {
+            font-weight: 600;
+            color: #8B4513;
+        }
+
+        .hustle-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            flex: 1;
+            margin: 0 15px;
+            overflow: hidden;
+        }
+
+        .hustle-fill {
+            height: 100%;
+            background: #8B4513;
+            border-radius: 5px;
+        }
+
+        .goal-section {
+            margin-top: 30px;
+        }
+
+        .goal-alert {
+            background: #d1f7c4;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2ecc71;
+        }
+
+        .tax-section {
+            background: #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #fdcb6e;
+        }
+
+        .hustle-ideas {
+            margin-top: 30px;
+        }
+
+        .idea-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .idea-icon {
+            background: #8B4513;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            flex-shrink: 0;
+        }
+
+        .idea-content h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .idea-content p {
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h1>Side Hustle Income Calculator</h1>
+            <p>Project your extra income and build your financial freedom</p>
+        </div>
+
+        <div class="calculator-content">
+            <div class="input-section">
+                <div class="section-title">
+                    <i class="fas fa-user"></i>
+                    <h2>Your Side Hustle</h2>
+                </div>
+                
+                <div class="input-group">
+                    <label for="hustle-type">Primary Side Hustle Type</label>
+                    <select id="hustle-type">
+                        <option value="freelance">Freelance Services</option>
+                        <option value="gig">Gig Economy (Uber, DoorDash, etc.)</option>
+                        <option value="online">Online Business</option>
+                        <option value="creative">Creative Work</option>
+                        <option value="consulting">Consulting/Coaching</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="hourly-rate">Hourly Rate ($)</label>
+                    <input type="number" id="hourly-rate" value="25" min="0" step="1">
+                    <div class="range-container">
+                        <input type="range" id="hourly-rate-range" min="10" max="200" value="25">
+                        <div class="range-labels">
+                            <span>$10</span>
+                            <span>$200</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="hours-week">Hours Per Week</label>
+                    <input type="number" id="hours-week" value="10" min="1" max="40" step="0.5">
+                    <div class="range-container">
+                        <input type="range" id="hours-week-range" min="1" max="40" value="10">
+                        <div class="range-labels">
+                            <span>1 hr</span>
+                            <span>40 hrs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="weeks-year">Weeks Worked Per Year</label>
+                    <input type="number" id="weeks-year" value="48" min="1" max="52" step="1">
+                </div>
+
+                <div class="section-title" style="margin-top: 30px;">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h2>Income & Expenses</h2>
+                </div>
+
+                <div class="input-group">
+                    <label for="expense-rate">Business Expense Rate (% of income)</label>
+                    <input type="number" id="expense-rate" value="15" min="0" max="100" step="1">
+                    <div class="range-container">
+                        <input type="range" id="expense-rate-range" min="0" max="50" value="15">
+                        <div class="range-labels">
+                            <span>0%</span>
+                            <span>50%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="tax-rate">Estimated Tax Rate (%)</label>
+                    <input type="number" id="tax-rate" value="25" min="0" max="50" step="1">
+                    <div class="range-container">
+                        <input type="range" id="tax-rate-range" min="0" max="50" value="25">
+                        <div class="range-labels">
+                            <span>0%</span>
+                            <span>50%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="income-goal">Monthly Income Goal ($)</label>
+                    <input type="number" id="income-goal" value="1000" min="0" step="100">
+                </div>
+
+                <button class="calculate-btn" onclick="calculateHustle()">
+                    <i class="fas fa-calculator"></i> Calculate Side Hustle Income
+                </button>
+
+                <div class="comparison-section">
+                    <h3>Compare Hustle Types</h3>
+                    <div class="input-group">
+                        <label for="compare-hustle">Compare With</label>
+                        <select id="compare-hustle">
+                            <option value="freelance">Freelance Services</option>
+                            <option value="gig">Gig Economy</option>
+                            <option value="online">Online Business</option>
+                            <option value="creative">Creative Work</option>
+                            <option value="consulting">Consulting/Coaching</option>
+                        </select>
+                    </div>
+                    <button class="calculate-btn" onclick="compareHustles()" style="margin-top: 10px; background: #2ecc71;">
+                        Compare Hustles
+                    </button>
+                </div>
+
+                <div class="hustle-ideas">
+                    <h3>Popular Side Hustle Ideas</h3>
+                    <div class="idea-card">
+                        <div class="idea-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="idea-content">
+                            <h4>Freelance Programming</h4>
+                            <p>Average rate: $50-150/hr • Build websites, apps, or software</p>
+                        </div>
+                    </div>
+                    <div class="idea-card">
+                        <div class="idea-icon">
+                            <i class="fas fa-pencil-alt"></i>
+                        </div>
+                        <div class="idea-content">
+                            <h4>Content Writing</h4>
+                            <p>Average rate: $25-100/hr • Blog posts, articles, copywriting</p>
+                        </div>
+                    </div>
+                    <div class="idea-card">
+                        <div class="idea-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="idea-content">
+                            <h4>Online Tutoring</h4>
+                            <p>Average rate: $20-60/hr • Teach subjects you're skilled in</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="section-title">
+                    <i class="fas fa-chart-bar"></i>
+                    <h2>Your Side Hustle Income</h2>
+                </div>
+                
+                <div class="income-summary">
+                    <h3>Estimated Annual Side Income</h3>
+                    <div class="income-amount" id="annual-income">$12,000</div>
+                    <div class="income-description" id="income-description">After expenses and taxes</div>
+                </div>
+
+                <div id="goal-alert" class="goal-alert" style="display: none;">
+                    <h4><i class="fas fa-trophy"></i> Goal Achieved!</h4>
+                    <p>Congratulations! Your side hustle exceeds your monthly income goal of <strong id="goal-amount">$1,000</strong>.</p>
+                </div>
+
+                <div class="tax-section">
+                    <h4><i class="fas fa-receipt"></i> Tax Considerations</h4>
+                    <p>Remember to set aside approximately <strong id="tax-setaside">$2,400</strong> for taxes and track your business expenses for deductions.</p>
+                </div>
+
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Gross Annual Income</h3>
+                        <div class="value" id="gross-income">$12,000</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>After Expenses</h3>
+                        <div class="value" id="after-expenses">$10,200</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>After Taxes</h3>
+                        <div class="value" id="after-taxes">$7,650</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Monthly Take-Home</h3>
+                        <div class="value" id="monthly-income">$638</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="incomeBreakdownChart"></canvas>
+                </div>
+
+                <div class="tab-container">
+                    <div class="tabs">
+                        <div class="tab active" onclick="switchTab('breakdown')">Income Breakdown</div>
+                        <div class="tab" onclick="switchTab('milestones')">Income Milestones</div>
+                        <div class="tab" onclick="switchTab('comparison')">Hustle Comparison</div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="breakdown-tab">
+                            <div class="hustle-section">
+                                <h3>Income Composition</h3>
+                                <div class="hustle-chart">
+                                    <canvas id="breakdownChart"></canvas>
+                                </div>
+                                <table class="breakdown-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Component</th>
+                                            <th>Amount</th>
+                                            <th>Percentage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Gross Income</td>
+                                            <td id="gross-income-amount">$12,000</td>
+                                            <td id="gross-income-percent">100%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Business Expenses</td>
+                                            <td id="expenses-amount">$1,800</td>
+                                            <td id="expenses-percent">15%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Taxes</td>
+                                            <td id="taxes-amount">$2,550</td>
+                                            <td id="taxes-percent">21.3%</td>
+                                        </tr>
+                                        <tr style="font-weight: 600;">
+                                            <td>Net Income</td>
+                                            <td id="net-income-amount">$7,650</td>
+                                            <td>63.8%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="milestones-tab">
+                            <div class="milestone-section">
+                                <h3>Income Growth Timeline</h3>
+                                <div class="milestone-list">
+                                    <div class="milestone-item">
+                                        <span class="milestone-month">3 months</span>
+                                        <span class="milestone-value" id="milestone-3">$1,913</span>
+                                    </div>
+                                    <div class="milestone-item">
+                                        <span class="milestone-month">6 months</span>
+                                        <span class="milestone-value" id="milestone-6">$3,825</span>
+                                    </div>
+                                    <div class="milestone-item">
+                                        <span class="milestone-month">1 year</span>
+                                        <span class="milestone-value" id="milestone-12">$7,650</span>
+                                    </div>
+                                    <div class="milestone-item">
+                                        <span class="milestone-month">2 years</span>
+                                        <span class="milestone-value" id="milestone-24">$15,300</span>
+                                    </div>
+                                    <div class="milestone-item">
+                                        <span class="milestone-month">5 years</span>
+                                        <span class="milestone-value" id="milestone-60">$38,250</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="comparison-tab">
+                            <div class="comparison-section">
+                                <h3>Side Hustle Comparison</h3>
+                                <div class="comparison-chart">
+                                    <canvas id="comparisonChart"></canvas>
+                                </div>
+                                <table class="breakdown-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Hustle Type</th>
+                                            <th>Annual Income</th>
+                                            <th>Hourly Rate</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="current-hustle">Freelance Services</td>
+                                            <td id="current-hustle-income">$7,650</td>
+                                            <td id="current-hustle-rate">$25/hr</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="compare-hustle-display">Gig Economy</td>
+                                            <td id="compare-hustle-income">$5,760</td>
+                                            <td id="compare-hustle-rate">$18/hr</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insights-section">
+                    <h3><i class="fas fa-lightbulb"></i> Side Hustle Success Tips</h3>
+                    <div class="insight-item">
+                        <strong>Track Everything:</strong> Use apps to track your time, expenses, and income for tax purposes.
+                    </div>
+                    <div class="insight-item">
+                        <strong>Set Aside Taxes:</strong> Save 25-30% of your income for taxes to avoid surprises at tax time.
+                    </div>
+                    <div class="insight-item">
+                        <strong>Diversify Income:</strong> Consider multiple side hustles to reduce risk and increase earnings.
+                    </div>
+                    <div class="insight-item">
+                        <strong>Raise Your Rates:</strong> As you gain experience and skills, don't be afraid to increase your prices.
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="print-btn" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print Results
+                    </button>
+                    <button class="reset-btn" onclick="resetCalculator()">
+                        <i class="fas fa-redo"></i> Reset Calculator
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let incomeBreakdownChart, breakdownChart, comparisonChart;
+        
+        // Typical hourly rates for different side hustles
+        const hustleRates = {
+            freelance: 50,
+            gig: 18,
+            online: 35,
+            creative: 40,
+            consulting: 75,
+            other: 25
+        };
+
+        // Sync range and number inputs for hourly rate
+        document.getElementById('hourly-rate-range').addEventListener('input', function() {
+            document.getElementById('hourly-rate').value = this.value;
+            calculateHustle();
+        });
+
+        document.getElementById('hourly-rate').addEventListener('input', function() {
+            document.getElementById('hourly-rate-range').value = this.value;
+            calculateHustle();
+        });
+
+        // Sync range and number inputs for hours per week
+        document.getElementById('hours-week-range').addEventListener('input', function() {
+            document.getElementById('hours-week').value = this.value;
+            calculateHustle();
+        });
+
+        document.getElementById('hours-week').addEventListener('input', function() {
+            document.getElementById('hours-week-range').value = this.value;
+            calculateHustle();
+        });
+
+        // Sync range and number inputs for expense rate
+        document.getElementById('expense-rate-range').addEventListener('input', function() {
+            document.getElementById('expense-rate').value = this.value;
+            calculateHustle();
+        });
+
+        document.getElementById('expense-rate').addEventListener('input', function() {
+            document.getElementById('expense-rate-range').value = this.value;
+            calculateHustle();
+        });
+
+        // Sync range and number inputs for tax rate
+        document.getElementById('tax-rate-range').addEventListener('input', function() {
+            document.getElementById('tax-rate').value = this.value;
+            calculateHustle();
+        });
+
+        document.getElementById('tax-rate').addEventListener('input', function() {
+            document.getElementById('tax-rate-range').value = this.value;
+            calculateHustle();
+        });
+
+        // Update hourly rate based on hustle type
+        document.getElementById('hustle-type').addEventListener('change', function() {
+            const selectedHustle = this.value;
+            const typicalRate = hustleRates[selectedHustle];
+            document.getElementById('hourly-rate').value = typicalRate;
+            document.getElementById('hourly-rate-range').value = typicalRate;
+            calculateHustle();
+        });
+
+        // Switch between tabs
+        function switchTab(tabName) {
+            // Update tab active states
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update tab content visibility
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.remove('active');
+            });
+            document.getElementById(${tabName}-tab).classList.add('active');
+        }
+
+        // Calculate side hustle income
+        function calculateHustle() {
+            // Get input values
+            const hourlyRate = parseFloat(document.getElementById('hourly-rate').value);
+            const hoursPerWeek = parseFloat(document.getElementById('hours-week').value);
+            const weeksPerYear = parseFloat(document.getElementById('weeks-year').value);
+            const expenseRate = parseFloat(document.getElementById('expense-rate').value) / 100;
+            const taxRate = parseFloat(document.getElementById('tax-rate').value) / 100;
+            const incomeGoal = parseFloat(document.getElementById('income-goal').value);
+
+            // Calculate gross income
+            const grossAnnual = hourlyRate * hoursPerWeek * weeksPerYear;
+
+            // Calculate expenses
+            const annualExpenses = grossAnnual * expenseRate;
+
+            // Calculate income after expenses
+            const incomeAfterExpenses = grossAnnual - annualExpenses;
+
+            // Calculate taxes
+            const annualTaxes = incomeAfterExpenses * taxRate;
+
+            // Calculate net income
+            const netAnnual = incomeAfterExpenses - annualTaxes;
+
+            // Calculate monthly income
+            const monthlyIncome = netAnnual / 12;
+
+            // Update results
+            document.getElementById('annual-income').textContent = $${Math.round(netAnnual).toLocaleString()};
+            document.getElementById('income-description').textContent = After expenses and taxes;
+            document.getElementById('gross-income').textContent = $${Math.round(grossAnnual).toLocaleString()};
+            document.getElementById('after-expenses').textContent = $${Math.round(incomeAfterExpenses).toLocaleString()};
+            document.getElementById('after-taxes').textContent = $${Math.round(netAnnual).toLocaleString()};
+            document.getElementById('monthly-income').textContent = $${Math.round(monthlyIncome).toLocaleString()};
+
+            // Update tax setaside amount
+            document.getElementById('tax-setaside').textContent = $${Math.round(annualTaxes).toLocaleString()};
+
+            // Update goal alert
+            const goalAlert = document.getElementById('goal-alert');
+            if (monthlyIncome >= incomeGoal) {
+                goalAlert.style.display = 'block';
+                document.getElementById('goal-amount').textContent = $${Math.round(incomeGoal).toLocaleString()};
+            } else {
+                goalAlert.style.display = 'none';
+            }
+
+            // Update breakdown table
+            document.getElementById('gross-income-amount').textContent = $${Math.round(grossAnnual).toLocaleString()};
+            document.getElementById('gross-income-percent').textContent = '100%';
+            document.getElementById('expenses-amount').textContent = $${Math.round(annualExpenses).toLocaleString()};
+            document.getElementById('expenses-percent').textContent = ${(expenseRate * 100).toFixed(0)}%;
+            document.getElementById('taxes-amount').textContent = $${Math.round(annualTaxes).toLocaleString()};
+            document.getElementById('taxes-percent').textContent = ${((annualTaxes / grossAnnual) * 100).toFixed(1)}%;
+            document.getElementById('net-income-amount').textContent = $${Math.round(netAnnual).toLocaleString()};
+
+            // Update milestones
+            updateMilestones(netAnnual);
+
+            // Update charts
+            updateIncomeBreakdownChart(grossAnnual, annualExpenses, annualTaxes, netAnnual);
+            updateBreakdownChart(grossAnnual, annualExpenses, annualTaxes, netAnnual);
+        }
+
+        // Update income milestones
+        function updateMilestones(annualIncome) {
+            const milestones = [3, 6, 12, 24, 60]; // months
+            
+            milestones.forEach(months => {
+                const income = (annualIncome / 12) * months;
+                document.getElementById(milestone-${months}).textContent = $${Math.round(income).toLocaleString()};
+            });
+        }
+
+        // Compare different side hustles
+        function compareHustles() {
+            const currentHustle = document.getElementById('hustle-type').value;
+            const compareHustle = document.getElementById('compare-hustle').value;
+            
+            // Get current hustle details
+            const currentRate = parseFloat(document.getElementById('hourly-rate').value);
+            const hoursPerWeek = parseFloat(document.getElementById('hours-week').value);
+            const weeksPerYear = parseFloat(document.getElementById('weeks-year').value);
+            const expenseRate = parseFloat(document.getElementById('expense-rate').value) / 100;
+            const taxRate = parseFloat(document.getElementById('tax-rate').value) / 100;
+            
+            // Calculate current hustle income
+            const currentGross = currentRate * hoursPerWeek * weeksPerYear;
+            const currentNet = currentGross * (1 - expenseRate) * (1 - taxRate);
+            
+            // Calculate comparison hustle income
+            const compareRate = hustleRates[compareHustle];
+            const compareGross = compareRate * hoursPerWeek * weeksPerYear;
+            const compareNet = compareGross * (1 - expenseRate) * (1 - taxRate);
+            
+            // Update comparison table
+            document.getElementById('current-hustle').textContent = formatHustleType(currentHustle);
+            document.getElementById('current-hustle-income').textContent = $${Math.round(currentNet).toLocaleString()};
+            document.getElementById('current-hustle-rate').textContent = $${currentRate}/hr;
+            document.getElementById('compare-hustle-display').textContent = formatHustleType(compareHustle);
+            document.getElementById('compare-hustle-income').textContent = $${Math.round(compareNet).toLocaleString()};
+            document.getElementById('compare-hustle-rate').textContent = $${compareRate}/hr;
+            
+            // Update comparison chart
+            updateComparisonChart(currentHustle, compareHustle, currentNet, compareNet);
+        }
+
+        // Format hustle type for display
+        function formatHustleType(type) {
+            switch(type) {
+                case 'freelance': return 'Freelance Services';
+                case 'gig': return 'Gig Economy';
+                case 'online': return 'Online Business';
+                case 'creative': return 'Creative Work';
+                case 'consulting': return 'Consulting/Coaching';
+                default: return type;
+            }
+        }
+
+        // Update the income breakdown chart
+        function updateIncomeBreakdownChart(gross, expenses, taxes, net) {
+            const ctx = document.getElementById('incomeBreakdownChart').getContext('2d');
+            
+            if (incomeBreakdownChart) {
+                incomeBreakdownChart.destroy();
+            }
+            
+            incomeBreakdownChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Gross Income', 'After Expenses', 'After Taxes', 'Net Income'],
+                    datasets: [{
+                        label: 'Income Breakdown',
+                        data: [gross, gross - expenses, gross - expenses - taxes, net],
+                        backgroundColor: [
+                            '#8B4513',
+                            '#D2691E',
+                            '#F4A460',
+                            '#2ecc71'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Income at Each Stage'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amount ($)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update the breakdown chart
+        function updateBreakdownChart(gross, expenses, taxes, net) {
+            const ctx = document.getElementById('breakdownChart').getContext('2d');
+            
+            if (breakdownChart) {
+                breakdownChart.destroy();
+            }
+            
+            breakdownChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Gross Income', 'Business Expenses', 'Taxes', 'Net Income'],
+                    datasets: [{
+                        data: [gross, expenses, taxes, net],
+                        backgroundColor: [
+                            '#8B4513',
+                            '#D2691E',
+                            '#F4A460',
+                            '#2ecc71'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ${context.label}: $${context.raw.toLocaleString()};
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update the comparison chart
+        function updateComparisonChart(currentHustle, compareHustle, currentIncome, compareIncome) {
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            
+            if (comparisonChart) {
+                comparisonChart.destroy();
+            }
+            
+            comparisonChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [formatHustleType(currentHustle), formatHustleType(compareHustle)],
+                    datasets: [{
+                        label: 'Annual Net Income',
+                        data: [currentIncome, compareIncome],
+                        backgroundColor: ['#8B4513', '#3498db'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Side Hustle Income Comparison'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Annual Income ($)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Reset the calculator
+        function resetCalculator() {
+            document.getElementById('hustle-type').value = 'freelance';
+            document.getElementById('hourly-rate').value = '25';
+            document.getElementById('hours-week').value = '10';
+            document.getElementById('weeks-year').value = '48';
+            document.getElementById('expense-rate').value = '15';
+            document.getElementById('tax-rate').value = '25';
+            document.getElementById('income-goal').value = '1000';
+            document.getElementById('compare-hustle').value = 'gig';
+            
+            // Update range sliders
+            document.getElementById('hourly-rate-range').value = '25';
+            document.getElementById('hours-week-range').value = '10';
+            document.getElementById('expense-rate-range').value = '15';
+            document.getElementById('tax-rate-range').value = '25';
+            
+            calculateHustle();
+        }
+
+        // Initialize the calculator
+        window.onload = function() {
+            calculateHustle();
+        };
+    </script>
+</body>
+</html>

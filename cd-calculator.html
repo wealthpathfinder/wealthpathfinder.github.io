@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CD Calculator - Financial Tools</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .calculator-header {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .calculator-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .calculator-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .calculator-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .range-container {
+            margin-top: 10px;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .results-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-card h3 {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .result-card .value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .chart-container {
+            height: 300px;
+            margin: 30px 0;
+        }
+
+        .breakdown-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .breakdown-table th,
+        .breakdown-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breakdown-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .insights-section {
+            background: #e8f4fd;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #2196F3;
+        }
+
+        .insights-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .insight-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #667eea;
+        }
+
+        .comparison-section {
+            margin-top: 30px;
+        }
+
+        .comparison-chart {
+            height: 250px;
+            margin-top: 20px;
+        }
+
+        .print-btn {
+            padding: 12px 25px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .reset-btn {
+            padding: 12px 25px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h1>CD Calculator</h1>
+            <p>Calculate your Certificate of Deposit earnings and compare investment options</p>
+        </div>
+
+        <div class="calculator-content">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="initialDeposit">Initial Deposit ($)</label>
+                    <input type="number" id="initialDeposit" value="10000" min="100" step="100">
+                </div>
+
+                <div class="input-group">
+                    <label for="interestRate">Annual Interest Rate (%)</label>
+                    <input type="range" id="interestRate" min="0.1" max="10" step="0.1" value="3.5">
+                    <div class="range-container">
+                        <input type="number" id="interestRateDisplay" value="3.5" min="0.1" max="10" step="0.1">
+                        <div class="range-labels">
+                            <span>0.1%</span>
+                            <span>10%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="termLength">Term Length</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="termLength" value="12" min="1" max="60">
+                        <select id="termUnit">
+                            <option value="months">Months</option>
+                            <option value="years">Years</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="compoundingFrequency">Compounding Frequency</label>
+                    <select id="compoundingFrequency">
+                        <option value="daily">Daily</option>
+                        <option value="monthly" selected>Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="annually">Annually</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="taxRate">Tax Rate (%)</label>
+                    <input type="number" id="taxRate" value="25" min="0" max="50" step="0.1">
+                </div>
+
+                <button class="calculate-btn" onclick="calculateCD()">Calculate CD Earnings</button>
+            </div>
+
+            <div class="results-section">
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Total Value at Maturity</h3>
+                        <div class="value" id="totalValue">$10,350.00</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Total Interest Earned</h3>
+                        <div class="value" id="totalInterest">$350.00</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>After-Tax Value</h3>
+                        <div class="value" id="afterTaxValue">$10,262.50</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Annual Percentage Yield (APY)</h3>
+                        <div class="value" id="apyValue">3.56%</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+
+                <div class="insights-section">
+                    <h3>💡 CD Investment Insights</h3>
+                    <div class="insight-item">
+                        <strong>Safety First:</strong> Your CD is FDIC insured up to $250,000 per institution
+                    </div>
+                    <div class="insight-item">
+                        <strong>Early Withdrawal Penalty:</strong> Withdrawing before maturity typically costs 3-6 months of interest
+                    </div>
+                    <div class="insight-item">
+                        <strong>Ladder Strategy:</strong> Consider staggering multiple CDs with different terms for better liquidity
+                    </div>
+                </div>
+
+                <div class="comparison-section">
+                    <h3>CD Term Comparison</h3>
+                    <div class="comparison-chart">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                </div>
+
+                <button class="print-btn" onclick="window.print()">Print Results</button>
+                <button class="reset-btn" onclick="resetCalculator()">Reset Calculator</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Sync range and number inputs
+        document.getElementById('interestRate').addEventListener('input', function() {
+            document.getElementById('interestRateDisplay').value = this.value;
+        });
+
+        document.getElementById('interestRateDisplay').addEventListener('input', function() {
+            document.getElementById('interestRate').value = this.value;
+        });
+
+        let growthChart, comparisonChart;
+
+        function calculateCD() {
+            const principal = parseFloat(document.getElementById('initialDeposit').value);
+            const annualRate = parseFloat(document.getElementById('interestRate').value) / 100;
+            const termLength = parseInt(document.getElementById('termLength').value);
+            const termUnit = document.getElementById('termUnit').value;
+            const compounding = document.getElementById('compoundingFrequency').value;
+            const taxRate = parseFloat(document.getElementById('taxRate').value) / 100;
+
+            // Convert term to years for calculation
+            let years = termUnit === 'months' ? termLength / 12 : termLength;
+
+            // Determine compounding periods per year
+            let compoundsPerYear;
+            switch(compounding) {
+                case 'daily': compoundsPerYear = 365; break;
+                case 'monthly': compoundsPerYear = 12; break;
+                case 'quarterly': compoundsPerYear = 4; break;
+                case 'annually': compoundsPerYear = 1; break;
+            }
+
+            // Calculate total value using compound interest formula
+            const totalValue = principal * Math.pow(1 + annualRate / compoundsPerYear, compoundsPerYear * years);
+            const totalInterest = totalValue - principal;
+            const taxAmount = totalInterest * taxRate;
+            const afterTaxValue = totalValue - taxAmount;
+            
+            // Calculate APY
+            const apy = (Math.pow(1 + annualRate / compoundsPerYear, compoundsPerYear) - 1) * 100;
+
+            // Update results
+            document.getElementById('totalValue').textContent = $${totalValue.toFixed(2)};
+            document.getElementById('totalInterest').textContent = $${totalInterest.toFixed(2)};
+            document.getElementById('afterTaxValue').textContent = $${afterTaxValue.toFixed(2)};
+            document.getElementById('apyValue').textContent = ${apy.toFixed(2)}%;
+
+            // Update charts
+            updateGrowthChart(principal, annualRate, years, compoundsPerYear);
+            updateComparisonChart(principal, annualRate, years, compoundsPerYear);
+        }
+
+        function updateGrowthChart(principal, rate, years, compoundsPerYear) {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            
+            if (growthChart) {
+                growthChart.destroy();
+            }
+
+            // Generate data points for each year
+            const labels = [];
+            const principalData = [];
+            const interestData = [];
+
+            for (let i = 0; i <= years; i++) {
+                labels.push(Year ${i});
+                const value = principal * Math.pow(1 + rate / compoundsPerYear, compoundsPerYear * i);
+                principalData.push(principal);
+                interestData.push(value - principal);
+            }
+
+            growthChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Principal',
+                            data: principalData,
+                            backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                            stack: 'Stack 0'
+                        },
+                        {
+                            label: 'Interest Earned',
+                            data: interestData,
+                            backgroundColor: 'rgba(118, 75, 162, 0.8)',
+                            stack: 'Stack 0'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'CD Growth Over Time'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ${context.dataset.label}: $${context.raw.toFixed(2)};
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Years'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Amount ($)'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateComparisonChart(principal, rate, years, compoundsPerYear) {
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            
+            if (comparisonChart) {
+                comparisonChart.destroy();
+            }
+
+            // Compare different CD terms
+            const terms = [6, 12, 18, 24, 36, 48, 60]; // months
+            const values = terms.map(term => {
+                const termYears = term / 12;
+                return principal * Math.pow(1 + rate / compoundsPerYear, compoundsPerYear * termYears);
+            });
+
+            comparisonChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: terms.map(term => ${term} months),
+                    datasets: [{
+                        label: 'CD Value at Maturity',
+                        data: values,
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'CD Value by Term Length'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+        }
+
+        function resetCalculator() {
+            document.getElementById('initialDeposit').value = '10000';
+            document.getElementById('interestRate').value = '3.5';
+            document.getElementById('interestRateDisplay').value = '3.5';
+            document.getElementById('termLength').value = '12';
+            document.getElementById('termUnit').value = 'months';
+            document.getElementById('compoundingFrequency').value = 'monthly';
+            document.getElementById('taxRate').value = '25';
+            
+            calculateCD();
+        }
+
+        // Initialize calculator on load
+        window.onload = calculateCD;
+    </script>
+</body>
+</html>

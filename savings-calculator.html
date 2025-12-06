@@ -1,0 +1,1277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Calculators: Savings Growth, CD Returns & More (2024) | WealthPathfinder</title>
+    <meta name="description" content="Free banking calculators: savings growth, CD returns, emergency fund, and bank fees. Calculate your potential earnings and savings with our interactive tools.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://wealthpathfinder.com/banking-calculators.html">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Banking Calculators",
+      "description": "Free interactive banking calculators for savings growth, CD returns, emergency funds, and bank fee analysis.",
+      "url": "https://wealthpathfinder.com/banking-calculators.html",
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": 4,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebApplication",
+              "name": "Savings Growth Calculator",
+              "url": "https://wealthpathfinder.com/banking-calculators.html#savings-calculator"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebApplication",
+              "name": "CD Returns Calculator",
+              "url": "https://wealthpathfinder.com/banking-calculators.html#cd-calculator"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-icon">💰</span>
+                        <span class="logo-text">WealthPathfinder</span>
+                    </a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="banking.html" class="nav-link">Banking & Savings</a></li>
+                        <li><a href="investing.html" class="nav-link">Investing Basics</a></li>
+                        <li><a href="credit.html" class="nav-link">Credit & Debt</a></li>
+                        <li><a href="budgeting.html" class="nav-link">Budgeting</a></li>
+                        <li><a href="side-hustles.html" class="nav-link">Making Money</a></li>
+                        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                        <li><a href="banking-calculators.html" class="nav-link active">Calculators</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Ad -->
+    <section class="ad-section">
+        <div class="container">
+            <div class="ad-unit header-ad">
+                <div class="ad-placeholder">
+                    <span>Advertisement</span>
+                    <div class="ad-size">728 x 90</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculators Hero -->
+    <section class="calculators-hero">
+        <div class="container">
+            <div class="calculators-hero-content">
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a> > 
+                    <a href="banking.html">Banking & Savings</a> > 
+                    <span>Banking Calculators</span>
+                </nav>
+                
+                <h1 class="calculators-title">Banking Calculators</h1>
+                <p class="calculators-subtitle">Calculate your potential savings growth, CD returns, emergency fund needs, and bank fee savings with our interactive tools.</p>
+                
+                <div class="calculators-stats">
+                    <div class="calculator-stat">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Interactive Calculators</span>
+                    </div>
+                    <div class="calculator-stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Free to Use</span>
+                    </div>
+                    <div class="calculator-stat">
+                        <span class="stat-number">No Signup</span>
+                        <span class="stat-label">Required</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Calculators Section -->
+    <main class="calculators-main">
+        <div class="container">
+            <!-- Savings Growth Calculator -->
+            <section id="savings-calculator" class="calculator-section">
+                <div class="calculator-header">
+                    <h2 class="calculator-title">
+                        <span class="calculator-icon">💰</span>
+                        Savings Growth Calculator
+                    </h2>
+                    <p class="calculator-description">Calculate how much your savings can grow with compound interest and regular contributions.</p>
+                </div>
+                
+                <div class="calculator-wrapper">
+                    <div class="calculator-inputs">
+                        <h3>Input Your Savings Details</h3>
+                        
+                        <div class="input-group">
+                            <label for="initialDeposit">
+                                <span>Initial Deposit ($)</span>
+                                <span class="input-hint">Amount you're starting with</span>
+                            </label>
+                            <input type="number" id="initialDeposit" value="5000" min="0" step="100">
+                            <div class="input-slider">
+                                <input type="range" id="initialDepositSlider" min="0" max="50000" value="5000" step="500">
+                                <div class="slider-labels">
+                                    <span>$0</span>
+                                    <span>$25,000</span>
+                                    <span>$50,000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="monthlyContribution">
+                                <span>Monthly Contribution ($)</span>
+                                <span class="input-hint">Amount you'll add each month</span>
+                            </label>
+                            <input type="number" id="monthlyContribution" value="200" min="0" step="50">
+                            <div class="input-slider">
+                                <input type="range" id="monthlyContributionSlider" min="0" max="2000" value="200" step="50">
+                                <div class="slider-labels">
+                                    <span>$0</span>
+                                    <span>$1,000</span>
+                                    <span>$2,000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="annualInterestRate">
+                                <span>Annual Interest Rate (APY %)</span>
+                                <span class="input-hint">Current average is 0.42%, but high-yield accounts offer 4-5%</span>
+                            </label>
+                            <input type="number" id="annualInterestRate" value="4.5" min="0" max="20" step="0.1">
+                            <div class="input-slider">
+                                <input type="range" id="annualInterestRateSlider" min="0" max="10" value="4.5" step="0.1">
+                                <div class="slider-labels">
+                                    <span>0%</span>
+                                    <span>5%</span>
+                                    <span>10%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="timePeriod">
+                                <span>Time Period (Years)</span>
+                                <span class="input-hint">How long you'll save</span>
+                            </label>
+                            <input type="number" id="timePeriod" value="10" min="1" max="50">
+                            <div class="input-slider">
+                                <input type="range" id="timePeriodSlider" min="1" max="30" value="10" step="1">
+                                <div class="slider-labels">
+                                    <span>1 year</span>
+                                    <span>15 years</span>
+                                    <span>30 years</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="calculator-presets">
+                            <h4>Quick Presets:</h4>
+                            <div class="preset-buttons">
+                                <button class="preset-btn" data-preset="emergency">Emergency Fund</button>
+                                <button class="preset-btn" data-preset="house">House Down Payment</button>
+                                <button class="preset-btn" data-preset="retirement">Retirement Savings</button>
+                                <button class="preset-btn" data-preset="vacation">Vacation Fund</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-results">
+                        <h3>Your Savings Projection</h3>
+                        
+                        <div class="result-summary">
+                            <div class="result-item total-savings">
+                                <span class="result-label">Total Savings</span>
+                                <span class="result-value" id="totalSavings">$37,851</span>
+                            </div>
+                            <div class="result-item total-contributions">
+                                <span class="result-label">Your Contributions</span>
+                                <span class="result-value" id="totalContributions">$29,000</span>
+                            </div>
+                            <div class="result-item interest-earned">
+                                <span class="result-label">Interest Earned</span>
+                                <span class="result-value" id="interestEarned">$8,851</span>
+                            </div>
+                        </div>
+                        
+                        <div class="growth-chart">
+                            <div class="chart-container">
+                                <div class="chart-bars" id="savingsChart">
+                                    <!-- Chart bars will be generated by JavaScript -->
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar principal" style="height: 60%;"></div>
+                                        <div class="chart-bar interest" style="height: 40%;"></div>
+                                        <div class="chart-label">Year 10</div>
+                                    </div>
+                                </div>
+                                <div class="chart-legend">
+                                    <div class="legend-item">
+                                        <span class="legend-color principal"></span>
+                                        <span>Your Contributions</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color interest"></span>
+                                        <span>Interest Earned</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="yearly-breakdown">
+                            <h4>Year-by-Year Breakdown</h4>
+                            <div class="breakdown-table">
+                                <div class="table-header">
+                                    <span>Year</span>
+                                    <span>Balance</span>
+                                    <span>Interest</span>
+                                    <span>Contributions</span>
+                                </div>
+                                <div class="table-body" id="yearlyBreakdown">
+                                    <!-- Yearly data will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="calculator-insights">
+                            <h4>💡 Key Insights</h4>
+                            <div class="insights-grid" id="savingsInsights">
+                                <div class="insight">
+                                    <span class="insight-title">Time Advantage</span>
+                                    <span class="insight-value">83% of your earnings come from interest</span>
+                                </div>
+                                <div class="insight">
+                                    <span class="insight-title">Monthly Impact</span>
+                                    <span class="insight-value">Each extra $100/month adds $2,400 in 10 years</span>
+                                </div>
+                                <div class="insight">
+                                    <span class="insight-title">Rate Effect</span>
+                                    <span class="insight-value">1% higher APY = $1,250 extra in 10 years</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calculator-tips">
+                    <h4>🚀 How to Maximize Your Savings Growth</h4>
+                    <div class="tips-grid">
+                        <div class="tip">
+                            <h5>1. Start Early</h5>
+                            <p>Starting 5 years earlier can double your ending balance due to compound interest.</p>
+                        </div>
+                        <div class="tip">
+                            <h5>2. Use High-Yield Accounts</h5>
+                            <p>Switch from traditional banks (0.01% APY) to online banks (4-5% APY) for 400x more interest.</p>
+                        </div>
+                        <div class="tip">
+                            <h5>3. Automate Contributions</h5>
+                            <p>Set up automatic transfers on payday to make saving effortless and consistent.</p>
+                        </div>
+                        <div class="tip">
+                            <h5>4. Increase Contributions Annually</h5>
+                            <p>Boost your monthly contribution by 5% each year to accelerate growth.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- First Ad Unit -->
+            <div class="ad-unit in-article-ad">
+                <div class="ad-placeholder">
+                    <span>Advertisement</span>
+                    <div class="ad-size">300 x 250</div>
+                </div>
+            </div>
+
+            <!-- CD Returns Calculator -->
+            <section id="cd-calculator" class="calculator-section">
+                <div class="calculator-header">
+                    <h2 class="calculator-title">
+                        <span class="calculator-icon">📈</span>
+                        CD Returns Calculator
+                    </h2>
+                    <p class="calculator-description">Calculate how much you can earn with Certificates of Deposit and compare different term lengths.</p>
+                </div>
+                
+                <div class="calculator-wrapper">
+                    <div class="calculator-inputs">
+                        <h3>CD Investment Details</h3>
+                        
+                        <div class="input-group">
+                            <label for="cdDeposit">
+                                <span>CD Deposit Amount ($)</span>
+                                <span class="input-hint">Minimum deposits typically $500-$1,000</span>
+                            </label>
+                            <input type="number" id="cdDeposit" value="10000" min="500" step="500">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="cdTerm">
+                                <span>CD Term Length</span>
+                                <span class="input-hint">Longer terms usually have higher rates</span>
+                            </label>
+                            <select id="cdTerm">
+                                <option value="3">3 months (0.5-1.5%)</option>
+                                <option value="6">6 months (1.0-2.0%)</option>
+                                <option value="12" selected>12 months (1.5-3.0%)</option>
+                                <option value="24">24 months (2.0-4.0%)</option>
+                                <option value="36">36 months (2.5-4.5%)</option>
+                                <option value="60">60 months (3.0-5.0%)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="cdRate">
+                                <span>Annual Interest Rate (APY %)</span>
+                                <span class="input-hint">Based on current market rates</span>
+                            </label>
+                            <input type="number" id="cdRate" value="4.25" min="0" max="10" step="0.05">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="cdCompounding">
+                                <span>Compounding Frequency</span>
+                                <span class="input-hint">How often interest is calculated</span>
+                            </label>
+                            <select id="cdCompounding">
+                                <option value="365">Daily (best)</option>
+                                <option value="12" selected>Monthly</option>
+                                <option value="4">Quarterly</option>
+                                <option value="2">Semi-annually</option>
+                                <option value="1">Annually</option>
+                            </select>
+                        </div>
+                        
+                        <div class="calculator-comparison">
+                            <h4>Compare With:</h4>
+                            <div class="comparison-options">
+                                <label class="comparison-option">
+                                    <input type="checkbox" id="compareSavings" checked>
+                                    <span>High-Yield Savings (4.0%)</span>
+                                </label>
+                                <label class="comparison-option">
+                                    <input type="checkbox" id="compareMoneyMarket">
+                                    <span>Money Market (3.75%)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-results">
+                        <h3>CD Earnings Projection</h3>
+                        
+                        <div class="result-summary">
+                            <div class="result-item maturity-value">
+                                <span class="result-label">Maturity Value</span>
+                                <span class="result-value" id="cdMaturityValue">$10,434</span>
+                            </div>
+                            <div class="result-item interest-earned">
+                                <span class="result-label">Total Interest</span>
+                                <span class="result-value" id="cdTotalInterest">$434</span>
+                            </div>
+                            <div class="result-item effective-apy">
+                                <span class="result-label">Effective APY</span>
+                                <span class="result-value" id="cdEffectiveAPY">4.34%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-chart">
+                            <h4>CD vs Other Savings Options</h4>
+                            <div class="chart-container">
+                                <div class="comparison-bars" id="cdComparisonChart">
+                                    <!-- Comparison bars will be generated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="cd-insights">
+                            <h4>💡 CD Strategy Insights</h4>
+                            <div class="insights-grid">
+                                <div class="insight">
+                                    <span class="insight-title">Penalty Warning</span>
+                                    <span class="insight-value">Early withdrawal = 3-12 months interest penalty</span>
+                                </div>
+                                <div class="insight">
+                                    <span class="insight-title">Ladder Strategy</span>
+                                    <span class="insight-value">Stagger 3-5 CDs for better liquidity</span>
+                                </div>
+                                <div class="insight">
+                                    <span class="insight-title">Rate Timing</span>
+                                    <span class="insight-value">Best rates during Fed rate hikes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Second Ad Unit -->
+            <div class="ad-unit in-article-ad">
+                <div class="ad-placeholder">
+                    <span>Advertisement</span>
+                    <div class="ad-size">300 x 250</div>
+                </div>
+            </div>
+
+            <!-- Emergency Fund Calculator -->
+            <section id="emergency-calculator" class="calculator-section">
+                <div class="calculator-header">
+                    <h2 class="calculator-title">
+                        <span class="calculator-icon">🛡</span>
+                        Emergency Fund Calculator
+                    </h2>
+                    <p class="calculator-description">Calculate how much you need in your emergency fund and create a savings plan to reach it.</p>
+                </div>
+                
+                <div class="calculator-wrapper">
+                    <div class="calculator-inputs">
+                        <h3>Your Monthly Expenses</h3>
+                        
+                        <div class="expense-categories">
+                            <div class="expense-category">
+                                <label for="housingExpense">Housing (Rent/Mortgage)</label>
+                                <input type="number" id="housingExpense" value="1500" min="0">
+                            </div>
+                            <div class="expense-category">
+                                <label for="utilitiesExpense">Utilities & Bills</label>
+                                <input type="number" id="utilitiesExpense" value="300" min="0">
+                            </div>
+                            <div class="expense-category">
+                                <label for="foodExpense">Food & Groceries</label>
+                                <input type="number" id="foodExpense" value="600" min="0">
+                            </div>
+                            <div class="expense-category">
+                                <label for="transportationExpense">Transportation</label>
+                                <input type="number" id="transportationExpense" value="400" min="0">
+                            </div>
+                            <div class="expense-category">
+                                <label for="insuranceExpense">Insurance</label>
+                                <input type="number" id="insuranceExpense" value="300" min="0">
+                            </div>
+                            <div class="expense-category">
+                                <label for="debtExpense">Minimum Debt Payments</label>
+                                <input type="number" id="debtExpense" value="500" min="0">
+                            </div>
+                            <div class="expense-category">
+                                <label for="otherExpense">Other Essential Expenses</label>
+                                <input type="number" id="otherExpense" value="200" min="0">
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="monthsCoverage">
+                                <span>Months to Cover</span>
+                                <span class="input-hint">3-6 months recommended (9-12 if self-employed)</span>
+                            </label>
+                            <input type="number" id="monthsCoverage" value="6" min="1" max="24">
+                            <div class="input-slider">
+                                <input type="range" id="monthsCoverageSlider" min="1" max="12" value="6" step="1">
+                                <div class="slider-labels">
+                                    <span>3 mo</span>
+                                    <span>6 mo</span>
+                                    <span>12 mo</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="currentEmergencySavings">
+                                <span>Current Emergency Savings ($)</span>
+                                <span class="input-hint">What you have saved already</span>
+                            </label>
+                            <input type="number" id="currentEmergencySavings" value="2000" min="0">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="monthlyEmergencyContribution">
+                                <span>Monthly Savings Contribution ($)</span>
+                                <span class="input-hint">How much you can save monthly</span>
+                            </label>
+                            <input type="number" id="monthlyEmergencyContribution" value="300" min="0">
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-results">
+                        <h3>Emergency Fund Analysis</h3>
+                        
+                        <div class="result-summary">
+                            <div class="result-item target-fund">
+                                <span class="result-label">Target Emergency Fund</span>
+                                <span class="result-value" id="targetEmergencyFund">$20,400</span>
+                            </div>
+                            <div class="result-item current-status">
+                                <span class="result-label">Current Status</span>
+                                <span class="result-value" id="emergencyFundStatus">$2,000 (10%)</span>
+                            </div>
+                            <div class="result-item months-to-goal">
+                                <span class="result-label">Months to Reach Goal</span>
+                                <span class="result-value" id="monthsToGoal">61 months</span>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-visualization">
+                            <h4>Your Progress</h4>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="emergencyProgressFill" style="width: 10%;"></div>
+                                </div>
+                                <div class="progress-labels">
+                                    <span>$0</span>
+                                    <span id="progressHalfway">$10,200</span>
+                                    <span id="progressGoal">$20,400</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="funding-strategies">
+                            <h4>🚀 Accelerate Your Emergency Fund</h4>
+                            <div class="strategies-grid">
+                                <div class="strategy">
+                                    <h5>1. Starter Fund First</h5>
+                                    <p>Save $1,000 immediately for minor emergencies before building full fund.</p>
+                                </div>
+                                <div class="strategy">
+                                    <h5>2. Windfall Allocation</h5>
+                                    <p>Put 50% of tax refunds, bonuses, or gifts toward emergency fund.</p>
+                                </div>
+                                <div class="strategy">
+                                    <h5>3. Side Hustle Focus</h5>
+                                    <p>Dedicate one side hustle income stream entirely to emergency savings.</p>
+                                </div>
+                                <div class="strategy">
+                                    <h5>4. Expense Cutbacks</h5>
+                                    <p>Reduce 3 non-essential expenses and redirect funds to emergency savings.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bank Fee Calculator -->
+            <section id="fee-calculator" class="calculator-section">
+                <div class="calculator-header">
+                    <h2 class="calculator-title">
+                        <span class="calculator-icon">💸</span>
+                        Bank Fee Calculator
+                    </h2>
+                    <p class="calculator-description">Calculate how much bank fees are costing you and discover how switching could save you money.</p>
+                </div>
+                
+                <div class="calculator-wrapper">
+                    <div class="calculator-inputs">
+                        <h3>Your Current Bank Fees</h3>
+                        
+                        <div class="fee-categories">
+                            <div class="fee-category">
+                                <label for="monthlyFee">
+                                    <span>Monthly Maintenance Fee</span>
+                                    <span class="fee-hint">Most banks: $5-15/month</span>
+                                </label>
+                                <input type="number" id="monthlyFee" value="12" min="0">
+                                <div class="fee-frequency">
+                                    <span>Charged:</span>
+                                    <select id="monthlyFeeFrequency">
+                                        <option value="12" selected>Monthly</option>
+                                        <option value="0">Waived with min balance</option>
+                                        <option value="6">Every other month</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="fee-category">
+                                <label for="overdraftFee">
+                                    <span>Overdraft Fees (per occurrence)</span>
+                                    <span class="fee-hint">Average: $30-35 per overdraft</span>
+                                </label>
+                                <input type="number" id="overdraftFee" value="35" min="0">
+                                <div class="fee-frequency">
+                                    <span>Times per year:</span>
+                                    <input type="number" id="overdraftFrequency" value="2" min="0" max="12">
+                                </div>
+                            </div>
+                            
+                            <div class="fee-category">
+                                <label for="atmFee">
+                                    <span>Out-of-Network ATM Fee</span>
+                                    <span class="fee-hint">Typically $2.50-3.50 per use</span>
+                                </label>
+                                <input type="number" id="atmFee" value="3" min="0">
+                                <div class="fee-frequency">
+                                    <span>Uses per month:</span>
+                                    <input type="number" id="atmFrequency" value="4" min="0" max="50">
+                                </div>
+                            </div>
+                            
+                            <div class="fee-category">
+                                <label for="wireFee">
+                                    <span>Wire Transfer Fees</span>
+                                    <span class="fee-hint">Domestic: $15-30, International: $35-50</span>
+                                </label>
+                                <input type="number" id="wireFee" value="25" min="0">
+                                <div class="fee-frequency">
+                                    <span>Per year:</span>
+                                    <input type="number" id="wireFrequency" value="1" min="0" max="12">
+                                </div>
+                            </div>
+                            
+                            <div class="fee-category">
+                                <label for="paperStatementFee">
+                                    <span>Paper Statement Fee</span>
+                                    <span class="fee-hint">Some banks charge $2-5/month for paper statements</span>
+                                </label>
+                                <input type="number" id="paperStatementFee" value="3" min="0">
+                                <div class="fee-frequency">
+                                    <span>Charged:</span>
+                                    <select id="paperStatementFrequency">
+                                        <option value="12" selected>Monthly</option>
+                                        <option value="0">I use e-statements</option>
+                                        <option value="4">Quarterly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-results">
+                        <h3>Your Fee Analysis</h3>
+                        
+                        <div class="result-summary">
+                            <div class="result-item annual-fees">
+                                <span class="result-label">Annual Fee Total</span>
+                                <span class="result-value" id="annualFeeTotal">$390</span>
+                            </div>
+                            <div class="result-item monthly-average">
+                                <span class="result-label">Monthly Average</span>
+                                <span class="result-value" id="monthlyFeeAverage">$32.50</span>
+                            </div>
+                            <div class="result-item 5year-cost">
+                                <span class="result-label">5-Year Cost</span>
+                                <span class="result-value" id="fiveYearCost">$1,950</span>
+                            </div>
+                        </div>
+                        
+                        <div class="fee-breakdown">
+                            <h4>Fee Breakdown</h4>
+                            <div class="breakdown-chart">
+                                <div class="pie-chart-container">
+                                    <canvas id="feePieChart" width="200" height="200"></canvas>
+                                </div>
+                                <div class="breakdown-list">
+                                    <div class="breakdown-item" id="breakdownMonthly">
+                                        <span class="breakdown-label">Monthly Fees</span>
+                                        <span class="breakdown-value">$144</span>
+                                    </div>
+                                    <div class="breakdown-item" id="breakdownOverdraft">
+                                        <span class="breakdown-label">Overdraft Fees</span>
+                                        <span class="breakdown-value">$70</span>
+                                    </div>
+                                    <div class="breakdown-item" id="breakdownATM">
+                                        <span class="breakdown-label">ATM Fees</span>
+                                        <span class="breakdown-value">$144</span>
+                                    </div>
+                                    <div class="breakdown-item" id="breakdownWire">
+                                        <span class="breakdown-label">Wire Fees</span>
+                                        <span class="breakdown-value">$25</span>
+                                    </div>
+                                    <div class="breakdown-item" id="breakdownPaper">
+                                        <span class="breakdown-label">Paper Statements</span>
+                                        <span class="breakdown-value">$36</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="fee-savings">
+                            <h4>💡 How to Eliminate These Fees</h4>
+                            <div class="savings-tips">
+                                <div class="savings-tip">
+                                    <h5>Switch to Online Banks</h5>
+                                    <p>Most online banks charge $0 monthly fees and refund ATM fees worldwide.</p>
+                                    <span class="savings-amount">Save: $288/year</span>
+                                </div>
+                                <div class="savings-tip">
+                                    <h5>Set Up Alerts</h5>
+                                    <p>Low balance alerts prevent overdrafts. Free at all major banks.</p>
+                                    <span class="savings-amount">Save: $70/year</span>
+                                </div>
+                                <div class="savings-tip">
+                                    <h5>Go Paperless</h5>
+                                    <p>Switch to e-statements to avoid paper statement fees.</p>
+                                    <span class="savings-amount">Save: $36/year</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Calculators Comparison Table -->
+            <section class="calculators-comparison">
+                <div class="container">
+                    <h2>Which Calculator Do You Need?</h2>
+                    
+                    <div class="comparison-table">
+                        <div class="table-header">
+                            <div class="table-cell">Calculator</div>
+                            <div class="table-cell">Best For</div>
+                            <div class="table-cell">Key Metric</div>
+                            <div class="table-cell">Time to Use</div>
+                            <div class="table-cell">Action Step</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">
+                                <strong>Savings Growth</strong>
+                            </div>
+                            <div class="table-cell">
+                                Long-term planning, retirement, major purchases
+                            </div>
+                            <div class="table-cell">
+                                Compound interest effect
+                            </div>
+                            <div class="table-cell">
+                                3-5 minutes
+                            </div>
+                            <div class="table-cell">
+                                <a href="#savings-calculator" class="table-link">Calculate Now</a>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">
+                                <strong>CD Returns</strong>
+                            </div>
+                            <div class="table-cell">
+                                Safe investments, fixed income, short-term goals
+                            </div>
+                            <div class="table-cell">
+                                Guaranteed returns
+                            </div>
+                            <div class="table-cell">
+                                2-3 minutes
+                            </div>
+                            <div class="table-cell">
+                                <a href="#cd-calculator" class="table-link">Calculate Now</a>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">
+                                <strong>Emergency Fund</strong>
+                            </div>
+                            <div class="table-cell">
+                                Financial security, job loss protection, unexpected expenses
+                            </div>
+                            <div class="table-cell">
+                                Months of expenses covered
+                            </div>
+                            <div class="table-cell">
+                                4-6 minutes
+                            </div>
+                            <div class="table-cell">
+                                <a href="#emergency-calculator" class="table-link">Calculate Now</a>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">
+                                <strong>Bank Fees</strong>
+                            </div>
+                            <div class="table-cell">
+                                Cost reduction, bank comparison, hidden charges
+                            </div>
+                            <div class="table-cell">
+                                Annual fee total
+                            </div>
+                            <div class="table-cell">
+                                2-4 minutes
+                            </div>
+                            <div class="table-cell">
+                                <a href="#fee-calculator" class="table-link">Calculate Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Newsletter CTA -->
+            <section class="calculators-newsletter">
+                <div class="container">
+                    <div class="newsletter-content">
+                        <h3>Get All Our Financial Calculators in One Excel File</h3>
+                        <p>Join our newsletter and get instant access to our complete Financial Calculator Toolkit, including advanced spreadsheets for retirement planning, debt payoff, and investment returns.</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Enter your email address" required>
+                            <button type="submit" class="btn btn-primary">Get Free Toolkit</button>
+                        </form>
+                        <p class="privacy-note">No spam. Unsubscribe anytime. Toolkit includes 8 advanced calculators.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <a href="index.html" class="logo-link">
+                            <span class="logo-icon">💰</span>
+                            <span class="logo-text">WealthPathfinder</span>
+                        </a>
+                    </div>
+                    <p class="footer-description">Smart money moves for real life. Building financial freedom, one step at a time.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="banking.html">Banking & Savings</a></li>
+                            <li><a href="investing.html">Investing Basics</a></li>
+                            <li><a href="credit.html">Credit & Debt</a></li>
+                            <li><a href="budgeting.html">Budgeting</a></li>
+                            <li><a href="side-hustles.html">Making Money</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="banking-calculators.html" class="active">Financial Calculators</a></li>
+                            <li><a href="tools.html">Free Tools</a></li>
+                            <li><a href="glossary.html">Financial Glossary</a></li>
+                            <li><a href="newsletter.html">Newsletter</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                            <li><a href="disclaimer.html">Disclaimer</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 WealthPathfinder. All rights reserved. </p>
+                <p class="disclaimer-note">WealthPathfinder is for educational purposes only and does not constitute financial advice. Please consult with a professional financial advisor before making any financial decisions.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+    <!-- Banking Calculators JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Savings Growth Calculator
+            const savingsInputs = {
+                initialDeposit: document.getElementById('initialDeposit'),
+                monthlyContribution: document.getElementById('monthlyContribution'),
+                annualInterestRate: document.getElementById('annualInterestRate'),
+                timePeriod: document.getElementById('timePeriod'),
+                initialDepositSlider: document.getElementById('initialDepositSlider'),
+                monthlyContributionSlider: document.getElementById('monthlyContributionSlider'),
+                annualInterestRateSlider: document.getElementById('annualInterestRateSlider'),
+                timePeriodSlider: document.getElementById('timePeriodSlider')
+            };
+
+            const savingsOutputs = {
+                totalSavings: document.getElementById('totalSavings'),
+                totalContributions: document.getElementById('totalContributions'),
+                interestEarned: document.getElementById('interestEarned')
+            };
+
+            // CD Calculator
+            const cdInputs = {
+                deposit: document.getElementById('cdDeposit'),
+                term: document.getElementById('cdTerm'),
+                rate: document.getElementById('cdRate'),
+                compounding: document.getElementById('cdCompounding')
+            };
+
+            const cdOutputs = {
+                maturityValue: document.getElementById('cdMaturityValue'),
+                totalInterest: document.getElementById('cdTotalInterest'),
+                effectiveAPY: document.getElementById('cdEffectiveAPY')
+            };
+
+            // Emergency Fund Calculator
+            const emergencyInputs = {
+                housing: document.getElementById('housingExpense'),
+                utilities: document.getElementById('utilitiesExpense'),
+                food: document.getElementById('foodExpense'),
+                transportation: document.getElementById('transportationExpense'),
+                insurance: document.getElementById('insuranceExpense'),
+                debt: document.getElementById('debtExpense'),
+                other: document.getElementById('otherExpense'),
+                monthsCoverage: document.getElementById('monthsCoverage'),
+                currentSavings: document.getElementById('currentEmergencySavings'),
+                monthlyContribution: document.getElementById('monthlyEmergencyContribution')
+            };
+
+            const emergencyOutputs = {
+                targetFund: document.getElementById('targetEmergencyFund'),
+                currentStatus: document.getElementById('emergencyFundStatus'),
+                monthsToGoal: document.getElementById('monthsToGoal'),
+                progressFill: document.getElementById('emergencyProgressFill')
+            };
+
+            // Bank Fee Calculator
+            const feeInputs = {
+                monthlyFee: document.getElementById('monthlyFee'),
+                monthlyFeeFrequency: document.getElementById('monthlyFeeFrequency'),
+                overdraftFee: document.getElementById('overdraftFee'),
+                overdraftFrequency: document.getElementById('overdraftFrequency'),
+                atmFee: document.getElementById('atmFee'),
+                atmFrequency: document.getElementById('atmFrequency'),
+                wireFee: document.getElementById('wireFee'),
+                wireFrequency: document.getElementById('wireFrequency'),
+                paperStatementFee: document.getElementById('paperStatementFee'),
+                paperStatementFrequency: document.getElementById('paperStatementFrequency')
+            };
+
+            const feeOutputs = {
+                annualTotal: document.getElementById('annualFeeTotal'),
+                monthlyAverage: document.getElementById('monthlyFeeAverage'),
+                fiveYearCost: document.getElementById('fiveYearCost')
+            };
+
+            // Initialize all calculators
+            function initializeCalculators() {
+                // Sync sliders with number inputs for savings calculator
+                savingsInputs.initialDeposit.addEventListener('input', function() {
+                    savingsInputs.initialDepositSlider.value = this.value;
+                    calculateSavingsGrowth();
+                });
+
+                savingsInputs.initialDepositSlider.addEventListener('input', function() {
+                    savingsInputs.initialDeposit.value = this.value;
+                    calculateSavingsGrowth();
+                });
+
+                savingsInputs.monthlyContribution.addEventListener('input', function() {
+                    savingsInputs.monthlyContributionSlider.value = this.value;
+                    calculateSavingsGrowth();
+                });
+
+                savingsInputs.monthlyContributionSlider.addEventListener('input', function() {
+                    savingsInputs.monthlyContribution.value = this.value;
+                    calculateSavingsGrowth();
+                });
+
+                savingsInputs.annualInterestRate.addEventListener('input', function() {
+                    savingsInputs.annualInterestRateSlider.value = this.value;
+                    calculateSavingsGrowth();
+                });
+
+                savingsInputs.annualInterestRateSlider.addEventListener('input', function() {
+                    savingsInputs.annualInterestRate.value = this.value;
+                    calculateSavingsGrowth();
+                });
+
+                savingsInputs.timePeriod.addEventListener('input', function() {
+                    savingsInputs.timePeriodSlider.value = this.value;
+                    calculateSavingsGrowth();
+                });
+
+                savingsInputs.timePeriodSlider.addEventListener('input', function() {
+                    savingsInputs.timePeriod.value = this.value;
+                    calculateSavingsGrowth();
+                });
+
+                // CD Calculator listeners
+                Object.values(cdInputs).forEach(input => {
+                    input.addEventListener('input', calculateCDReturns);
+                });
+
+                // Emergency Fund Calculator listeners
+                Object.values(emergencyInputs).forEach(input => {
+                    input.addEventListener('input', calculateEmergencyFund);
+                });
+
+                // Bank Fee Calculator listeners
+                Object.values(feeInputs).forEach(input => {
+                    input.addEventListener('input', calculateBankFees);
+                });
+
+                // Preset buttons
+                document.querySelectorAll('.preset-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        applySavingsPreset(this.dataset.preset);
+                    });
+                });
+
+                // Initial calculations
+                calculateSavingsGrowth();
+                calculateCDReturns();
+                calculateEmergencyFund();
+                calculateBankFees();
+            }
+
+            // Savings Growth Calculation
+            function calculateSavingsGrowth() {
+                const initial = parseFloat(savingsInputs.initialDeposit.value) || 0;
+                const monthly = parseFloat(savingsInputs.monthlyContribution.value) || 0;
+                const rate = parseFloat(savingsInputs.annualInterestRate.value) || 0;
+                const years = parseFloat(savingsInputs.timePeriod.value) || 1;
+
+                const monthlyRate = rate / 100 / 12;
+                const months = years * 12;
+                
+                // Calculate future value
+                let futureValue = initial * Math.pow(1 + monthlyRate, months);
+                
+                // Add monthly contributions
+                for (let i = 1; i <= months; i++) {
+                    futureValue += monthly * Math.pow(1 + monthlyRate, months - i);
+                }
+
+                const totalContributions = initial + (monthly * months);
+                const interestEarned = futureValue - totalContributions;
+
+                // Update display
+                savingsOutputs.totalSavings.textContent = '$' + formatNumber(futureValue.toFixed(0));
+                savingsOutputs.totalContributions.textContent = '$' + formatNumber(totalContributions.toFixed(0));
+                savingsOutputs.interestEarned.textContent = '$' + formatNumber(interestEarned.toFixed(0));
+
+                updateSavingsInsights(initial, monthly, rate, years, futureValue, interestEarned);
+                updateYearlyBreakdown(initial, monthly, rate, years);
+            }
+
+            // CD Returns Calculation
+            function calculateCDReturns() {
+                const deposit = parseFloat(cdInputs.deposit.value) || 0;
+                const term = parseInt(cdInputs.term.value) || 12;
+                const rate = parseFloat(cdInputs.rate.value) || 0;
+                const compounding = parseInt(cdInputs.compounding.value) || 12;
+
+                // Convert months to years
+                const years = term / 12;
+                
+                // Calculate compound interest
+                const effectiveRate = rate / 100;
+                const futureValue = deposit * Math.pow(1 + effectiveRate/compounding, compounding * years);
+                const interestEarned = futureValue - deposit;
+                const effectiveAPY = (Math.pow(1 + effectiveRate/compounding, compounding) - 1) * 100;
+
+                // Update display
+                cdOutputs.maturityValue.textContent = '$' + formatNumber(futureValue.toFixed(0));
+                cdOutputs.totalInterest.textContent = '$' + formatNumber(interestEarned.toFixed(0));
+                cdOutputs.effectiveAPY.textContent = effectiveAPY.toFixed(2) + '%';
+            }
+
+            // Emergency Fund Calculation
+            function calculateEmergencyFund() {
+                let monthlyExpenses = 0;
+                
+                // Sum all expense categories
+                Object.keys(emergencyInputs).forEach(key => {
+                    if (key !== 'monthsCoverage' && key !== 'currentSavings' && key !== 'monthlyContribution') {
+                        monthlyExpenses += parseFloat(emergencyInputs[key].value) || 0;
+                    }
+                });
+
+                const monthsCoverage = parseFloat(emergencyInputs.monthsCoverage.value) || 6;
+                const currentSavings = parseFloat(emergencyInputs.currentSavings.value) || 0;
+                const monthlyContribution = parseFloat(emergencyInputs.monthlyContribution.value) || 0;
+
+                const targetFund = monthlyExpenses * monthsCoverage;
+                const needed = targetFund - currentSavings;
+                const monthsToGoal = monthlyContribution > 0 ? Math.ceil(needed / monthlyContribution) : 0;
+                const progressPercentage = currentSavings > 0 ? (currentSavings / targetFund) * 100 : 0;
+
+                // Update display
+                emergencyOutputs.targetFund.textContent = '$' + formatNumber(targetFund.toFixed(0));
+                emergencyOutputs.currentStatus.textContent = `$${formatNumber(currentSavings.toFixed(0))} (${progressPercentage.toFixed(0)}%)`;
+                emergencyOutputs.monthsToGoal.textContent = monthsToGoal + ' months';
+                emergencyOutputs.progressFill.style.width = `${Math.min(progressPercentage, 100)}%`;
+            }
+
+            // Bank Fee Calculation
+            function calculateBankFees() {
+                const monthlyFee = parseFloat(feeInputs.monthlyFee.value) || 0;
+                const monthlyFeeFrequency = parseInt(feeInputs.monthlyFeeFrequency.value) || 12;
+                
+                const overdraftFee = parseFloat(feeInputs.overdraftFee.value) || 0;
+                const overdraftFrequency = parseInt(feeInputs.overdraftFrequency.value) || 0;
+                
+                const atmFee = parseFloat(feeInputs.atmFee.value) || 0;
+                const atmFrequency = parseInt(feeInputs.atmFrequency.value) || 0;
+                
+                const wireFee = parseFloat(feeInputs.wireFee.value) || 0;
+                const wireFrequency = parseInt(feeInputs.wireFrequency.value) || 0;
+                
+                const paperStatementFee = parseFloat(feeInputs.paperStatementFee.value) || 0;
+                const paperStatementFrequency = parseInt(feeInputs.paperStatementFrequency.value) || 12;
+
+                // Calculate annual totals
+                const monthlyTotal = monthlyFee * monthlyFeeFrequency;
+                const overdraftTotal = overdraftFee * overdraftFrequency;
+                const atmTotal = atmFee * atmFrequency * 12;
+                const wireTotal = wireFee * wireFrequency;
+                const paperTotal = paperStatementFee * paperStatementFrequency;
+
+                const annualTotal = monthlyTotal + overdraftTotal + atmTotal + wireTotal + paperTotal;
+                const monthlyAverage = annualTotal / 12;
+                const fiveYearCost = annualTotal * 5;
+
+                // Update display
+                feeOutputs.annualTotal.textContent = '$' + formatNumber(annualTotal.toFixed(0));
+                feeOutputs.monthlyAverage.textContent = '$' + monthlyAverage.toFixed(2);
+                feeOutputs.fiveYearCost.textContent = '$' + formatNumber(fiveYearCost.toFixed(0));
+
+                // Update breakdown
+                document.getElementById('breakdownMonthly').querySelector('.breakdown-value').textContent = '$' + monthlyTotal;
+                document.getElementById('breakdownOverdraft').querySelector('.breakdown-value').textContent = '$' + overdraftTotal;
+                document.getElementById('breakdownATM').querySelector('.breakdown-value').textContent = '$' + atmTotal;
+                document.getElementById('breakdownWire').querySelector('.breakdown-value').textContent = '$' + wireTotal;
+                document.getElementById('breakdownPaper').querySelector('.breakdown-value').textContent = '$' + paperTotal;
+            }
+
+            // Helper Functions
+            function formatNumber(num) {
+                return parseInt(num).toLocaleString();
+            }
+
+            function applySavingsPreset(preset) {
+                switch(preset) {
+                    case 'emergency':
+                        savingsInputs.initialDeposit.value = 1000;
+                        savingsInputs.monthlyContribution.value = 200;
+                        savingsInputs.annualInterestRate.value = 4.0;
+                        savingsInputs.timePeriod.value = 2;
+                        break;
+                    case 'house':
+                        savingsInputs.initialDeposit.value = 10000;
+                        savingsInputs.monthlyContribution.value = 500;
+                        savingsInputs.annualInterestRate.value = 4.5;
+                        savingsInputs.timePeriod.value = 5;
+                        break;
+                    case 'retirement':
+                        savingsInputs.initialDeposit.value = 5000;
+                        savingsInputs.monthlyContribution.value = 300;
+                        savingsInputs.annualInterestRate.value = 7.0;
+                        savingsInputs.timePeriod.value = 30;
+                        break;
+                    case 'vacation':
+                        savingsInputs.initialDeposit.value = 500;
+                        savingsInputs.monthlyContribution.value = 150;
+                        savingsInputs.annualInterestRate.value = 4.0;
+                        savingsInputs.timePeriod.value = 1;
+                        break;
+                }
+                
+                // Update sliders
+                savingsInputs.initialDepositSlider.value = savingsInputs.initialDeposit.value;
+                savingsInputs.monthlyContributionSlider.value = savingsInputs.monthlyContribution.value;
+                savingsInputs.annualInterestRateSlider.value = savingsInputs.annualInterestRate.value;
+                savingsInputs.timePeriodSlider.value = savingsInputs.timePeriod.value;
+                
+                calculateSavingsGrowth();
+            }
+
+            function updateSavingsInsights(initial, monthly, rate, years, futureValue, interestEarned) {
+                const insightsGrid = document.getElementById('savingsInsights');
+                
+                // Time Advantage
+                const interestPercentage = (interestEarned / futureValue * 100).toFixed(0);
+                insightsGrid.children[0].querySelector('.insight-value').textContent = 
+                    `${interestPercentage}% of your earnings come from interest`;
+                
+                // Monthly Impact
+                const extra100 = 100 * ((Math.pow(1 + rate/100/12, years*12) - 1) / (rate/100/12));
+                insightsGrid.children[1].querySelector('.insight-value').textContent = 
+                    `Each extra $100/month adds $${formatNumber(extra100.toFixed(0))} in ${years} years`;
+                
+                // Rate Effect
+                const rateImpact = (futureValue * (1.01/rate) - futureValue).toFixed(0);
+                insightsGrid.children[2].querySelector('.insight-value').textContent = 
+                    `1% higher APY = $${formatNumber(rateImpact)} extra in ${years} years`;
+            }
+
+            function updateYearlyBreakdown(initial, monthly, rate, years) {
+                const breakdownBody = document.getElementById('yearlyBreakdown');
+                breakdownBody.innerHTML = '';
+                
+                const monthlyRate = rate / 100 / 12;
+                let balance = initial;
+                
+                for (let year = 1; year <= years; year++) {
+                    let yearInterest = 0;
+                    
+                    for (let month = 1; month <= 12; month++) {
+                        const monthInterest = balance * monthlyRate;
+                        yearInterest += monthInterest;
+                        balance += monthInterest + monthly;
+                    }
+                    
+                    const yearContributions = monthly * 12;
+                    
+                    const row = document.createElement('div');
+                    row.className = 'table-row';
+                    row.innerHTML = `
+                        <span>Year ${year}</span>
+                        <span>$${formatNumber(balance.toFixed(0))}</span>
+                        <span>$${formatNumber(yearInterest.toFixed(0))}</span>
+                        <span>$${formatNumber(yearContributions.toFixed(0))}</span>
+                    `;
+                    
+                    breakdownBody.appendChild(row);
+                }
+            }
+
+            // Initialize on page load
+            initializeCalculators();
+        });
+    </script>
+</body>
+</html>

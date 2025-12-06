@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>401k Calculator - Financial Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0c2461 0%, #1e3799 50%, #4a69bd 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .calculator-header {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .calculator-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .calculator-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .calculator-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 1.4em;
+        }
+
+        .section-title i {
+            color: #0c2461;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #0c2461;
+        }
+
+        .range-container {
+            margin-top: 10px;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        .toggle-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .toggle-option {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .toggle-option.active {
+            background: #0c2461;
+            color: white;
+            border-color: #0c2461;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #0c2461 0%, #1e3799 50%, #4a69bd 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 20px;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .results-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .savings-summary {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .savings-amount {
+            font-size: 3em;
+            font-weight: 800;
+            margin: 10px 0;
+            color: #0c2461;
+        }
+
+        .savings-description {
+            font-size: 1.2em;
+            color: #6c757d;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #0c2461;
+        }
+
+        .result-card h3 {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .result-card .value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .chart-container {
+            height: 300px;
+            margin: 30px 0;
+        }
+
+        .breakdown-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .breakdown-table th,
+        .breakdown-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breakdown-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .insights-section {
+            background: #e8f4fd;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+        }
+
+        .insights-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .insight-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #0c2461;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .print-btn, .reset-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .print-btn {
+            background: #3498db;
+            color: white;
+        }
+
+        .reset-btn {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .print-btn:hover, .reset-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .contribution-section {
+            margin-top: 30px;
+        }
+
+        .contribution-chart {
+            height: 250px;
+            margin-top: 20px;
+        }
+
+        .tab-container {
+            margin-top: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid #0c2461;
+            font-weight: 600;
+            color: #0c2461;
+        }
+
+        .tab-content {
+            padding: 20px 0;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .milestone-section {
+            margin-top: 30px;
+        }
+
+        .milestone-list {
+            margin-top: 15px;
+        }
+
+        .milestone-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .milestone-year {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .milestone-value {
+            font-weight: 600;
+            color: #0c2461;
+        }
+
+        .match-explainer {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        .scenario-comparison {
+            margin-top: 30px;
+        }
+
+        .scenario-chart {
+            height: 250px;
+            margin-top: 20px;
+        }
+
+        .employer-match-visual {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .match-tier {
+            text-align: center;
+            flex: 1;
+        }
+
+        .match-tier h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .match-tier p {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .match-arrow {
+            font-size: 1.5em;
+            color: #0c2461;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h1>401k Calculator</h1>
+            <p>Maximize your retirement savings with employer matching</p>
+        </div>
+
+        <div class="calculator-content">
+            <div class="input-section">
+                <div class="section-title">
+                    <i class="fas fa-user"></i>
+                    <h2>Personal Information</h2>
+                </div>
+                
+                <div class="input-group">
+                    <label for="current-age">Current Age</label>
+                    <input type="number" id="current-age" value="35" min="18" max="80">
+                </div>
+
+                <div class="input-group">
+                    <label for="retirement-age">Planned Retirement Age</label>
+                    <input type="number" id="retirement-age" value="65" min="40" max="90">
+                </div>
+
+                <div class="input-group">
+                    <label for="annual-salary">Annual Salary ($)</label>
+                    <input type="number" id="annual-salary" value="75000" min="0" step="1000">
+                </div>
+
+                <div class="input-group">
+                    <label for="salary-increase">Expected Annual Salary Increase (%)</label>
+                    <input type="number" id="salary-increase" value="2.5" min="0" max="10" step="0.1">
+                </div>
+
+                <div class="section-title" style="margin-top: 30px;">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h2>401k Details</h2>
+                </div>
+
+                <div class="input-group">
+                    <label for="current-balance">Current 401k Balance ($)</label>
+                    <input type="number" id="current-balance" value="50000" min="0" step="1000">
+                </div>
+
+                <div class="input-group">
+                    <label for="contribution-rate">Your Contribution Rate (%)</label>
+                    <input type="number" id="contribution-rate" value="6" min="0" max="100" step="0.5">
+                    <div class="range-container">
+                        <input type="range" id="contribution-rate-range" min="0" max="25" value="6" step="0.5">
+                        <div class="range-labels">
+                            <span>0%</span>
+                            <span>25%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="employer-match">Employer Match</label>
+                    <div class="toggle-container">
+                        <div class="toggle-option active" id="match-percent" onclick="toggleMatchType('percent')">Percentage</div>
+                        <div class="toggle-option" id="match-tiered" onclick="toggleMatchType('tiered')">Tiered Match</div>
+                    </div>
+                    <div id="match-simple-container">
+                        <input type="number" id="employer-match-percent" value="50" min="0" max="100" step="1">
+                        <span>% of your contributions up to </span>
+                        <input type="number" id="employer-match-limit" value="6" min="0" max="25" step="0.5">
+                        <span>% of salary</span>
+                    </div>
+                    <div id="match-tiered-container" style="display: none;">
+                        <div class="match-tier">
+                            <h4>First 3%</h4>
+                            <p>100% match</p>
+                        </div>
+                        <div class="match-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="match-tier">
+                            <h4>Next 2%</h4>
+                            <p>50% match</p>
+                        </div>
+                        <div class="match-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="match-tier">
+                            <h4>Additional</h4>
+                            <p>No match</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="investment-return">Expected Annual Return (%)</label>
+                    <input type="number" id="investment-return" value="7" min="0.1" max="20" step="0.1">
+                    <div class="range-container">
+                        <input type="range" id="investment-return-range" min="1" max="15" value="7" step="0.1">
+                        <div class="range-labels">
+                            <span>1%</span>
+                            <span>15%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="employer-contribution">Additional Employer Contribution (%)</label>
+                    <input type="number" id="employer-contribution" value="0" min="0" max="10" step="0.1">
+                    <div class="range-container">
+                        <input type="range" id="employer-contribution-range" min="0" max="10" value="0" step="0.1">
+                        <div class="range-labels">
+                            <span>0%</span>
+                            <span>10%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="calculate401k()">
+                    <i class="fas fa-calculator"></i> Calculate 401k Growth
+                </button>
+
+                <div class="scenario-comparison">
+                    <h3>Compare Contribution Scenarios</h3>
+                    <div class="input-group">
+                        <label for="compare-contribution">Alternative Contribution Rate (%)</label>
+                        <input type="number" id="compare-contribution" value="10" min="0" max="25" step="0.5">
+                    </div>
+                    <button class="calculate-btn" onclick="compareScenarios()" style="margin-top: 10px; background: #2ecc71;">
+                        Compare Scenarios
+                    </button>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="section-title">
+                    <i class="fas fa-chart-bar"></i>
+                    <h2>Your 401k Projection</h2>
+                </div>
+                
+                <div class="savings-summary">
+                    <h3>Estimated 401k Balance at Retirement</h3>
+                    <div class="savings-amount" id="retirement-balance">$987,500</div>
+                    <div class="savings-description" id="savings-description">After 30 years of contributions</div>
+                </div>
+
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Total Contributions</h3>
+                        <div class="value" id="total-contributions">$180,000</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Employer Match</h3>
+                        <div class="value" id="employer-match-total">$67,500</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Investment Growth</h3>
+                        <div class="value" id="investment-growth">$740,000</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Annual Income at 4%</h3>
+                        <div class="value" id="annual-income">$39,500</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+
+                <div class="tab-container">
+                    <div class="tabs">
+                        <div class="tab active" onclick="switchTab('breakdown')">Value Breakdown</div>
+                        <div class="tab" onclick="switchTab('milestones')">Savings Milestones</div>
+                        <div class="tab" onclick="switchTab('scenarios')">Scenario Comparison</div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="breakdown-tab">
+                            <div class="contribution-section">
+                                <h3>401k Composition</h3>
+                                <div class="contribution-chart">
+                                    <canvas id="breakdownChart"></canvas>
+                                </div>
+                                <table class="breakdown-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Component</th>
+                                            <th>Amount</th>
+                                            <th>Percentage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Your Contributions</td>
+                                            <td id="your-contributions-amount">$180,000</td>
+                                            <td id="your-contributions-percent">18.2%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employer Match</td>
+                                            <td id="employer-match-amount">$67,500</td>
+                                            <td id="employer-match-percent">6.8%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Additional Employer</td>
+                                            <td id="additional-employer-amount">$0</td>
+                                            <td id="additional-employer-percent">0%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Investment Growth</td>
+                                            <td id="growth-amount">$740,000</td>
+                                            <td id="growth-percent">75%</td>
+                                        </tr>
+                                        <tr style="font-weight: 600;">
+                                            <td>Total Value</td>
+                                            <td id="total-value">$987,500</td>
+                                            <td>100%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="milestones-tab">
+                            <div class="milestone-section">
+                                <h3>401k Growth Milestones</h3>
+                                <div class="milestone-list">
+                                    <div class="milestone-item">
+                                        <span class="milestone-year">Age 40</span>
+                                        <span class="milestone-value" id="milestone-40">$125,000</span>
+                                    </div>
+                                    <div class="milestone-item">
+                                        <span class="milestone-year">Age 50</span>
+                                        <span class="milestone-value" id="milestone-50">$350,000</span>
+                                    </div>
+                                    <div class="milestone-item">
+                                        <span class="milestone-year">Age 60</span>
+                                        <span class="milestone-value" id="milestone-60">$700,000</span>
+                                    </div>
+                                    <div class="milestone-item">
+                                        <span class="milestone-year">Age 65</span>
+                                        <span class="milestone-value" id="milestone-65">$987,500</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="scenarios-tab">
+                            <div class="scenario-section">
+                                <h3>Contribution Rate Comparison</h3>
+                                <div class="scenario-chart">
+                                    <canvas id="scenarioChart"></canvas>
+                                </div>
+                                <table class="breakdown-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Contribution Rate</th>
+                                            <th>Retirement Balance</th>
+                                            <th>Difference</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>6% (Current)</td>
+                                            <td id="current-scenario-value">$987,500</td>
+                                            <td>Base Scenario</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="compare-rate-display">10% (Alternative)</td>
+                                            <td id="compare-scenario-value">$1,250,000</td>
+                                            <td id="scenario-difference">+$262,500</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="match-explainer">
+                    <h4><i class="fas fa-info-circle"></i> Maximizing Employer Match</h4>
+                    <p>Your employer matches 50% of your contributions up to 6% of your salary. This means if you contribute at least 6%, you'll get the full employer match of 3% of your salary (50% of 6%). Not contributing enough to get the full match is like leaving free money on the table!</p>
+                </div>
+
+                <div class="insights-section">
+                    <h3><i class="fas fa-lightbulb"></i> 401k Optimization Tips</h3>
+                    <div class="insight-item">
+                        <strong>Maximize Employer Match:</strong> Always contribute enough to get the full employer match - it's an immediate 50-100% return on your investment.
+                    </div>
+                    <div class="insight-item">
+                        <strong>Increase Contributions Gradually:</strong> Consider increasing your contribution rate by 1% each year until you reach 15-20% of your salary.
+                    </div>
+                    <div class="insight-item">
+                        <strong>Take Advantage of Catch-up Contributions:</strong> If you're 50 or older, you can contribute an additional $7,500 per year (for 2023).
+                    </div>
+                    <div class="insight-item">
+                        <strong>Diversify Investments:</strong> Don't put all your money in company stock - diversify across different asset classes.
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="print-btn" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print Results
+                    </button>
+                    <button class="reset-btn" onclick="resetCalculator()">
+                        <i class="fas fa-redo"></i> Reset Calculator
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let growthChart, breakdownChart, scenarioChart;
+        let matchType = 'percent';
+
+        // Toggle between simple and tiered employer match
+        function toggleMatchType(type) {
+            matchType = type;
+            const percentOption = document.getElementById('match-percent');
+            const tieredOption = document.getElementById('match-tiered');
+            const simpleContainer = document.getElementById('match-simple-container');
+            const tieredContainer = document.getElementById('match-tiered-container');
+            
+            if (type === 'percent') {
+                percentOption.classList.add('active');
+                tieredOption.classList.remove('active');
+                simpleContainer.style.display = 'block';
+                tieredContainer.style.display = 'none';
+            } else {
+                percentOption.classList.remove('active');
+                tieredOption.classList.add('active');
+                simpleContainer.style.display = 'none';
+                tieredContainer.style.display = 'flex';
+            }
+            calculate401k();
+        }
+
+        // Sync range and number inputs for contribution rate
+        document.getElementById('contribution-rate-range').addEventListener('input', function() {
+            document.getElementById('contribution-rate').value = this.value;
+            calculate401k();
+        });
+
+        document.getElementById('contribution-rate').addEventListener('input', function() {
+            document.getElementById('contribution-rate-range').value = this.value;
+            calculate401k();
+        });
+
+        // Sync range and number inputs for investment return
+        document.getElementById('investment-return-range').addEventListener('input', function() {
+            document.getElementById('investment-return').value = this.value;
+            calculate401k();
+        });
+
+        document.getElementById('investment-return').addEventListener('input', function() {
+            document.getElementById('investment-return-range').value = this.value;
+            calculate401k();
+        });
+
+        // Sync range and number inputs for employer contribution
+        document.getElementById('employer-contribution-range').addEventListener('input', function() {
+            document.getElementById('employer-contribution').value = this.value;
+            calculate401k();
+        });
+
+        document.getElementById('employer-contribution').addEventListener('input', function() {
+            document.getElementById('employer-contribution-range').value = this.value;
+            calculate401k();
+        });
+
+        // Switch between tabs
+        function switchTab(tabName) {
+            // Update tab active states
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update tab content visibility
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.remove('active');
+            });
+            document.getElementById(${tabName}-tab).classList.add('active');
+        }
+
+        // Calculate 401k growth
+        function calculate401k() {
+            // Get input values
+            const currentAge = parseInt(document.getElementById('current-age').value);
+            const retirementAge = parseInt(document.getElementById('retirement-age').value);
+            const annualSalary = parseFloat(document.getElementById('annual-salary').value);
+            const salaryIncrease = parseFloat(document.getElementById('salary-increase').value) / 100;
+            const currentBalance = parseFloat(document.getElementById('current-balance').value);
+            const contributionRate = parseFloat(document.getElementById('contribution-rate').value) / 100;
+            const investmentReturn = parseFloat(document.getElementById('investment-return').value) / 100;
+            const additionalEmployer = parseFloat(document.getElementById('employer-contribution').value) / 100;
+            
+            // Calculate employer match
+            let employerMatchRate = 0;
+            if (matchType === 'percent') {
+                const matchPercent = parseFloat(document.getElementById('employer-match-percent').value) / 100;
+                const matchLimit = parseFloat(document.getElementById('employer-match-limit').value) / 100;
+                employerMatchRate = Math.min(contributionRate, matchLimit) * matchPercent;
+            } else {
+                // Tiered match: 100% on first 3%, 50% on next 2%
+                if (contributionRate >= 0.05) {
+                    employerMatchRate = 0.03 + (0.02 * 0.5);
+                } else if (contributionRate >= 0.03) {
+                    employerMatchRate = 0.03 + ((contributionRate - 0.03) * 0.5);
+                } else {
+                    employerMatchRate = contributionRate;
+                }
+            }
+            
+            // Calculate years until retirement
+            const yearsToRetirement = retirementAge - currentAge;
+            
+            // Calculate future value
+            let balance = currentBalance;
+            let totalContributions = 0;
+            let totalEmployerMatch = 0;
+            let totalAdditionalEmployer = 0;
+            let currentSalary = annualSalary;
+            
+            for (let year = 1; year <= yearsToRetirement; year++) {
+                // Calculate contributions for the year
+                const employeeContribution = currentSalary * contributionRate;
+                const matchContribution = currentSalary * employerMatchRate;
+                const additionalEmployerContribution = currentSalary * additionalEmployer;
+                
+                // Add to running totals
+                totalContributions += employeeContribution;
+                totalEmployerMatch += matchContribution;
+                totalAdditionalEmployer += additionalEmployerContribution;
+                
+                // Calculate growth for the year
+                const beginningBalance = balance;
+                const totalContributionsThisYear = employeeContribution + matchContribution + additionalEmployerContribution;
+                
+                // Apply investment growth (simplified - assumes contributions throughout the year)
+                balance = (beginningBalance + totalContributionsThisYear / 2) * (1 + investmentReturn);
+                
+                // Increase salary for next year
+                currentSalary *= (1 + salaryIncrease);
+            }
+            
+            // Calculate investment growth
+            const investmentGrowth = balance - currentBalance - totalContributions - totalEmployerMatch - totalAdditionalEmployer;
+            
+            // Calculate annual income at 4% withdrawal rate
+            const annualIncome = balance * 0.04;
+            
+            // Update results
+            document.getElementById('retirement-balance').textContent = $${Math.round(balance).toLocaleString()};
+            document.getElementById('savings-description').textContent = After ${yearsToRetirement} years of contributions;
+            document.getElementById('total-contributions').textContent = $${Math.round(totalContributions).toLocaleString()};
+            document.getElementById('employer-match-total').textContent = $${Math.round(totalEmployerMatch).toLocaleString()};
+            document.getElementById('investment-growth').textContent = $${Math.round(investmentGrowth).toLocaleString()};
+            document.getElementById('annual-income').textContent = $${Math.round(annualIncome).toLocaleString()};
+            
+            // Update breakdown table
+            const totalValue = balance;
+            const yourContributionsPercent = (totalContributions / totalValue * 100).toFixed(1);
+            const employerMatchPercent = (totalEmployerMatch / totalValue * 100).toFixed(1);
+            const additionalEmployerPercent = (totalAdditionalEmployer / totalValue * 100).toFixed(1);
+            const growthPercent = (investmentGrowth / totalValue * 100).toFixed(1);
+            
+            document.getElementById('your-contributions-amount').textContent = $${Math.round(totalContributions).toLocaleString()};
+            document.getElementById('your-contributions-percent').textContent = ${yourContributionsPercent}%;
+            document.getElementById('employer-match-amount').textContent = $${Math.round(totalEmployerMatch).toLocaleString()};
+            document.getElementById('employer-match-percent').textContent = ${employerMatchPercent}%;
+            document.getElementById('additional-employer-amount').textContent = $${Math.round(totalAdditionalEmployer).toLocaleString()};
+            document.getElementById('additional-employer-percent').textContent = ${additionalEmployerPercent}%;
+            document.getElementById('growth-amount').textContent = $${Math.round(investmentGrowth).toLocaleString()};
+            document.getElementById('growth-percent').textContent = ${growthPercent}%;
+            document.getElementById('total-value').textContent = $${Math.round(totalValue).toLocaleString()};
+            
+            // Update match explainer text
+            updateMatchExplainer(contributionRate, employerMatchRate);
+            
+            // Update milestones
+            updateMilestones(currentAge, retirementAge, currentBalance, annualSalary, contributionRate, employerMatchRate, additionalEmployer, salaryIncrease, investmentReturn);
+            
+            // Update charts
+            updateGrowthChart(currentAge, retirementAge, currentBalance, annualSalary, contributionRate, employerMatchRate, additionalEmployer, salaryIncrease, investmentReturn);
+            updateBreakdownChart(totalContributions, totalEmployerMatch, totalAdditionalEmployer, investmentGrowth);
+        }
+
+        // Update the match explainer text
+        function updateMatchExplainer(contributionRate, employerMatchRate) {
+            const explainer = document.querySelector('.match-explainer p');
+            
+            if (matchType === 'percent') {
+                const matchPercent = parseFloat(document.getElementById('employer-match-percent').value);
+                const matchLimit = parseFloat(document.getElementById('employer-match-limit').value);
+                const fullMatchRate = matchLimit * (matchPercent / 100);
+                
+                if (contributionRate * 100 >= matchLimit) {
+                    explainer.textContent = Your employer matches ${matchPercent}% of your contributions up to ${matchLimit}% of your salary. Since you're contributing ${(contributionRate * 100).toFixed(1)}%, you're getting the full employer match of ${fullMatchRate.toFixed(1)}% of your salary. Great job maximizing your employer's contribution!;
+                } else {
+                    explainer.textContent = Your employer matches ${matchPercent}% of your contributions up to ${matchLimit}% of your salary. You're currently contributing ${(contributionRate * 100).toFixed(1)}%, so you're getting ${(employerMatchRate * 100).toFixed(1)}% in employer match. To get the full match of ${fullMatchRate.toFixed(1)}%, increase your contribution to ${matchLimit}%.;
+                }
+            } else {
+                if (contributionRate >= 0.05) {
+                    explainer.textContent = "With your current contribution rate, you're getting the maximum employer match: 100% on the first 3% of your salary and 50% on the next 2%. Excellent job maximizing your employer's contribution!";
+                } else if (contributionRate >= 0.03) {
+                    explainer.textContent = You're currently getting 100% match on the first 3% of your salary and 50% on the next ${((contributionRate - 0.03) * 100).toFixed(1)}%. To get the full employer match, increase your contribution to 5% of your salary.;
+                } else {
+                    explainer.textContent = You're currently getting 100% match on the first ${(contributionRate * 100).toFixed(1)}% of your salary. To maximize your employer match, increase your contribution to at least 5% of your salary.;
+                }
+            }
+        }
+
+        // Update 401k milestones
+        function updateMilestones(currentAge, retirementAge, currentBalance, annualSalary, contributionRate, employerMatchRate, additionalEmployer, salaryIncrease, investmentReturn) {
+            const milestones = [40, 50, 60, 65];
+            
+            milestones.forEach(age => {
+                if (age > currentAge && age <= retirementAge) {
+                    const years = age - currentAge;
+                    let balance = currentBalance;
+                    let currentSalaryValue = annualSalary;
+                    
+                    for (let year = 1; year <= years; year++) {
+                        const employeeContribution = currentSalaryValue * contributionRate;
+                        const matchContribution = currentSalaryValue * employerMatchRate;
+                        const additionalEmployerContribution = currentSalaryValue * additionalEmployer;
+                        const totalContributionsThisYear = employeeContribution + matchContribution + additionalEmployerContribution;
+                        
+                        balance = (balance + totalContributionsThisYear / 2) * (1 + investmentReturn);
+                        currentSalaryValue *= (1 + salaryIncrease);
+                    }
+                    
+                    document.getElementById(milestone-${age}).textContent = $${Math.round(balance).toLocaleString()};
+                } else if (age <= currentAge) {
+                    document.getElementById(milestone-${age}).textContent = 'Already passed';
+                } else {
+                    document.getElementById(milestone-${age}).textContent = 'Beyond retirement';
+                }
+            });
+        }
+
+        // Compare different contribution scenarios
+        function compareScenarios() {
+            const compareRate = parseFloat(document.getElementById('compare-contribution').value) / 100;
+            document.getElementById('compare-rate-display').textContent = ${(compareRate * 100).toFixed(1)}% (Alternative);
+            
+            // Get input values
+            const currentAge = parseInt(document.getElementById('current-age').value);
+            const retirementAge = parseInt(document.getElementById('retirement-age').value);
+            const annualSalary = parseFloat(document.getElementById('annual-salary').value);
+            const salaryIncrease = parseFloat(document.getElementById('salary-increase').value) / 100;
+            const currentBalance = parseFloat(document.getElementById('current-balance').value);
+            const investmentReturn = parseFloat(document.getElementById('investment-return').value) / 100;
+            const additionalEmployer = parseFloat(document.getElementById('employer-contribution').value) / 100;
+            
+            // Calculate employer match for comparison scenario
+            let compareEmployerMatchRate = 0;
+            if (matchType === 'percent') {
+                const matchPercent = parseFloat(document.getElementById('employer-match-percent').value) / 100;
+                const matchLimit = parseFloat(document.getElementById('employer-match-limit').value) / 100;
+                compareEmployerMatchRate = Math.min(compareRate, matchLimit) * matchPercent;
+            } else {
+                // Tiered match: 100% on first 3%, 50% on next 2%
+                if (compareRate >= 0.05) {
+                    compareEmployerMatchRate = 0.03 + (0.02 * 0.5);
+                } else if (compareRate >= 0.03) {
+                    compareEmployerMatchRate = 0.03 + ((compareRate - 0.03) * 0.5);
+                } else {
+                    compareEmployerMatchRate = compareRate;
+                }
+            }
+            
+            // Calculate years until retirement
+            const yearsToRetirement = retirementAge - currentAge;
+            
+            // Calculate future value for comparison scenario
+            let compareBalance = currentBalance;
+            let currentSalary = annualSalary;
+            
+            for (let year = 1; year <= yearsToRetirement; year++) {
+                const employeeContribution = currentSalary * compareRate;
+                const matchContribution = currentSalary * compareEmployerMatchRate;
+                const additionalEmployerContribution = currentSalary * additionalEmployer;
+                const totalContributionsThisYear = employeeContribution + matchContribution + additionalEmployerContribution;
+                
+                compareBalance = (compareBalance + totalContributionsThisYear / 2) * (1 + investmentReturn);
+                currentSalary *= (1 + salaryIncrease);
+            }
+            
+            // Get current scenario balance
+            const currentBalanceElement = document.getElementById('retirement-balance');
+            const currentBalanceValue = parseFloat(currentBalanceElement.textContent.replace(/[$,]/g, ''));
+            
+            // Update comparison table
+            document.getElementById('compare-scenario-value').textContent = $${Math.round(compareBalance).toLocaleString()};
+            const difference = compareBalance - currentBalanceValue;
+            document.getElementById('scenario-difference').textContent = +$${Math.round(difference).toLocaleString()};
+            
+            // Update scenario chart
+            updateScenarioChart(currentAge, retirementAge, currentBalance, annualSalary, compareRate, compareEmployerMatchRate, additionalEmployer, salaryIncrease, investmentReturn);
+        }
+
+        // Update the growth chart
+        function updateGrowthChart(currentAge, retirementAge, currentBalance, annualSalary, contributionRate, employerMatchRate, additionalEmployer, salaryIncrease, investmentReturn) {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            
+            if (growthChart) {
+                growthChart.destroy();
+            }
+            
+            // Generate data points for each year until retirement
+            const labels = [];
+            const balanceData = [];
+            const contributionsData = [];
+            const employerData = [];
+            
+            let balance = currentBalance;
+            let totalContributions = 0;
+            let totalEmployer = 0;
+            let currentSalaryValue = annualSalary;
+            
+            for (let age = currentAge; age <= retirementAge; age++) {
+                labels.push(Age ${age});
+                balanceData.push(balance);
+                contributionsData.push(totalContributions);
+                employerData.push(totalEmployer);
+                
+                if (age < retirementAge) {
+                    const employeeContribution = currentSalaryValue * contributionRate;
+                    const matchContribution = currentSalaryValue * employerMatchRate;
+                    const additionalEmployerContribution = currentSalaryValue * additionalEmployer;
+                    const totalContributionsThisYear = employeeContribution + matchContribution + additionalEmployerContribution;
+                    
+                    totalContributions += employeeContribution;
+                    totalEmployer += matchContribution + additionalEmployerContribution;
+                    
+                    balance = (balance + totalContributionsThisYear / 2) * (1 + investmentReturn);
+                    currentSalaryValue *= (1 + salaryIncrease);
+                }
+            }
+            
+            growthChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Total 401k Balance',
+                            data: balanceData,
+                            borderColor: '#0c2461',
+                            backgroundColor: 'rgba(12, 36, 97, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Your Contributions',
+                            data: contributionsData,
+                            borderColor: '#4a69bd',
+                            backgroundColor: 'rgba(74, 105, 189, 0.1)',
+                            fill: false,
+                            borderDash: [5, 5]
+                        },
+                        {
+                            label: 'Employer Contributions',
+                            data: employerData,
+                            borderColor: '#1e3799',
+                            backgroundColor: 'rgba(30, 55, 153, 0.1)',
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '401k Growth Projection'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amount ($)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update the breakdown chart
+        function updateBreakdownChart(contributions, employerMatch, additionalEmployer, growth) {
+            const ctx = document.getElementById('breakdownChart').getContext('2d');
+            
+            if (breakdownChart) {
+                breakdownChart.destroy();
+            }
+            
+            const total = contributions + employerMatch + additionalEmployer + growth;
+            
+            breakdownChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Your Contributions', 'Employer Match', 'Additional Employer', 'Investment Growth'],
+                    datasets: [{
+                        data: [contributions, employerMatch, additionalEmployer, growth],
+                        backgroundColor: [
+                            '#0c2461',
+                            '#1e3799',
+                            '#4a69bd',
+                            '#6a89cc'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const percentage = ((context.raw / total) * 100).toFixed(1);
+                                    return ${context.label}: $${context.raw.toLocaleString()} (${percentage}%);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update the scenario comparison chart
+        function updateScenarioChart(currentAge, retirementAge, currentBalance, annualSalary, compareRate, compareEmployerMatchRate, additionalEmployer, salaryIncrease, investmentReturn) {
+            const ctx = document.getElementById('scenarioChart').getContext('2d');
+            
+            if (scenarioChart) {
+                scenarioChart.destroy();
+            }
+            
+            // Get current scenario values
+            const currentRate = parseFloat(document.getElementById('contribution-rate').value) / 100;
+            let currentEmployerMatchRate = 0;
+            if (matchType === 'percent') {
+                const matchPercent = parseFloat(document.getElementById('employer-match-percent').value) / 100;
+                const matchLimit = parseFloat(document.getElementById('employer-match-limit').value) / 100;
+                currentEmployerMatchRate = Math.min(currentRate, matchLimit) * matchPercent;
+            } else {
+                if (currentRate >= 0.05) {
+                    currentEmployerMatchRate = 0.03 + (0.02 * 0.5);
+                } else if (currentRate >= 0.03) {
+                    currentEmployerMatchRate = 0.03 + ((currentRate - 0.03) * 0.5);
+                } else {
+                    currentEmployerMatchRate = currentRate;
+                }
+            }
+            
+            // Generate data for both scenarios
+            const labels = [];
+            const currentData = [];
+            const compareData = [];
+            
+            let currentBalanceValue = currentBalance;
+            let compareBalanceValue = currentBalance;
+            let currentSalaryValue = annualSalary;
+            
+            for (let age = currentAge; age <= retirementAge; age++) {
+                labels.push(Age ${age});
+                currentData.push(currentBalanceValue);
+                compareData.push(compareBalanceValue);
+                
+                if (age < retirementAge) {
+                    // Current scenario
+                    const currentEmployeeContribution = currentSalaryValue * currentRate;
+                    const currentMatchContribution = currentSalaryValue * currentEmployerMatchRate;
+                    const currentAdditionalEmployerContribution = currentSalaryValue * additionalEmployer;
+                    const currentTotalContributions = currentEmployeeContribution + currentMatchContribution + currentAdditionalEmployerContribution;
+                    
+                    currentBalanceValue = (currentBalanceValue + currentTotalContributions / 2) * (1 + investmentReturn);
+                    
+                    // Comparison scenario
+                    const compareEmployeeContribution = currentSalaryValue * compareRate;
+                    const compareMatchContribution = currentSalaryValue * compareEmployerMatchRate;
+                    const compareAdditionalEmployerContribution = currentSalaryValue * additionalEmployer;
+                    const compareTotalContributions = compareEmployeeContribution + compareMatchContribution + compareAdditionalEmployerContribution;
+                    
+                    compareBalanceValue = (compareBalanceValue + compareTotalContributions / 2) * (1 + investmentReturn);
+                    
+                    // Increase salary
+                    currentSalaryValue *= (1 + salaryIncrease);
+                }
+            }
+            
+            scenarioChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: ${(currentRate * 100).toFixed(1)}% Contribution,
+                            data: currentData,
+                            borderColor: '#0c2461',
+                            backgroundColor: 'rgba(12, 36, 97, 0.1)',
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: ${(compareRate * 100).toFixed(1)}% Contribution,
+                            data: compareData,
+                            borderColor: '#2ecc71',
+                            backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                            fill: false,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Contribution Rate Comparison'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '401k Balance ($)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Reset the calculator
+        function resetCalculator() {
+            document.getElementById('current-age').value = '35';
+            document.getElementById('retirement-age').value = '65';
+            document.getElementById('annual-salary').value = '75000';
+            document.getElementById('salary-increase').value = '2.5';
+            document.getElementById('current-balance').value = '50000';
+            document.getElementById('contribution-rate').value = '6';
+            document.getElementById('investment-return').value = '7';
+            document.getElementById('employer-match-percent').value = '50';
+            document.getElementById('employer-match-limit').value = '6';
+            document.getElementById('employer-contribution').value = '0';
+            document.getElementById('compare-contribution').value = '10';
+            
+            // Update range sliders
+            document.getElementById('contribution-rate-range').value = '6';
+            document.getElementById('investment-return-range').value = '7';
+            document.getElementById('employer-contribution-range').value = '0';
+            
+            toggleMatchType('percent');
+            calculate401k();
+        }
+
+        // Initialize the calculator
+        window.onload = function() {
+            calculate401k();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Fee Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-calculator"></i> Bank Fee Calculator</h1>
+            <p class="subtitle">Calculate your total banking fees and charges</p>
+        </header>
+
+        <main>
+            <div class="calculator-card">
+                <div class="input-section">
+                    <h2><i class="fas fa-edit"></i> Enter Your Banking Details</h2>
+                    
+                    <div class="input-group">
+                        <label for="accountType"><i class="fas fa-university"></i> Account Type</label>
+                        <select id="accountType">
+                            <option value="personal">Personal Checking</option>
+                            <option value="business">Business Account</option>
+                            <option value="student">Student Account</option>
+                            <option value="premium">Premium Account</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="monthlyFee"><i class="fas fa-calendar-alt"></i> Monthly Maintenance Fee ($)</label>
+                        <input type="number" id="monthlyFee" min="0" step="0.01" value="12.00">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="atmWithdrawals"><i class="fas fa-credit-card"></i> ATM Withdrawals (per month)</label>
+                        <input type="number" id="atmWithdrawals" min="0" value="8">
+                        <div class="fee-info">Fee per withdrawal: $3.00</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="overdraftCount"><i class="fas fa-exclamation-triangle"></i> Overdraft Occurrences</label>
+                        <input type="number" id="overdraftCount" min="0" value="0">
+                        <div class="fee-info">Fee per occurrence: $35.00</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="wireTransfers"><i class="fas fa-exchange-alt"></i> Wire Transfers (per month)</label>
+                        <input type="number" id="wireTransfers" min="0" value="1">
+                        <div class="fee-info">Domestic: $25.00, International: $45.00</div>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="wireType" value="domestic" checked> Domestic
+                            </label>
+                            <label>
+                                <input type="radio" name="wireType" value="international"> International
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="paperStatements"><i class="fas fa-file-invoice"></i> Paper Statements</label>
+                        <select id="paperStatements">
+                            <option value="0">No, I use e-statements</option>
+                            <option value="2">Yes, monthly ($2.00/month)</option>
+                            <option value="5">Yes, quarterly ($5.00/quarter)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="otherFees"><i class="fas fa-receipt"></i> Other Fees ($ per month)</label>
+                        <input type="number" id="otherFees" min="0" step="0.01" value="0.00">
+                        <div class="fee-info">e.g., card replacement, check orders</div>
+                    </div>
+
+                    <div class="button-group">
+                        <button id="calculateBtn" class="btn btn-primary">
+                            <i class="fas fa-calculator"></i> Calculate Total Fees
+                        </button>
+                        <button id="resetBtn" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <div class="results-section">
+                    <h2><i class="fas fa-chart-pie"></i> Fee Breakdown</h2>
+                    
+                    <div class="results-card">
+                        <div class="result-item">
+                            <span>Monthly Maintenance:</span>
+                            <span id="monthlyFeeResult">$12.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span>ATM Fees:</span>
+                            <span id="atmFeeResult">$24.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Overdraft Fees:</span>
+                            <span id="overdraftFeeResult">$0.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Wire Transfer Fees:</span>
+                            <span id="wireFeeResult">$25.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Paper Statement Fees:</span>
+                            <span id="statementFeeResult">$0.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Other Fees:</span>
+                            <span id="otherFeeResult">$0.00</span>
+                        </div>
+                        
+                        <div class="total-fee">
+                            <h3>Total Monthly Fees</h3>
+                            <div class="total-amount" id="totalFee">$61.00</div>
+                        </div>
+
+                        <div class="annual-projection">
+                            <h4><i class="fas fa-chart-line"></i> Annual Projection</h4>
+                            <div class="annual-amount" id="annualFee">$732.00</div>
+                        </div>
+                    </div>
+
+                    <div class="savings-tip">
+                        <i class="fas fa-lightbulb"></i>
+                        <p><strong>Tip:</strong> Consider switching to online statements and using in-network ATMs to save up to <strong>$50/month</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-section">
+                <h2><i class="fas fa-balance-scale"></i> Bank Fee Comparison</h2>
+                <div class="comparison-cards">
+                    <div class="comparison-card">
+                        <h3>Basic Account</h3>
+                        <div class="comparison-fee">~$45/month</div>
+                        <ul>
+                            <li>10 free ATM withdrawals</li>
+                            <li>$10 monthly fee</li>
+                            <li>No paper statements</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card featured">
+                        <h3>Your Current</h3>
+                        <div class="comparison-fee" id="currentComparison">$61.00/month</div>
+                        <ul>
+                            <li>8 ATM withdrawals @ $3</li>
+                            <li>$12 monthly fee</li>
+                            <li>No paper statements</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card">
+                        <h3>Premium Account</h3>
+                        <div class="comparison-fee">~$25/month</div>
+                        <ul>
+                            <li>Unlimited ATM fee reimbursements</li>
+                            <li>$25 monthly fee</li>
+                            <li>Free paper statements</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Bank Fee Calculator &copy; 2023 | This tool provides estimates only. Actual fees may vary.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

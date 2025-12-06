@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debt Payoff Calculator - Snowball vs Avalanche Method | WealthPathfinder</title>
+    <meta name="description" content="Free debt payoff calculator comparing snowball vs avalanche methods. Calculate how long it will take to pay off your debts and save on interest.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://wealthpathfinder.com/debt-payoff-calculator.html">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-icon">💰</span>
+                        <span class="logo-text">WealthPathfinder</span>
+                    </a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="banking.html" class="nav-link">Banking & Savings</a></li>
+                        <li><a href="investing.html" class="nav-link">Investing Basics</a></li>
+                        <li><a href="credit.html" class="nav-link">Credit & Debt</a></li>
+                        <li><a href="budgeting.html" class="nav-link">Budgeting</a></li>
+                        <li><a href="side-hustles.html" class="nav-link">Making Money</a></li>
+                        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                        <li><a href="calculators.html" class="nav-link">Calculators</a></li>
+                        <li><a href="tools.html" class="nav-link">Tools</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Ad -->
+    <section class="ad-section">
+        <div class="container">
+            <div class="ad-unit header-ad">
+                <div class="ad-placeholder">
+                    <span>Advertisement</span>
+                    <div class="ad-size">728 x 90</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Hero -->
+    <section class="calculator-hero debt-hero">
+        <div class="container">
+            <div class="calculator-hero-content">
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a> > 
+                    <a href="calculators.html">Calculators</a> > 
+                    <span>Debt Payoff</span>
+                </nav>
+                
+                <h1 class="calculator-title">Debt Payoff Calculator</h1>
+                <p class="calculator-subtitle">Compare debt snowball vs avalanche methods to find the fastest way to become debt-free and save money on interest.</p>
+                
+                <div class="calculator-stats">
+                    <div class="stat">
+                        <span class="stat-number">Two Methods</span>
+                        <span class="stat-label">Snowball & Avalanche</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Interest Savings</span>
+                        <span class="stat-label">Compare Costs</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Free</span>
+                        <span class="stat-label">No Signup</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Main -->
+    <main class="calculator-main">
+        <div class="container">
+            <div class="calculator-layout">
+                <!-- Calculator Form -->
+                <section class="calculator-form-section">
+                    <h2>Enter Your Debt Information</h2>
+                    <p>Add all your debts below to compare payoff strategies and see which method works best for your situation.</p>
+                    
+                    <form class="calculator-form" id="debtPayoffForm">
+                        <!-- Debt Strategy Selection -->
+                        <div class="form-group">
+                            <label>Payoff Strategy</label>
+                            <div class="strategy-selection">
+                                <label class="strategy-option">
+                                    <input type="radio" name="payoffStrategy" value="snowball" checked>
+                                    <span class="strategy-content">
+                                        <span class="strategy-icon">❄</span>
+                                        <span class="strategy-name">Debt Snowball</span>
+                                        <span class="strategy-desc">Pay smallest debts first for quick wins</span>
+                                    </span>
+                                </label>
+                                <label class="strategy-option">
+                                    <input type="radio" name="payoffStrategy" value="avalanche">
+                                    <span class="strategy-content">
+                                        <span class="strategy-icon">🏔</span>
+                                        <span class="strategy-name">Debt Avalanche</span>
+                                        <span class="strategy-desc">Pay highest interest first to save money</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Extra Payment -->
+                        <div class="form-group">
+                            <label for="extraPayment">Extra Monthly Payment ($)</label>
+                            <input type="number" id="extraPayment" value="100" min="0" step="10">
+                            <small>Additional amount you can pay toward debt each month</small>
+                        </div>
+
+                        <!-- Debts Container -->
+                        <div class="debts-section">
+                            <h3>Your Debts</h3>
+                            <div id="debtsContainer">
+                                <!-- Debt rows will be added here by JavaScript -->
+                            </div>
+                            <button type="button" class="btn btn-outline" onclick="addDebtRow()">
+                                + Add Another Debt
+                            </button>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-primary calculate-btn" onclick="calculateDebtPayoff()">
+                                Calculate Payoff Plan
+                            </button>
+                            <button type="button" class="btn btn-outline" onclick="resetDebtCalculator()">
+                                Reset
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Calculator Results -->
+                <section class="calculator-results" id="debtPayoffResults" style="display: none;">
+                    <h2>Your Debt Payoff Results</h2>
+                    
+                    <!-- Strategy Comparison -->
+                    <div class="strategy-comparison">
+                        <div class="strategy-result" id="snowballResult">
+                            <h3>❄ Debt Snowball Method</h3>
+                            <div class="result-stats">
+                                <div class="stat">
+                                    <span class="stat-value" id="snowballTime">0 months</span>
+                                    <span class="stat-label">Time to Debt-Free</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value" id="snowballInterest">$0</span>
+                                    <span class="stat-label">Total Interest</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value" id="snowballTotal">$0</span>
+                                    <span class="stat-label">Total Paid</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="strategy-result" id="avalancheResult">
+                            <h3>🏔 Debt Avalanche Method</h3>
+                            <div class="result-stats">
+                                <div class="stat">
+                                    <span class="stat-value" id="avalancheTime">0 months</span>
+                                    <span class="stat-label">Time to Debt-Free</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value" id="avalancheInterest">$0</span>
+                                    <span class="stat-label">Total Interest</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value" id="avalancheTotal">$0</span>
+                                    <span class="stat-label">Total Paid</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payoff Timeline -->
+                    <div class="timeline-section">
+                        <h3>Payoff Timeline Comparison</h3>
+                        <div class="chart-container">
+                            <canvas id="payoffChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Payoff Order -->
+                    <div class="payoff-order">
+                        <h3>Recommended Payoff Order</h3>
+                        <div id="payoffOrder">
+                            <!-- JavaScript will populate this -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Calculator Sidebar -->
+                <aside class="calculator-sidebar">
+                    <!-- Method Explanation -->
+                    <div class="sidebar-widget">
+                        <h3>Snowball vs Avalanche</h3>
+                        
+                        <div class="method-explanation">
+                            <h4>❄ Debt Snowball</h4>
+                            <p><strong>Pay smallest balances first.</strong> This method provides psychological wins by eliminating debts quickly, which helps maintain motivation.</p>
+                            
+                            <h4>🏔 Debt Avalanche</h4>
+                            <p><strong>Pay highest interest rates first.</strong> This method saves the most money on interest but may take longer to see your first debt eliminated.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tips Widget -->
+                    <div class="sidebar-widget">
+                        <h3>Debt Payoff Tips</h3>
+                        <div class="tip-list">
+                            <div class="tip-item">
+                                <span class="tip-icon">🎯</span>
+                                <span class="tip-text">Choose the method that keeps you motivated</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-icon">💰</span>
+                                <span class="tip-text">Even small extra payments make a big difference</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-icon">📞</span>
+                                <span class="tip-text">Call creditors to negotiate lower rates</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-icon">🔄</span>
+                                <span class="tip-text">Roll payments to next debt when one is paid off</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Calculators -->
+                    <div class="sidebar-widget">
+                        <h3>Related Calculators</h3>
+                        <div class="related-calculators">
+                            <a href="debt-consolidation-calculator.html" class="related-calc">
+                                <span class="calc-icon">🔄</span>
+                                <span class="calc-name">Debt Consolidation Calculator</span>
+                            </a>
+                            <a href="credit-utilization-calculator.html" class="related-calc">
+                                <span class="calc-icon">📊</span>
+                                <span class="calc-name">Credit Utilization Calculator</span>
+                            </a>
+                            <a href="budget-calculator.html" class="related-calc">
+                                <span class="calc-icon">📝</span>
+                                <span class="calc-name">Budget Calculator</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Ad -->
+                    <div class="sidebar-widget ad-widget">
+                        <div class="ad-placeholder">
+                            <span>Advertisement</span>
+                            <div class="ad-size">300 x 250</div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Method Details Section -->
+    <section class="method-details">
+        <div class="container">
+            <h2>Which Method Should You Choose?</h2>
+            <div class="method-comparison-grid">
+                <div class="method-detail">
+                    <h3>❄ Choose Snowball If:</h3>
+                    <ul>
+                        <li>You need motivation to stay on track</li>
+                        <li>You have many small debts</li>
+                        <li>Quick wins keep you motivated</li>
+                        <li>Interest rates are similar across debts</li>
+                    </ul>
+                </div>
+                <div class="method-detail">
+                    <h3>🏔 Choose Avalanche If:</h3>
+                    <ul>
+                        <li>You want to save the most money</li>
+                        <li>You have high-interest credit card debt</li>
+                        <li>You're disciplined and don't need quick wins</li>
+                        <li>Interest rates vary significantly</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Debt Payoff FAQs</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>What's the difference in savings between methods?</h4>
+                    <p>The avalanche method typically saves 10-30% more in interest compared to snowball. However, snowball users often stick with their plan longer due to psychological wins.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Should I pay off debt or invest?</h4>
+                    <p>Generally, pay off high-interest debt first (>7-8%). For lower interest debt, you might get better returns investing, but being debt-free provides financial security.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What if I can't make extra payments?</h4>
+                    <p>Start with minimum payments and focus on increasing income or reducing expenses. Even $25-50 extra per month can significantly reduce your payoff time.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Should I consider debt consolidation?</h4>
+                    <p>Consolidation can simplify payments and potentially lower interest rates, but it doesn't reduce the total amount owed. Use our debt consolidation calculator to compare.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="calculator-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h3>Start Your Debt-Free Journey Today</h3>
+                <p>Every payment brings you closer to financial freedom. Use your preferred payoff method consistently, and you'll be amazed at how quickly you can eliminate debt.</p>
+                <div class="cta-buttons">
+                    <a href="credit.html" class="btn btn-primary">Learn About Debt Management</a>
+                    <a href="tools.html" class="btn btn-outline">Download Debt Payoff Tools</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <a href="index.html" class="logo-link">
+                            <span class="logo-icon">💰</span>
+                            <span class="logo-text">WealthPathfinder</span>
+                        </a>
+                    </div>
+                    <p class="footer-description">Smart money moves for real life. Building financial freedom, one step at a time.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="banking.html">Banking & Savings</a></li>
+                            <li><a href="investing.html">Investing Basics</a></li>
+                            <li><a href="credit.html">Credit & Debt</a></li>
+                            <li><a href="budgeting.html">Budgeting</a></li>
+                            <li><a href="side-hustles.html">Making Money</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="calculators.html">Financial Calculators</a></li>
+                            <li><a href="tools.html">Free Tools</a></li>
+                            <li><a href="glossary.html">Financial Glossary</a></li>
+                            <li><a href="newsletter.html">Newsletter</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                            <li><a href="disclaimer.html">Disclaimer</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 WealthPathfinder. All rights reserved. </p>
+                <p class="disclaimer-note">WealthPathfinder is for educational purposes only and does not constitute financial advice. Please consult with a professional financial advisor before making any financial decisions.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Debt Payoff Calculator Specific Functions
+        let debtIdCounter = 1;
+
+        function addDebtRow() {
+            const container = document.getElementById('debtsContainer');
+            const debtId = debtIdCounter++;
+            
+            const debtHtml = `
+                <div class="debt-row" data-debt-id="${debtId}">
+                    <div class="debt-header">
+                        <h4>Debt ${debtId}</h4>
+                        <button type="button" class="btn-remove" onclick="removeDebtRow(${debtId})">×</button>
+                    </div>
+                    <div class="debt-fields">
+                        <div class="form-group">
+                            <label>Debt Name</label>
+                            <input type="text" class="debt-name" placeholder="Credit Card, Car Loan, etc." value="Debt ${debtId}">
+                        </div>
+                        <div class="form-group">
+                            <label>Balance ($)</label>
+                            <input type="number" class="debt-balance" placeholder="0.00" min="0" step="0.01" value="5000">
+                        </div>
+                        <div class="form-group">
+                            <label>Interest Rate (%)</label>
+                            <input type="number" class="debt-interest" placeholder="0.0" min="0" step="0.1" value="18.9">
+                        </div>
+                        <div class="form-group">
+                            <label>Minimum Payment ($)</label>
+                            <input type="number" class="debt-min-payment" placeholder="0.00" min="0" step="0.01" value="150">
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', debtHtml);
+        }
+
+        function removeDebtRow(debtId) {
+            const debtRow = document.querySelector([data-debt-id="${debtId}"]);
+            if (debtRow) {
+                debtRow.remove();
+            }
+        }
+
+        function getDebts() {
+            const debts = [];
+            const debtRows = document.querySelectorAll('.debt-row');
+            
+            debtRows.forEach(row => {
+                const name = row.querySelector('.debt-name').value || 'Unnamed Debt';
+                const balance = parseFloat(row.querySelector('.debt-balance').value) || 0;
+                const interest = parseFloat(row.querySelector('.debt-interest').value) || 0;
+                const minPayment = parseFloat(row.querySelector('.debt-min-payment').value) || 0;
+                
+                if (balance > 0) {
+                    debts.push({
+                        name: name,
+                        balance: balance,
+                        interest: interest,
+                        minPayment: minPayment
+                    });
+                }
+            });
+            
+            return debts;
+        }
+
+        function calculateDebtPayoff() {
+            const debts = getDebts();
+            const extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
+            
+            if (debts.length === 0) {
+                alert('Please add at least one debt.');
+                return;
+            }
+
+            // Calculate both methods
+            const snowballResult = simulatePayoff(debts, extraPayment, 'snowball');
+            const avalancheResult = simulatePayoff(debts, extraPayment, 'avalanche');
+
+            // Display results
+            displayResults(snowballResult, avalancheResult);
+            generatePayoffChart(snowballResult, avalancheResult);
+            displayPayoffOrder(snowballResult, avalancheResult);
+
+            // Show results section
+            document.getElementById('debtPayoffResults').style.display = 'block';
+        }
+
+        function simulatePayoff(debts, extraPayment, method) {
+            // Create a deep copy of debts
+            const currentDebts = JSON.parse(JSON.stringify(debts));
+            let months = 0;
+            let totalInterest = 0;
+            const monthlyResults = [];
+            const payoffOrder = [];
+
+            // Sort debts based on method
+            if (method === 'snowball') {
+                currentDebts.sort((a, b) => a.balance - b.balance);
+            } else {
+                currentDebts.sort((a, b) => b.interest - a.interest);
+            }
+
+            while (currentDebts.length > 0) {
+                months++;
+                let availableExtra = extraPayment;
+                let totalPaidThisMonth = 0;
+
+                // Pay minimums on all debts
+                currentDebts.forEach(debt => {
+                    if (debt.balance > 0) {
+                        const monthlyInterest = debt.balance * (debt.interest / 100 / 12);
+                        let payment = Math.min(debt.balance + monthlyInterest, debt.minPayment);
+                        
+                        // Apply payment
+                        debt.balance = debt.balance + monthlyInterest - payment;
+                        totalInterest += monthlyInterest;
+                        totalPaidThisMonth += payment;
+                    }
+                });
+
+                // Apply extra payment to target debt
+                const targetDebt = currentDebts.find(debt => debt.balance > 0);
+                if (targetDebt && availableExtra > 0) {
+                    const payment = Math.min(targetDebt.balance, availableExtra);
+                    targetDebt.balance -= payment;
+                    totalPaidThisMonth += payment;
+                    availableExtra -= payment;
+                }
+
+                // Remove paid-off debts and record payoff order
+                for (let i = currentDebts.length - 1; i >= 0; i--) {
+                    if (currentDebts[i].balance <= 0) {
+                        payoffOrder.push({
+                            name: currentDebts[i].name,
+                            month: months
+                        });
+                        currentDebts.splice(i, 1);
+                    }
+                }
+
+                // Store monthly result for chart
+                if (months % 3 === 0 || months === 1 || currentDebts.length === 0) {
+                    const remainingDebt = currentDebts.reduce((sum, debt) => sum + Math.max(0, debt.balance), 0);
+                    monthlyResults.push({
+                        month: months,
+                        remaining: remainingDebt
+                    });
+                }
+
+                // Safety break
+                if (months > 600) break;
+            }
+
+            const totalDebt = debts.reduce((sum, debt) => sum + debt.balance, 0);
+            
+            return {
+                method: method,
+                months: months,
+                totalInterest: totalInterest,
+                totalPaid: totalDebt + totalInterest,
+                monthlyResults: monthlyResults,
+                payoffOrder: payoffOrder
+            };
+        }
+
+        function displayResults(snowballResult, avalancheResult) {
+            // Snowball results
+            document.getElementById('snowballTime').textContent = ${snowballResult.months} months (${Math.round(snowballResult.months/12)} years);
+            document.getElementById('snowballInterest').textContent = formatCurrency(snowballResult.totalInterest);
+            document.getElementById('snowballTotal').textContent = formatCurrency(snowballResult.totalPaid);
+
+            // Avalanche results
+            document.getElementById('avalancheTime').textContent = ${avalancheResult.months} months (${Math.round(avalancheResult.months/12)} years);
+            document.getElementById('avalancheInterest').textContent = formatCurrency(avalancheResult.totalInterest);
+            document.getElementById('avalancheTotal').textContent = formatCurrency(avalancheResult.totalPaid);
+        }
+
+        function generatePayoffChart(snowballResult, avalancheResult) {
+            const ctx = document.getElementById('payoffChart').getContext('2d');
+            
+            // Prepare data
+            const snowballData = Array(snowballResult.months).fill().map((_, i) => {
+                const month = i + 1;
+                const result = snowballResult.monthlyResults.find(r => r.month >= month);
+                return result ? result.remaining : 0;
+            });
+
+            const avalancheData = Array(avalancheResult.months).fill().map((_, i) => {
+                const month = i + 1;
+                const result = avalancheResult.monthlyResults.find(r => r.month >= month);
+                return result ? result.remaining : 0;
+            });
+
+            const labels = Array(Math.max(snowballResult.months, avalancheResult.months)).fill().map((_, i) => Month ${i + 1});
+
+            // Destroy existing chart
+            const existingChart = Chart.getChart(ctx);
+            if (existingChart) {
+                existingChart.destroy();
+            }
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Snowball Method',
+                            data: snowballData,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Avalanche Method',
+                            data: avalancheData,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Debt Payoff Progress Comparison'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatCurrency(context.raw);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function displayPayoffOrder(snowballResult, avalancheResult) {
+            const container = document.getElementById('payoffOrder');
+            container.innerHTML = '';
+
+            const selectedMethod = document.querySelector('input[name="payoffStrategy"]:checked').value;
+            const result = selectedMethod === 'snowball' ? snowballResult : avalancheResult;
+
+            const orderHtml = result.payoffOrder.map((debt, index) => `
+                <div class="payoff-step">
+                    <div class="step-number">${index + 1}</div>
+                    <div class="step-content">
+                        <strong>${debt.name}</strong>
+                        <span>Paid off in month ${debt.month}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = orderHtml;
+        }
+
+        function resetDebtCalculator() {
+            document.getElementById('debtsContainer').innerHTML = '';
+            document.getElementById('extraPayment').value = 100;
+            document.getElementById('debtPayoffResults').style.display = 'none';
+            debtIdCounter = 1;
+            addDebtRow(); // Add one initial debt row
+            
+            // Destroy chart
+            const ctx = document.getElementById('payoffChart');
+            const existingChart = Chart.getChart(ctx);
+            if (existingChart) {
+                existingChart.destroy();
+            }
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Initialize calculator
+        document.addEventListener('DOMContentLoaded', function() {
+            addDebtRow(); // Add initial debt row
+        });
+    </script>
+</body>
+</html>

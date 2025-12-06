@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WealthPathfinder Newsletter - Financial Tips & Insights | WealthPathfinder</title>
+    <meta name="description" content="Join the WealthPathfinder newsletter for weekly financial tips, investment insights, money-saving strategies, and exclusive content to help you build wealth.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://wealthpathfinder.com/newsletter.html">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-icon">💰</span>
+                        <span class="logo-text">WealthPathfinder</span>
+                    </a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="banking.html" class="nav-link">Banking & Savings</a></li>
+                        <li><a href="investing.html" class="nav-link">Investing Basics</a></li>
+                        <li><a href="credit.html" class="nav-link">Credit & Debt</a></li>
+                        <li><a href="budgeting.html" class="nav-link">Budgeting</a></li>
+                        <li><a href="side-hustles.html" class="nav-link">Making Money</a></li>
+                        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                        <li><a href="calculators.html" class="nav-link">Calculators</a></li>
+                        <li><a href="tools.html" class="nav-link">Tools</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Ad -->
+    <section class="ad-section">
+        <div class="container">
+            <div class="ad-unit header-ad">
+                <div class="ad-placeholder">
+                    <span>Advertisement</span>
+                    <div class="ad-size">728 x 90</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Hero -->
+    <section class="newsletter-hero">
+        <div class="container">
+            <div class="newsletter-hero-content">
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a> > 
+                    <span>Newsletter</span>
+                </nav>
+                
+                <h1 class="newsletter-title">WealthPathfinder Newsletter</h1>
+                <p class="newsletter-subtitle">Get weekly financial insights, money-saving tips, and investment strategies delivered to your inbox.</p>
+                
+                <div class="newsletter-stats">
+                    <div class="stat">
+                        <span class="stat-number">10,000+</span>
+                        <span class="stat-label">Subscribers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Weekly</span>
+                        <span class="stat-label">Updates</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Free</span>
+                        <span class="stat-label">Forever</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Unsubscribe</span>
+                        <span class="stat-label">Anytime</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Main -->
+    <main class="newsletter-main">
+        <div class="container">
+            <div class="newsletter-layout">
+                <!-- Newsletter Signup -->
+                <section class="newsletter-signup">
+                    <div class="signup-card">
+                        <h2>Join Our Community</h2>
+                        <p>Get our best financial content delivered weekly. No spam, just practical advice you can use.</p>
+                        
+                        <form class="newsletter-form" id="newsletterForm">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Financial Interests (Select all that apply)</label>
+                                <div class="interest-checkboxes">
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="interests" value="investing">
+                                        <span class="checkmark"></span>
+                                        <span>Investing & Stocks</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="interests" value="saving">
+                                        <span class="checkmark"></span>
+                                        <span>Saving & Budgeting</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="interests" value="credit">
+                                        <span class="checkmark"></span>
+                                        <span>Credit & Debt</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="interests" value="retirement">
+                                        <span class="checkmark"></span>
+                                        <span>Retirement Planning</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="interests" value="side-hustles">
+                                        <span class="checkmark"></span>
+                                        <span>Side Hustles</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="interests" value="reviews">
+                                        <span class="checkmark"></span>
+                                        <span>Product Reviews</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="checkbox-option privacy-option">
+                                    <input type="checkbox" required>
+                                    <span class="checkmark"></span>
+                                    <span>I agree to the <a href="privacy.html">Privacy Policy</a> and understand I can unsubscribe at any time</span>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-large">
+                                <span class="btn-icon">📧</span>
+                                Join Now - It's Free!
+                            </button>
+                        </form>
+                        
+                        <div class="signup-guarantee">
+                            <div class="guarantee-item">
+                                <span class="guarantee-icon">🔒</span>
+                                <span class="guarantee-text">We never share your email. Unsubscribe anytime.</span>
+                            </div>
+                            <div class="guarantee-item">
+                                <span class="guarantee-icon">⭐</span>
+                                <span class="guarantee-text">No spam. Just valuable financial insights.</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Newsletter Benefits -->
+                <aside class="newsletter-benefits">
+                    <div class="benefits-card">
+                        <h3>What You'll Get</h3>
+                        
+                        <div class="benefits-list">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">🎯</div>
+                                <div class="benefit-content">
+                                    <h4>Weekly Financial Tips</h4>
+                                    <p>Actionable advice to improve your financial situation each week.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <div class="benefit-icon">📈</div>
+                                <div class="benefit-content">
+                                    <h4>Market Updates</h4>
+                                    <p>Simple explanations of what's happening in the financial markets.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <div class="benefit-icon">💡</div>
+                                <div class="benefit-content">
+                                    <h4>Exclusive Content</h4>
+                                    <p>Articles and guides only available to newsletter subscribers.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <div class="benefit-icon">🆓</div>
+                                <div class="benefit-content">
+                                    <h4>Free Tools & Resources</h4>
+                                    <p>Access to downloadable templates, calculators, and worksheets.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <div class="benefit-icon">🏆</div>
+                                <div class="benefit-content">
+                                    <h4>Early Access</h4>
+                                    <p>Be the first to know about new calculators, tools, and features.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonials -->
+                    <div class="testimonials-card">
+                        <h3>What Our Readers Say</h3>
+                        
+                        <div class="testimonials">
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    "The WealthPathfinder newsletter has completely changed how I manage my money. The weekly tips are practical and easy to implement."
+                                </div>
+                                <div class="testimonial-author">
+                                    <strong>Sarah M.</strong>
+                                    <span>Subscriber for 2 years</span>
+                                </div>
+                            </div>
+                            
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    "I look forward to the newsletter every Tuesday. It's like having a personal finance coach in my inbox."
+                                </div>
+                                <div class="testimonial-author">
+                                    <strong>Michael T.</strong>
+                                    <span>Subscriber for 1 year</span>
+                                </div>
+                            </div>
+                            
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    "Finally, financial advice that makes sense! No complicated jargon, just clear, actionable steps."
+                                </div>
+                                <div class="testimonial-author">
+                                    <strong>Jennifer L.</strong>
+                                    <span>New subscriber</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Ad -->
+                    <div class="sidebar-ad">
+                        <div class="ad-placeholder">
+                            <span>Advertisement</span>
+                            <div class="ad-size">300 x 250</div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Newsletter Samples -->
+    <section class="newsletter-samples">
+        <div class="container">
+            <h2>See What You'll Receive</h2>
+            <p class="section-subtitle">Here are examples of recent newsletter topics our subscribers loved:</p>
+            
+            <div class="sample-grid">
+                <div class="sample-card">
+                    <div class="sample-category investing">Investing</div>
+                    <h3>5 Index Funds for Beginner Investors</h3>
+                    <p>Learn about low-cost index funds perfect for starting your investment journey with minimal risk.</p>
+                    <div class="sample-meta">
+                        <span class="sample-date">Last Week</span>
+                        <span class="sample-popular">🔥 Most Popular</span>
+                    </div>
+                </div>
+                
+                <div class="sample-card">
+                    <div class="sample-category budgeting">Budgeting</div>
+                    <h3>The 50/30/20 Rule Made Simple</h3>
+                    <p>How to allocate your income between needs, wants, and savings without complicated spreadsheets.</p>
+                    <div class="sample-meta">
+                        <span class="sample-date">2 Weeks Ago</span>
+                    </div>
+                </div>
+                
+                <div class="sample-card">
+                    <div class="sample-category credit">Credit</div>
+                    <h3>Boost Your Credit Score in 90 Days</h3>
+                    <p>Actionable steps to improve your credit score quickly and qualify for better loan rates.</p>
+                    <div class="sample-meta">
+                        <span class="sample-date">3 Weeks Ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Newsletter FAQs</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>How often will I receive emails?</h4>
+                    <p>We send one main newsletter each week, typically on Tuesday mornings. Occasionally, we may send special updates for important financial news or new tool releases.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I unsubscribe at any time?</h4>
+                    <p>Absolutely! Every email includes an unsubscribe link at the bottom. We make it easy to leave if our content isn't right for you.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Do you sell my email address?</h4>
+                    <p>Never. We value your privacy and will never sell, rent, or share your email address with third parties.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What if I'm already experienced with personal finance?</h4>
+                    <p>Our newsletter covers topics for all experience levels. We include advanced strategies and deeper dives into complex financial topics alongside beginner-friendly content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h3>Start Your Journey to Financial Freedom</h3>
+                <p>Join thousands of readers who are taking control of their finances one week at a time. Sign up now and get our exclusive "Financial Starter Kit" as a welcome gift.</p>
+                <a href="#newsletterForm" class="btn btn-primary btn-large">
+                    <span class="btn-icon">🚀</span>
+                    Join Free Today
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <a href="index.html" class="logo-link">
+                            <span class="logo-icon">💰</span>
+                            <span class="logo-text">WealthPathfinder</span>
+                        </a>
+                    </div>
+                    <p class="footer-description">Smart money moves for real life. Building financial freedom, one step at a time.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="banking.html">Banking & Savings</a></li>
+                            <li><a href="investing.html">Investing Basics</a></li>
+                            <li><a href="credit.html">Credit & Debt</a></li>
+                            <li><a href="budgeting.html">Budgeting</a></li>
+                            <li><a href="side-hustles.html">Making Money</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="calculators.html">Financial Calculators</a></li>
+                            <li><a href="tools.html">Free Tools</a></li>
+                            <li><a href="glossary.html">Financial Glossary</a></li>
+                            <li><a href="newsletter.html" class="active">Newsletter</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                            <li><a href="disclaimer.html">Disclaimer</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 WealthPathfinder. All rights reserved. </p>
+                <p class="disclaimer-note">WealthPathfinder is for educational purposes only and does not constitute financial advice. Please consult with a professional financial advisor before making any financial decisions.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Newsletter Form Handling
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const firstName = formData.get('firstName');
+            const email = formData.get('email');
+            const interests = formData.getAll('interests');
+            
+            // Simple validation
+            if (!firstName || !email) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = 'Subscribing...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Show success message
+                this.innerHTML = `
+                    <div class="success-message">
+                        <div class="success-icon">🎉</div>
+                        <h3>Welcome to WealthPathfinder!</h3>
+                        <p>Thanks for subscribing, ${firstName}! We've sent a confirmation email to ${email}.</p>
+                        <p><strong>What's next:</strong></p>
+                        <ul>
+                            <li>Check your inbox for our welcome email</li>
+                            <li>Add hello@wealthpathfinder.com to your contacts</li>
+                            <li>Look for your first newsletter next Tuesday</li>
+                        </ul>
+                        <a href="index.html" class="btn btn-outline">Continue to Website</a>
+                    </div>
+                `;
+            }, 2000);
+        });
+
+        // Add CSS for success message
+        const style = document.createElement('style');
+        style.textContent = `
+            .success-message {
+                text-align: center;
+                padding: var(--space-2xl);
+            }
+            
+            .success-icon {
+                font-size: 4rem;
+                margin-bottom: var(--space-lg);
+            }
+            
+            .success-message h3 {
+                color: var(--primary-blue);
+                margin-bottom: var(--space-lg);
+            }
+            
+            .success-message p {
+                color: var(--gray-600);
+                margin-bottom: var(--space-lg);
+                line-height: 1.6;
+            }
+            
+            .success-message ul {
+                text-align: left;
+                color: var(--gray-600);
+                margin-bottom: var(--space-2xl);
+                padding-left: var(--space-lg);
+            }
+            
+            .success-message li {
+                margin-bottom: var(--space-sm);
+                line-height: 1.6;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

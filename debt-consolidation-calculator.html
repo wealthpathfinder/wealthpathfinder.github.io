@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debt Consolidation Calculator - Financial Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .calculator-header {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .calculator-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .calculator-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .calculator-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 1.4em;
+        }
+
+        .section-title i {
+            color: #6a11cb;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #6a11cb;
+        }
+
+        .debt-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .debt-item input {
+            flex: 1;
+        }
+
+        .remove-debt {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-debt-btn {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 20px;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .results-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #6a11cb;
+        }
+
+        .result-card h3 {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .result-card .value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .savings {
+            color: #2ecc71;
+        }
+
+        .loss {
+            color: #e74c3c;
+        }
+
+        .chart-container {
+            height: 300px;
+            margin: 30px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .comparison-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .highlight {
+            background-color: #e8f4fd;
+            font-weight: 600;
+        }
+
+        .insights-section {
+            background: #e8f4fd;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+        }
+
+        .insights-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .insight-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #6a11cb;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .print-btn, .reset-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .print-btn {
+            background: #3498db;
+            color: white;
+        }
+
+        .reset-btn {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .print-btn:hover, .reset-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .consolidation-options {
+            margin-top: 30px;
+        }
+
+        .option-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .option-card.selected {
+            border-color: #6a11cb;
+            background: #f0e6ff;
+        }
+
+        .option-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .option-title {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .option-desc {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h1>Debt Consolidation Calculator</h1>
+            <p>See how consolidating your debts can save you money and simplify payments</p>
+        </div>
+
+        <div class="calculator-content">
+            <div class="input-section">
+                <div class="section-title">
+                    <i class="fas fa-credit-card"></i>
+                    <h2>Your Current Debts</h2>
+                </div>
+                
+                <div id="debts-container">
+                    <div class="debt-item">
+                        <input type="text" placeholder="Debt Name (e.g., Credit Card)" value="Credit Card">
+                        <input type="number" placeholder="Balance" value="5000" min="0">
+                        <input type="number" placeholder="Interest Rate %" value="18.9" min="0" step="0.1">
+                        <input type="number" placeholder="Monthly Payment" value="150" min="0">
+                        <button class="remove-debt" onclick="removeDebt(this)"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="debt-item">
+                        <input type="text" placeholder="Debt Name (e.g., Personal Loan)" value="Personal Loan">
+                        <input type="number" placeholder="Balance" value="7500" min="0">
+                        <input type="number" placeholder="Interest Rate %" value="12.5" min="0" step="0.1">
+                        <input type="number" placeholder="Monthly Payment" value="200" min="0">
+                        <button class="remove-debt" onclick="removeDebt(this)"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                
+                <button class="add-debt-btn" onclick="addDebt()">
+                    <i class="fas fa-plus"></i> Add Another Debt
+                </button>
+
+                <div class="section-title" style="margin-top: 30px;">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h2>Consolidation Loan Details</h2>
+                </div>
+                
+                <div class="input-group">
+                    <label for="consolidation-rate">Consolidation Loan Interest Rate (%)</label>
+                    <input type="number" id="consolidation-rate" value="9.5" min="0" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label for="loan-term">Loan Term (Years)</label>
+                    <input type="number" id="loan-term" value="5" min="1" max="30">
+                </div>
+                
+                <div class="input-group">
+                    <label for="loan-fee">Loan Origination Fee ($)</label>
+                    <input type="number" id="loan-fee" value="250" min="0">
+                </div>
+
+                <button class="calculate-btn" onclick="calculateConsolidation()">
+                    <i class="fas fa-calculator"></i> Calculate Savings
+                </button>
+            </div>
+
+            <div class="results-section">
+                <div class="section-title">
+                    <i class="fas fa-chart-bar"></i>
+                    <h2>Your Results</h2>
+                </div>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Current Monthly Payment</h3>
+                        <div class="value" id="current-monthly">$350.00</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Consolidated Payment</h3>
+                        <div class="value" id="consolidated-monthly">$262.80</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Total Interest Savings</h3>
+                        <div class="value savings" id="interest-savings">$2,450.20</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Time to Pay Off</h3>
+                        <div class="value" id="time-savings">2.4 years faster</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+
+                <div class="comparison-table-container">
+                    <h3>Debt Payoff Comparison</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Current Plan</th>
+                                <th>Consolidated</th>
+                                <th>Difference</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Monthly Payment</td>
+                                <td id="current-payment-cell">$350.00</td>
+                                <td id="consolidated-payment-cell">$262.80</td>
+                                <td id="payment-difference-cell" class="savings">-$87.20</td>
+                            </tr>
+                            <tr>
+                                <td>Total Interest</td>
+                                <td id="current-interest-cell">$4,820.50</td>
+                                <td id="consolidated-interest-cell">$2,370.30</td>
+                                <td id="interest-difference-cell" class="savings">-$2,450.20</td>
+                            </tr>
+                            <tr>
+                                <td>Payoff Time</td>
+                                <td id="current-time-cell">7.2 years</td>
+                                <td id="consolidated-time-cell">5 years</td>
+                                <td id="time-difference-cell" class="savings">2.2 years faster</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td>Total Cost</td>
+                                <td id="current-total-cell">$17,320.50</td>
+                                <td id="consolidated-total-cell">$14,870.30</td>
+                                <td id="total-difference-cell" class="savings">-$2,450.20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="insights-section">
+                    <h3><i class="fas fa-lightbulb"></i> Consolidation Insights</h3>
+                    <div class="insight-item">
+                        <strong>Monthly Savings:</strong> You could save <span id="monthly-savings-text">$87.20</span> per month with debt consolidation.
+                    </div>
+                    <div class="insight-item">
+                        <strong>Interest Savings:</strong> Consolidating could save you <span id="interest-savings-text">$2,450.20</span> in total interest.
+                    </div>
+                    <div class="insight-item">
+                        <strong>Faster Payoff:</strong> You could become debt-free <span id="time-savings-text">2.2 years</span> sooner.
+                    </div>
+                    <div class="insight-item">
+                        <strong>Credit Impact:</strong> Consolidation may initially lower your credit score but can improve it over time as you pay down debt.
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="print-btn" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print Results
+                    </button>
+                    <button class="reset-btn" onclick="resetCalculator()">
+                        <i class="fas fa-redo"></i> Reset Calculator
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let comparisonChart;
+
+        // Add a new debt input row
+        function addDebt() {
+            const debtsContainer = document.getElementById('debts-container');
+            const debtItem = document.createElement('div');
+            debtItem.className = 'debt-item';
+            debtItem.innerHTML = `
+                <input type="text" placeholder="Debt Name" value="New Debt">
+                <input type="number" placeholder="Balance" value="1000" min="0">
+                <input type="number" placeholder="Interest Rate %" value="15.0" min="0" step="0.1">
+                <input type="number" placeholder="Monthly Payment" value="50" min="0">
+                <button class="remove-debt" onclick="removeDebt(this)"><i class="fas fa-times"></i></button>
+            `;
+            debtsContainer.appendChild(debtItem);
+        }
+
+        // Remove a debt input row
+        function removeDebt(button) {
+            const debtItem = button.parentElement;
+            if (document.querySelectorAll('.debt-item').length > 1) {
+                debtItem.remove();
+            } else {
+                alert("You need at least one debt to calculate consolidation.");
+            }
+        }
+
+        // Calculate the debt consolidation savings
+        function calculateConsolidation() {
+            // Get all debt inputs
+            const debtItems = document.querySelectorAll('.debt-item');
+            let totalBalance = 0;
+            let totalMonthlyPayment = 0;
+            let weightedInterest = 0;
+            
+            // Calculate current debt situation
+            debtItems.forEach(item => {
+                const inputs = item.querySelectorAll('input');
+                const balance = parseFloat(inputs[1].value) || 0;
+                const rate = parseFloat(inputs[2].value) || 0;
+                const payment = parseFloat(inputs[3].value) || 0;
+                
+                totalBalance += balance;
+                totalMonthlyPayment += payment;
+                weightedInterest += balance * (rate / 100);
+            });
+            
+            const avgInterestRate = totalBalance > 0 ? (weightedInterest / totalBalance) * 100 : 0;
+            
+            // Get consolidation loan details
+            const consolidationRate = parseFloat(document.getElementById('consolidation-rate').value) / 100;
+            const loanTerm = parseFloat(document.getElementById('loan-term').value);
+            const loanFee = parseFloat(document.getElementById('loan-fee').value) || 0;
+            
+            // Calculate current payoff time and interest (simplified)
+            const currentPayoffTime = calculatePayoffTime(totalBalance, avgInterestRate/100, totalMonthlyPayment);
+            const currentTotalInterest = calculateTotalInterest(totalBalance, avgInterestRate/100, totalMonthlyPayment, currentPayoffTime);
+            
+            // Calculate consolidation loan details
+            const monthlyRate = consolidationRate / 12;
+            const numberOfPayments = loanTerm * 12;
+            const consolidationPayment = (totalBalance + loanFee) * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments) / 
+                                        (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+            
+            const consolidationTotalInterest = (consolidationPayment * numberOfPayments) - (totalBalance + loanFee);
+            const consolidationPayoffTime = loanTerm;
+            
+            // Calculate savings
+            const monthlySavings = totalMonthlyPayment - consolidationPayment;
+            const interestSavings = currentTotalInterest - consolidationTotalInterest;
+            const timeSavings = currentPayoffTime - consolidationPayoffTime;
+            
+            // Update results
+            document.getElementById('current-monthly').textContent = $${totalMonthlyPayment.toFixed(2)};
+            document.getElementById('consolidated-monthly').textContent = $${consolidationPayment.toFixed(2)};
+            document.getElementById('interest-savings').textContent = $${interestSavings.toFixed(2)};
+            document.getElementById('time-savings').textContent = ${timeSavings.toFixed(1)} years faster;
+            
+            // Update comparison table
+            document.getElementById('current-payment-cell').textContent = $${totalMonthlyPayment.toFixed(2)};
+            document.getElementById('consolidated-payment-cell').textContent = $${consolidationPayment.toFixed(2)};
+            document.getElementById('payment-difference-cell').textContent = -$${Math.abs(monthlySavings).toFixed(2)};
+            
+            document.getElementById('current-interest-cell').textContent = $${currentTotalInterest.toFixed(2)};
+            document.getElementById('consolidated-interest-cell').textContent = $${consolidationTotalInterest.toFixed(2)};
+            document.getElementById('interest-difference-cell').textContent = -$${Math.abs(interestSavings).toFixed(2)};
+            
+            document.getElementById('current-time-cell').textContent = ${currentPayoffTime.toFixed(1)} years;
+            document.getElementById('consolidated-time-cell').textContent = ${consolidationPayoffTime.toFixed(1)} years;
+            document.getElementById('time-difference-cell').textContent = ${timeSavings.toFixed(1)} years faster;
+            
+            const currentTotal = totalBalance + currentTotalInterest;
+            const consolidatedTotal = totalBalance + consolidationTotalInterest + loanFee;
+            const totalSavings = currentTotal - consolidatedTotal;
+            
+            document.getElementById('current-total-cell').textContent = $${currentTotal.toFixed(2)};
+            document.getElementById('consolidated-total-cell').textContent = $${consolidatedTotal.toFixed(2)};
+            document.getElementById('total-difference-cell').textContent = -$${Math.abs(totalSavings).toFixed(2)};
+            
+            // Update insights
+            document.getElementById('monthly-savings-text').textContent = $${Math.abs(monthlySavings).toFixed(2)};
+            document.getElementById('interest-savings-text').textContent = $${Math.abs(interestSavings).toFixed(2)};
+            document.getElementById('time-savings-text').textContent = ${timeSavings.toFixed(1)} years;
+            
+            // Update chart
+            updateComparisonChart(totalBalance, currentTotalInterest, consolidationTotalInterest, loanFee);
+        }
+
+        // Calculate payoff time for current debts (simplified)
+        function calculatePayoffTime(balance, rate, payment) {
+            let remainingBalance = balance;
+            let months = 0;
+            
+            while (remainingBalance > 0 && months < 600) { // Cap at 50 years
+                const interest = remainingBalance * rate / 12;
+                remainingBalance = remainingBalance + interest - payment;
+                months++;
+                
+                if (remainingBalance >= balance * 1.5) {
+                    // Payment is too low, debt is growing
+                    return 600 / 12; // Return max
+                }
+            }
+            
+            return months / 12;
+        }
+
+        // Calculate total interest for current debts
+        function calculateTotalInterest(balance, rate, payment, years) {
+            let remainingBalance = balance;
+            let totalInterest = 0;
+            const months = Math.min(years * 12, 600);
+            
+            for (let i = 0; i < months; i++) {
+                if (remainingBalance <= 0) break;
+                
+                const interest = remainingBalance * rate / 12;
+                totalInterest += interest;
+                remainingBalance = remainingBalance + interest - payment;
+            }
+            
+            return totalInterest;
+        }
+
+        // Update the comparison chart
+        function updateComparisonChart(principal, currentInterest, consolidatedInterest, fee) {
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            
+            if (comparisonChart) {
+                comparisonChart.destroy();
+            }
+            
+            const currentTotal = principal + currentInterest;
+            const consolidatedTotal = principal + consolidatedInterest + fee;
+            
+            comparisonChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Current Plan', 'Debt Consolidation'],
+                    datasets: [
+                        {
+                            label: 'Principal',
+                            data: [principal, principal],
+                            backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                            stack: 'Stack 0'
+                        },
+                        {
+                            label: 'Interest & Fees',
+                            data: [currentInterest, consolidatedInterest + fee],
+                            backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                            stack: 'Stack 0'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Total Cost Comparison'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ${context.dataset.label}: $${context.raw.toFixed(2)};
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amount ($)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Reset the calculator
+        function resetCalculator() {
+            document.getElementById('debts-container').innerHTML = `
+                <div class="debt-item">
+                    <input type="text" placeholder="Debt Name (e.g., Credit Card)" value="Credit Card">
+                    <input type="number" placeholder="Balance" value="5000" min="0">
+                    <input type="number" placeholder="Interest Rate %" value="18.9" min="0" step="0.1">
+                    <input type="number" placeholder="Monthly Payment" value="150" min="0">
+                    <button class="remove-debt" onclick="removeDebt(this)"><i class="fas fa-times"></i></button>
+                </div>
+            `;
+            document.getElementById('consolidation-rate').value = '9.5';
+            document.getElementById('loan-term').value = '5';
+            document.getElementById('loan-fee').value = '250';
+            
+            calculateConsolidation();
+        }
+
+        // Initialize the calculator
+        window.onload = function() {
+            calculateConsolidation();
+        };
+    </script>
+</body>
+</html>
