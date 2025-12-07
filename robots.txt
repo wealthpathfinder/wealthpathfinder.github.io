@@ -1,6 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /private/
-
-Sitemap: https://wealthpathfinder.com/sitemap.xml
+Sitemap: https://wealthpathfinder.github.io/sitemap.xml
