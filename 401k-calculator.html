@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -574,9 +574,9 @@
 
                 <div class="tab-container">
                     <div class="tabs">
-                        <div class="tab active" onclick="switchTab('breakdown')">Value Breakdown</div>
-                        <div class="tab" onclick="switchTab('milestones')">Savings Milestones</div>
-                        <div class="tab" onclick="switchTab('scenarios')">Scenario Comparison</div>
+                        <div class="tab active" onclick="switchTab('breakdown', this)">Value Breakdown</div>
+                        <div class="tab" onclick="switchTab('milestones', this)">Savings Milestones</div>
+                        <div class="tab" onclick="switchTab('scenarios', this)">Scenario Comparison</div>
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="breakdown-tab">
@@ -771,19 +771,21 @@
         });
 
         // Switch between tabs
-        function switchTab(tabName) {
-            // Update tab active states
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Update tab content visibility
-            document.querySelectorAll('.tab-pane').forEach(pane => {
-                pane.classList.remove('active');
-            });
-            document.getElementById(${tabName}-tab).classList.add('active');
-        }
+                function switchTab(tabName, el) {
+                    // Update tab active states
+                    document.querySelectorAll('.tab').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    if (el && el.classList) {
+                        el.classList.add('active');
+                    }
+                    
+                    // Update tab content visibility
+                    document.querySelectorAll('.tab-pane').forEach(pane => {
+                        pane.classList.remove('active');
+                    });
+                    document.getElementById(tabName + '-tab').classList.add('active');
+                }
 
         // Calculate 401k growth
         function calculate401k() {
@@ -853,12 +855,12 @@
             const annualIncome = balance * 0.04;
             
             // Update results
-            document.getElementById('retirement-balance').textContent = $${Math.round(balance).toLocaleString()};
-            document.getElementById('savings-description').textContent = After ${yearsToRetirement} years of contributions;
-            document.getElementById('total-contributions').textContent = $${Math.round(totalContributions).toLocaleString()};
-            document.getElementById('employer-match-total').textContent = $${Math.round(totalEmployerMatch).toLocaleString()};
-            document.getElementById('investment-growth').textContent = $${Math.round(investmentGrowth).toLocaleString()};
-            document.getElementById('annual-income').textContent = $${Math.round(annualIncome).toLocaleString()};
+            document.getElementById('retirement-balance').textContent = '$' + Math.round(balance).toLocaleString();
+            document.getElementById('savings-description').textContent = 'After ' + yearsToRetirement + ' years of contributions';
+            document.getElementById('total-contributions').textContent = '$' + Math.round(totalContributions).toLocaleString();
+            document.getElementById('employer-match-total').textContent = '$' + Math.round(totalEmployerMatch).toLocaleString();
+            document.getElementById('investment-growth').textContent = '$' + Math.round(investmentGrowth).toLocaleString();
+            document.getElementById('annual-income').textContent = '$' + Math.round(annualIncome).toLocaleString();
             
             // Update breakdown table
             const totalValue = balance;
@@ -867,15 +869,15 @@
             const additionalEmployerPercent = (totalAdditionalEmployer / totalValue * 100).toFixed(1);
             const growthPercent = (investmentGrowth / totalValue * 100).toFixed(1);
             
-            document.getElementById('your-contributions-amount').textContent = $${Math.round(totalContributions).toLocaleString()};
-            document.getElementById('your-contributions-percent').textContent = ${yourContributionsPercent}%;
-            document.getElementById('employer-match-amount').textContent = $${Math.round(totalEmployerMatch).toLocaleString()};
-            document.getElementById('employer-match-percent').textContent = ${employerMatchPercent}%;
-            document.getElementById('additional-employer-amount').textContent = $${Math.round(totalAdditionalEmployer).toLocaleString()};
-            document.getElementById('additional-employer-percent').textContent = ${additionalEmployerPercent}%;
-            document.getElementById('growth-amount').textContent = $${Math.round(investmentGrowth).toLocaleString()};
-            document.getElementById('growth-percent').textContent = ${growthPercent}%;
-            document.getElementById('total-value').textContent = $${Math.round(totalValue).toLocaleString()};
+            document.getElementById('your-contributions-amount').textContent = '$' + Math.round(totalContributions).toLocaleString();
+            document.getElementById('your-contributions-percent').textContent = yourContributionsPercent + '%';
+            document.getElementById('employer-match-amount').textContent = '$' + Math.round(totalEmployerMatch).toLocaleString();
+            document.getElementById('employer-match-percent').textContent = employerMatchPercent + '%';
+            document.getElementById('additional-employer-amount').textContent = '$' + Math.round(totalAdditionalEmployer).toLocaleString();
+            document.getElementById('additional-employer-percent').textContent = additionalEmployerPercent + '%';
+            document.getElementById('growth-amount').textContent = '$' + Math.round(investmentGrowth).toLocaleString();
+            document.getElementById('growth-percent').textContent = growthPercent + '%';
+            document.getElementById('total-value').textContent = '$' + Math.round(totalValue).toLocaleString();
             
             // Update match explainer text
             updateMatchExplainer(contributionRate, employerMatchRate);
@@ -898,17 +900,17 @@
                 const fullMatchRate = matchLimit * (matchPercent / 100);
                 
                 if (contributionRate * 100 >= matchLimit) {
-                    explainer.textContent = Your employer matches ${matchPercent}% of your contributions up to ${matchLimit}% of your salary. Since you're contributing ${(contributionRate * 100).toFixed(1)}%, you're getting the full employer match of ${fullMatchRate.toFixed(1)}% of your salary. Great job maximizing your employer's contribution!;
+                    explainer.textContent = `Your employer matches ${matchPercent}% of your contributions up to ${matchLimit}% of your salary. Since you're contributing ${(contributionRate * 100).toFixed(1)}%, you're getting the full employer match of ${fullMatchRate.toFixed(1)}% of your salary. Great job maximizing your employer's contribution!`;
                 } else {
-                    explainer.textContent = Your employer matches ${matchPercent}% of your contributions up to ${matchLimit}% of your salary. You're currently contributing ${(contributionRate * 100).toFixed(1)}%, so you're getting ${(employerMatchRate * 100).toFixed(1)}% in employer match. To get the full match of ${fullMatchRate.toFixed(1)}%, increase your contribution to ${matchLimit}%.;
+                    explainer.textContent = `Your employer matches ${matchPercent}% of your contributions up to ${matchLimit}% of your salary. You're currently contributing ${(contributionRate * 100).toFixed(1)}%, so you're getting ${(employerMatchRate * 100).toFixed(1)}% in employer match. To get the full match of ${fullMatchRate.toFixed(1)}%, increase your contribution to ${matchLimit}%.`;
                 }
             } else {
                 if (contributionRate >= 0.05) {
                     explainer.textContent = "With your current contribution rate, you're getting the maximum employer match: 100% on the first 3% of your salary and 50% on the next 2%. Excellent job maximizing your employer's contribution!";
                 } else if (contributionRate >= 0.03) {
-                    explainer.textContent = You're currently getting 100% match on the first 3% of your salary and 50% on the next ${((contributionRate - 0.03) * 100).toFixed(1)}%. To get the full employer match, increase your contribution to 5% of your salary.;
+                    explainer.textContent = `You're currently getting 100% match on the first 3% of your salary and 50% on the next ${((contributionRate - 0.03) * 100).toFixed(1)}%. To get the full employer match, increase your contribution to 5% of your salary.`;
                 } else {
-                    explainer.textContent = You're currently getting 100% match on the first ${(contributionRate * 100).toFixed(1)}% of your salary. To maximize your employer match, increase your contribution to at least 5% of your salary.;
+                    explainer.textContent = `You're currently getting 100% match on the first ${(contributionRate * 100).toFixed(1)}% of your salary. To maximize your employer match, increase your contribution to at least 5% of your salary.`;
                 }
             }
         }
@@ -923,7 +925,7 @@
                     let balance = currentBalance;
                     let currentSalaryValue = annualSalary;
                     
-                    for (let year = 1; year <= years; year++) {
+            for (let year = 1; year <= years; year++) {
                         const employeeContribution = currentSalaryValue * contributionRate;
                         const matchContribution = currentSalaryValue * employerMatchRate;
                         const additionalEmployerContribution = currentSalaryValue * additionalEmployer;
@@ -933,11 +935,11 @@
                         currentSalaryValue *= (1 + salaryIncrease);
                     }
                     
-                    document.getElementById(milestone-${age}).textContent = $${Math.round(balance).toLocaleString()};
+                    document.getElementById('milestone-' + age).textContent = '$' + Math.round(balance).toLocaleString();
                 } else if (age <= currentAge) {
-                    document.getElementById(milestone-${age}).textContent = 'Already passed';
+                    document.getElementById('milestone-' + age).textContent = 'Already passed';
                 } else {
-                    document.getElementById(milestone-${age}).textContent = 'Beyond retirement';
+                    document.getElementById('milestone-' + age).textContent = 'Beyond retirement';
                 }
             });
         }
@@ -945,7 +947,7 @@
         // Compare different contribution scenarios
         function compareScenarios() {
             const compareRate = parseFloat(document.getElementById('compare-contribution').value) / 100;
-            document.getElementById('compare-rate-display').textContent = ${(compareRate * 100).toFixed(1)}% (Alternative);
+            document.getElementById('compare-rate-display').textContent = (compareRate * 100).toFixed(1) + '% (Alternative)';
             
             // Get input values
             const currentAge = parseInt(document.getElementById('current-age').value);
@@ -995,9 +997,9 @@
             const currentBalanceValue = parseFloat(currentBalanceElement.textContent.replace(/[$,]/g, ''));
             
             // Update comparison table
-            document.getElementById('compare-scenario-value').textContent = $${Math.round(compareBalance).toLocaleString()};
+            document.getElementById('compare-scenario-value').textContent = '$' + Math.round(compareBalance).toLocaleString();
             const difference = compareBalance - currentBalanceValue;
-            document.getElementById('scenario-difference').textContent = +$${Math.round(difference).toLocaleString()};
+            document.getElementById('scenario-difference').textContent = (difference >= 0 ? '+$' : '-$') + Math.round(Math.abs(difference)).toLocaleString();
             
             // Update scenario chart
             updateScenarioChart(currentAge, retirementAge, currentBalance, annualSalary, compareRate, compareEmployerMatchRate, additionalEmployer, salaryIncrease, investmentReturn);
@@ -1023,7 +1025,7 @@
             let currentSalaryValue = annualSalary;
             
             for (let age = currentAge; age <= retirementAge; age++) {
-                labels.push(Age ${age});
+                labels.push('Age ' + age);
                 balanceData.push(balance);
                 contributionsData.push(totalContributions);
                 employerData.push(totalEmployer);
@@ -1128,7 +1130,7 @@
                             callbacks: {
                                 label: function(context) {
                                     const percentage = ((context.raw / total) * 100).toFixed(1);
-                                    return ${context.label}: $${context.raw.toLocaleString()} (${percentage}%);
+                                    return `${context.label}: $${context.raw.toLocaleString()} (${percentage}%)`;
                                 }
                             }
                         }
@@ -1172,7 +1174,7 @@
             let currentSalaryValue = annualSalary;
             
             for (let age = currentAge; age <= retirementAge; age++) {
-                labels.push(Age ${age});
+                labels.push('Age ' + age);
                 currentData.push(currentBalanceValue);
                 compareData.push(compareBalanceValue);
                 
@@ -1204,7 +1206,7 @@
                     labels: labels,
                     datasets: [
                         {
-                            label: ${(currentRate * 100).toFixed(1)}% Contribution,
+                            label: (currentRate * 100).toFixed(1) + '% Contribution',
                             data: currentData,
                             borderColor: '#0c2461',
                             backgroundColor: 'rgba(12, 36, 97, 0.1)',
@@ -1212,7 +1214,7 @@
                             tension: 0.4
                         },
                         {
-                            label: ${(compareRate * 100).toFixed(1)}% Contribution,
+                            label: (compareRate * 100).toFixed(1) + '% Contribution',
                             data: compareData,
                             borderColor: '#2ecc71',
                             backgroundColor: 'rgba(46, 204, 113, 0.1)',

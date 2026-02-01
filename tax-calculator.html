@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -460,7 +460,7 @@
                     <label for="tax-year">Tax Year</label>
                     <select id="tax-year">
                         <option value="2023">2023</option>
-                        <option value="2024" selected>2024</option>
+                        <option value="2025" selected>2025</option>
                     </select>
                 </div>
 
@@ -601,7 +601,7 @@
                 <div class="tax-summary">
                     <h3>Estimated Tax Liability</h3>
                     <div class="tax-amount" id="tax-liability">$9,500</div>
-                    <div class="tax-description" id="tax-description">Based on 2024 tax brackets</div>
+                    <div class="tax-description" id="tax-description">Based on 2025 tax brackets</div>
                 </div>
 
                 <div id="refund-alert" class="refund-alert" style="display: none;">
@@ -753,7 +753,7 @@
         let taxBreakdownChart, bracketChart, withholdingChart, comparisonChart;
         let deductionMethod = 'standard';
 
-        // Tax brackets for 2024 (example rates - update with actual IRS data)
+        // Tax brackets for 2025 (example rates - update with actual IRS data)
         const taxBrackets = {
             single: [
                 { min: 0, max: 11600, rate: 0.10 },
@@ -793,7 +793,7 @@
             ]
         };
 
-        // Standard deductions for 2024
+        // Standard deductions for 2025
         const standardDeductions = {
             single: 14600,
             married_joint: 29200,
@@ -829,13 +829,15 @@
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            event.target.classList.add('active');
+            // Find the tab element that triggered the change (match onclick attribute) and mark active
+            const activeTab = document.querySelector('.tab[onclick*="' + tabName + '"]');
+            if (activeTab) activeTab.classList.add('active');
             
             // Update tab content visibility
             document.querySelectorAll('.tab-pane').forEach(pane => {
                 pane.classList.remove('active');
             });
-            document.getElementById(${tabName}-tab).classList.add('active');
+            document.getElementById(tabName + '-tab').classList.add('active');
         }
 
         // Calculate tax liability
@@ -930,12 +932,12 @@
             const refundOrDue = withholding - tax;
 
             // Update results
-            document.getElementById('tax-liability').textContent = $${Math.round(tax).toLocaleString()};
-            document.getElementById('tax-description').textContent = Based on ${document.getElementById('tax-year').value} tax brackets;
-            document.getElementById('effective-rate').textContent = ${effectiveRate.toFixed(1)}%;
-            document.getElementById('marginal-rate').textContent = ${(marginalRate * 100).toFixed(0)}%;
-            document.getElementById('taxable-income').textContent = $${Math.round(taxableIncome).toLocaleString()};
-            document.getElementById('after-tax-income').textContent = $${Math.round(afterTaxIncome).toLocaleString()};
+            document.getElementById('tax-liability').textContent = `$${Math.round(tax).toLocaleString()}`;
+            document.getElementById('tax-description').textContent = `Based on ${document.getElementById('tax-year').value} tax brackets`;
+            document.getElementById('effective-rate').textContent = `${effectiveRate.toFixed(1)}%`;
+            document.getElementById('marginal-rate').textContent = `${(marginalRate * 100).toFixed(0)}%`;
+            document.getElementById('taxable-income').textContent = `$${Math.round(taxableIncome).toLocaleString()}`;
+            document.getElementById('after-tax-income').textContent = `$${Math.round(afterTaxIncome).toLocaleString()}`;
 
             // Update refund/payment alerts
             const refundAlert = document.getElementById('refund-alert');
@@ -944,22 +946,22 @@
             if (refundOrDue > 0) {
                 refundAlert.style.display = 'block';
                 paymentAlert.style.display = 'none';
-                document.getElementById('refund-amount').textContent = $${Math.round(refundOrDue).toLocaleString()};
+                document.getElementById('refund-amount').textContent = `$${Math.round(refundOrDue).toLocaleString()}`;
             } else if (refundOrDue < 0) {
                 refundAlert.style.display = 'none';
                 paymentAlert.style.display = 'block';
-                document.getElementById('payment-amount').textContent = $${Math.round(-refundOrDue).toLocaleString()};
+                document.getElementById('payment-amount').textContent = `$${Math.round(-refundOrDue).toLocaleString()}`;
             } else {
                 refundAlert.style.display = 'none';
                 paymentAlert.style.display = 'none';
             }
 
             // Update withholding analysis
-            document.getElementById('total-tax-liability').textContent = $${Math.round(tax).toLocaleString()};
-            document.getElementById('withholding-amount').textContent = $${Math.round(withholding).toLocaleString()};
-            document.getElementById('withholding-percent').textContent = ${((withholding / tax) * 100).toFixed(1)}%;
-            document.getElementById('refund-total').textContent = $${Math.round(Math.max(0, refundOrDue)).toLocaleString()};
-            document.getElementById('refund-percent').textContent = ${((Math.max(0, refundOrDue) / tax) * 100).toFixed(1)}%;
+            document.getElementById('total-tax-liability').textContent = `$${Math.round(tax).toLocaleString()}`;
+            document.getElementById('withholding-amount').textContent = `$${Math.round(withholding).toLocaleString()}`;
+            document.getElementById('withholding-percent').textContent = `${((withholding / (tax || 1)) * 100).toFixed(1)}%`;
+            document.getElementById('refund-total').textContent = `$${Math.round(Math.max(0, refundOrDue)).toLocaleString()}`;
+            document.getElementById('refund-percent').textContent = `${((Math.max(0, refundOrDue) / (tax || 1)) * 100).toFixed(1)}%`;
 
             // Update charts
             updateTaxBreakdownChart(wages, interestIncome, dividendIncome, businessIncome, capitalGains, otherIncome, tax, deductions, totalCredits);
@@ -974,7 +976,7 @@
             
             // Get current tax liability
             const currentTaxElement = document.getElementById('tax-liability');
-            const currentTax = parseFloat(currentTaxElement.textContent.replace(/[$,]/g, ''));
+            const currentTax = parseFloat(currentTaxElement.textContent.replace(/[$,]/g, '')) || 0;
             
             // Calculate tax for comparison status
             const wages = parseFloat(document.getElementById('wages').value) || 0;
@@ -1010,11 +1012,11 @@
             
             // Update comparison table
             document.getElementById('current-status').textContent = formatFilingStatus(currentStatus);
-            document.getElementById('current-tax').textContent = $${Math.round(currentTax).toLocaleString()};
+            document.getElementById('current-tax').textContent = `$${Math.round(currentTax).toLocaleString()}`;
             document.getElementById('compare-status-display').textContent = formatFilingStatus(compareStatus);
-            document.getElementById('compare-tax').textContent = $${Math.round(compareTax).toLocaleString()};
+            document.getElementById('compare-tax').textContent = `$${Math.round(compareTax).toLocaleString()}`;
             const difference = compareTax - currentTax;
-            document.getElementById('tax-difference').textContent = ${difference >= 0 ? '+' : ''}$${Math.round(difference).toLocaleString()};
+            document.getElementById('tax-difference').textContent = (difference >= 0 ? '+' : '') + `$${Math.round(difference).toLocaleString()}`;
             
             // Update comparison chart
             updateComparisonChart(currentStatus, compareStatus, currentTax, compareTax);
@@ -1070,7 +1072,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return ${context.label}: $${context.raw.toLocaleString()};
+                                    return `${context.label}: $${context.raw.toLocaleString()}`;
                                 }
                             }
                         }
@@ -1102,7 +1104,7 @@
                 const incomeInBracket = Math.min(remainingIncome, bracketWidth);
                 
                 bracketData.push(incomeInBracket);
-                bracketLabels.push(${(bracket.rate * 100).toFixed(0)}% Bracket);
+                bracketLabels.push(`${(bracket.rate * 100).toFixed(0)}% Bracket`);
                 bracketColors.push(getBracketColor(bracket.rate));
                 
                 remainingIncome -= incomeInBracket;
@@ -1211,7 +1213,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return ${context.label}: $${context.raw.toLocaleString()};
+                                    return `${context.label}: $${context.raw.toLocaleString()}`;
                                 }
                             }
                         }
@@ -1263,7 +1265,7 @@
         // Reset the calculator
         function resetCalculator() {
             document.getElementById('filing-status').value = 'single';
-            document.getElementById('tax-year').value = '2024';
+            document.getElementById('tax-year').value = '2025';
             document.getElementById('age').value = '35';
             document.getElementById('wages').value = '75000';
             document.getElementById('interest-income').value = '500';

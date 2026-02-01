@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -787,9 +787,9 @@
         // Update progress bar and text
         function updateProgress() {
             const progress = ((currentQuestion + 1) / questions.length) * 100;
-            document.getElementById('progress-fill').style.width = ${progress}%;
+            document.getElementById('progress-fill').style.width = progress + '%';
             document.getElementById('current-question').textContent = currentQuestion + 1;
-            document.getElementById('progress-percent').textContent = ${Math.round(progress)}%;
+            document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
         }
 
         // Calculate risk score and profile
@@ -838,7 +838,7 @@
             // Update results display
             document.getElementById('risk-level').textContent = riskLevel;
             document.getElementById('risk-description').textContent = riskDescription;
-            document.getElementById('risk-score').textContent = ${totalScore}/100;
+            document.getElementById('risk-score').textContent = totalScore + '/100';
             document.getElementById('portfolio-type').textContent = portfolioType;
             document.getElementById('expected-return').textContent = expectedReturn;
             document.getElementById('max-drawdown').textContent = maxDrawdown;
@@ -961,7 +961,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return ${context.label}: ${context.raw}%;
+                                    return context.label + ': ' + context.raw + '%';
                                 }
                             }
                         }

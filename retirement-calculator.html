@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -594,9 +594,9 @@
 
                 <div class="tab-container">
                     <div class="tabs">
-                        <div class="tab active" onclick="switchTab('withdrawal')">Withdrawal Strategy</div>
-                        <div class="tab" onclick="switchTab('milestones')">Savings Milestones</div>
-                        <div class="tab" onclick="switchTab('adjustments')">Adjustment Options</div>
+                        <div class="tab active" onclick="switchTab('withdrawal', event)">Withdrawal Strategy</div>
+                        <div class="tab" onclick="switchTab('milestones', event)">Savings Milestones</div>
+                        <div class="tab" onclick="switchTab('adjustments', event)">Adjustment Options</div>
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="withdrawal-tab">
@@ -717,7 +717,7 @@
         });
 
         // Switch between tabs
-        function switchTab(tabName) {
+        function switchTab(tabName, event) {
             // Update tab active states
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
@@ -728,7 +728,7 @@
             document.querySelectorAll('.tab-pane').forEach(pane => {
                 pane.classList.remove('active');
             });
-            document.getElementById(${tabName}-tab).classList.add('active');
+            document.getElementById(tabName + '-tab').classList.add('active');
         }
 
         // Calculate retirement plan
@@ -778,16 +778,16 @@
             const totalRetirementIncome = incomeFromSavings + socialSecurity + pension;
 
             // Update results
-            document.getElementById('retirement-savings').textContent = $${Math.round(retirementSavings).toLocaleString()};
-            document.getElementById('annual-income').textContent = $${Math.round(totalRetirementIncome).toLocaleString()};
+            document.getElementById('retirement-savings').textContent = '$' + Math.round(retirementSavings).toLocaleString();
+            document.getElementById('annual-income').textContent = '$' + Math.round(totalRetirementIncome).toLocaleString();
             document.getElementById('retirement-years').textContent = retirementYears;
-            document.getElementById('savings-gap').textContent = $${Math.round(savingsGap).toLocaleString()};
+            document.getElementById('savings-gap').textContent = '$' + Math.round(savingsGap).toLocaleString();
 
             // Update income sources
-            document.getElementById('investment-income').textContent = $${Math.round(incomeFromSavings).toLocaleString()};
-            document.getElementById('social-security-income').textContent = $${Math.round(socialSecurity).toLocaleString()};
-            document.getElementById('pension-income').textContent = $${Math.round(pension).toLocaleString()};
-            document.getElementById('total-retirement-income').textContent = $${Math.round(totalRetirementIncome).toLocaleString()};
+            document.getElementById('investment-income').textContent = '$' + Math.round(incomeFromSavings).toLocaleString();
+            document.getElementById('social-security-income').textContent = '$' + Math.round(socialSecurity).toLocaleString();
+            document.getElementById('pension-income').textContent = '$' + Math.round(pension).toLocaleString();
+            document.getElementById('total-retirement-income').textContent = '$' + Math.round(totalRetirementIncome).toLocaleString();
 
             // Update retirement readiness
             const shortfallAlert = document.getElementById('shortfall-alert');
@@ -799,7 +799,7 @@
                 // On track
                 shortfallAlert.style.display = 'none';
                 successAlert.style.display = 'block';
-                retirementStatus.textContent = You're on track to retire at ${retirementAge};
+                retirementStatus.textContent = "You're on track to retire at " + retirementAge;
                 retirementStatus.className = 'retirement-status on-track';
                 retirementReadiness.textContent = 'On Track';
             } else {
@@ -807,8 +807,7 @@
                 shortfallAlert.style.display = 'block';
                 successAlert.style.display = 'none';
                 const additionalSavings = Math.abs(savingsGap);
-                document.getElementById('shortfall-message').textContent = 
-                    You have a shortfall of $${Math.round(additionalSavings).toLocaleString()}. Consider increasing contributions or delaying retirement.;
+                document.getElementById('shortfall-message').textContent = 'You have a shortfall of $' + Math.round(additionalSavings).toLocaleString() + '. Consider increasing contributions or delaying retirement.';
                 
                 if (savingsGap > -requiredSavings * 0.1) {
                     retirementStatus.textContent = 'Slight shortfall - minor adjustments needed';
@@ -843,11 +842,11 @@
                         savings += annualContribution * Math.pow(1 + returnRate, years - i);
                     }
                     
-                    document.getElementById(milestone-${age}).textContent = $${Math.round(savings).toLocaleString()};
+                    document.getElementById('milestone-' + age).textContent = '$' + Math.round(savings).toLocaleString();
                 } else if (age <= currentAge) {
-                    document.getElementById(milestone-${age}).textContent = 'Already passed';
+                    document.getElementById('milestone-' + age).textContent = 'Already passed';
                 } else {
-                    document.getElementById(milestone-${age}).textContent = 'Beyond retirement';
+                    document.getElementById('milestone-' + age).textContent = 'Beyond retirement';
                 }
             });
         }
@@ -868,7 +867,7 @@
             let savings = currentSavings;
             
             for (let age = currentAge; age <= retirementAge; age++) {
-                labels.push(Age ${age});
+                labels.push('Age ' + age);
                 savingsData.push(savings);
                 contributionData.push(annualContribution * (age - currentAge));
                 
@@ -937,7 +936,7 @@
             let withdrawalAmount = retirementSavings * withdrawalRate;
             
             for (let age = retirementAge; age <= lifeExpectancy; age++) {
-                labels.push(Age ${age});
+                labels.push('Age ' + age);
                 portfolioData.push(portfolio);
                 withdrawalData.push(withdrawalAmount);
                 

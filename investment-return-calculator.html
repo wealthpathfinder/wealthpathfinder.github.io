@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -501,9 +501,9 @@
 
                 <div class="tab-container">
                     <div class="tabs">
-                        <div class="tab active" onclick="switchTab('breakdown')">Value Breakdown</div>
-                        <div class="tab" onclick="switchTab('milestones')">Milestones</div>
-                        <div class="tab" onclick="switchTab('scenarios')">Scenario Comparison</div>
+                        <div class="tab active" onclick="switchTab(event, 'breakdown')">Value Breakdown</div>
+                        <div class="tab" onclick="switchTab(event, 'milestones')">Milestones</div>
+                        <div class="tab" onclick="switchTab(event, 'scenarios')">Scenario Comparison</div>
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="breakdown-tab">
@@ -663,7 +663,7 @@
         });
 
         // Switch between tabs
-        function switchTab(tabName) {
+        function switchTab(event, tabName) {
             // Update tab active states
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
@@ -674,18 +674,18 @@
             document.querySelectorAll('.tab-pane').forEach(pane => {
                 pane.classList.remove('active');
             });
-            document.getElementById(${tabName}-tab).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
         }
 
         // Calculate investment growth
         function calculateInvestment() {
             // Get input values
-            const initialInvestment = parseFloat(document.getElementById('initial-investment').value);
-            const monthlyContribution = parseFloat(document.getElementById('monthly-contribution').value);
-            const investmentPeriod = parseInt(document.getElementById('investment-period').value);
-            const expectedReturn = parseFloat(document.getElementById('expected-return').value) / 100;
-            const inflationRate = parseFloat(document.getElementById('inflation-rate').value) / 100;
-            const taxRate = parseFloat(document.getElementById('tax-rate').value) / 100;
+            const initialInvestment = parseFloat(document.getElementById('initial-investment').value) || 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthly-contribution').value) || 0;
+            const investmentPeriod = parseInt(document.getElementById('investment-period').value) || 0;
+            const expectedReturn = parseFloat(document.getElementById('expected-return').value) / 100 || 0;
+            const inflationRate = parseFloat(document.getElementById('inflation-rate').value) / 100 || 0;
+            const taxRate = parseFloat(document.getElementById('tax-rate').value) / 100 || 0;
             const compounding = document.getElementById('compounding-frequency').value;
             
             // Determine compounding periods per year
@@ -721,25 +721,25 @@
             const inflationAdjustedValue = futureValue / Math.pow(1 + inflationRate, investmentPeriod);
             
             // Update results
-            document.getElementById('future-value').textContent = $${Math.round(futureValue).toLocaleString()};
-            document.getElementById('growth-amount').textContent = $${Math.round(totalInterest).toLocaleString()} total growth;
-            document.getElementById('total-contributions').textContent = $${Math.round(totalContributions).toLocaleString()};
-            document.getElementById('total-interest').textContent = $${Math.round(totalInterest).toLocaleString()};
-            document.getElementById('after-tax-value').textContent = $${Math.round(afterTaxValue).toLocaleString()};
-            document.getElementById('inflation-adjusted').textContent = $${Math.round(inflationAdjustedValue).toLocaleString()};
+            document.getElementById('future-value').textContent = `${Math.round(futureValue).toLocaleString()}`;
+            document.getElementById('growth-amount').textContent = `${Math.round(totalInterest).toLocaleString()} total growth`;
+            document.getElementById('total-contributions').textContent = `${Math.round(totalContributions).toLocaleString()}`;
+            document.getElementById('total-interest').textContent = `${Math.round(totalInterest).toLocaleString()}`;
+            document.getElementById('after-tax-value').textContent = `${Math.round(afterTaxValue).toLocaleString()}`;
+            document.getElementById('inflation-adjusted').textContent = `${Math.round(inflationAdjustedValue).toLocaleString()}`;
             
             // Update breakdown table
             const initialPercent = (initialInvestment / futureValue * 100).toFixed(1);
             const contributionsPercent = ((monthlyContribution * investmentPeriod * 12) / futureValue * 100).toFixed(1);
             const growthPercent = (totalInterest / futureValue * 100).toFixed(1);
             
-            document.getElementById('initial-amount').textContent = $${Math.round(initialInvestment).toLocaleString()};
-            document.getElementById('initial-percent').textContent = ${initialPercent}%;
-            document.getElementById('contributions-amount').textContent = $${Math.round(monthlyContribution * investmentPeriod * 12).toLocaleString()};
-            document.getElementById('contributions-percent').textContent = ${contributionsPercent}%;
-            document.getElementById('growth-amount-cell').textContent = $${Math.round(totalInterest).toLocaleString()};
-            document.getElementById('growth-percent').textContent = ${growthPercent}%;
-            document.getElementById('total-value-cell').textContent = $${Math.round(futureValue).toLocaleString()};
+            document.getElementById('initial-amount').textContent = `${Math.round(initialInvestment).toLocaleString()}`;
+            document.getElementById('initial-percent').textContent = `${initialPercent}%`;
+            document.getElementById('contributions-amount').textContent = `${Math.round(monthlyContribution * investmentPeriod * 12).toLocaleString()}`;
+            document.getElementById('contributions-percent').textContent = `${contributionsPercent}%`;
+            document.getElementById('growth-amount-cell').textContent = `${Math.round(totalInterest).toLocaleString()}`;
+            document.getElementById('growth-percent').textContent = `${growthPercent}%`;
+            document.getElementById('total-value-cell').textContent = `${Math.round(futureValue).toLocaleString()}`;
             
             // Update milestones
             updateMilestones(initialInvestment, monthlyContribution, expectedReturn, investmentPeriod);
@@ -762,9 +762,9 @@
                         value += monthly * (Math.pow(1 + monthlyRate, years * 12) - 1) / monthlyRate;
                     }
                     
-                    document.getElementById(milestone-${years}).textContent = $${Math.round(value).toLocaleString()};
+                    document.getElementById(`milestone-${years}`).textContent = `${Math.round(value).toLocaleString()}`;
                 } else {
-                    document.getElementById(milestone-${years}).textContent = 'N/A';
+                    document.getElementById(`milestone-${years}`).textContent = 'N/A';
                 }
             });
         }
@@ -797,15 +797,15 @@
             }
             
             // Update comparison table
-            document.getElementById('conservative-value').textContent = $${Math.round(conservativeValue).toLocaleString()};
-            document.getElementById('moderate-value').textContent = $${Math.round(baseValue).toLocaleString()};
-            document.getElementById('aggressive-value').textContent = $${Math.round(aggressiveValue).toLocaleString()};
+            document.getElementById('conservative-value').textContent = `${Math.round(conservativeValue).toLocaleString()}`;
+            document.getElementById('moderate-value').textContent = `${Math.round(baseValue).toLocaleString()}`;
+            document.getElementById('aggressive-value').textContent = `${Math.round(aggressiveValue).toLocaleString()}`;
             
             const conservativeDiff = conservativeValue - baseValue;
             const aggressiveDiff = aggressiveValue - baseValue;
             
-            document.getElementById('conservative-diff').textContent = $${Math.round(conservativeDiff).toLocaleString()};
-            document.getElementById('aggressive-diff').textContent = +$${Math.round(aggressiveDiff).toLocaleString()};
+            document.getElementById('conservative-diff').textContent = `${Math.round(conservativeDiff).toLocaleString()}`;
+            document.getElementById('aggressive-diff').textContent = `+${Math.round(aggressiveDiff).toLocaleString()}`;
             
             // Update scenario chart
             updateScenarioChart(initialInvestment, monthlyContribution, investmentPeriod, conservativeReturn, baseReturn, aggressiveReturn);
@@ -829,7 +829,7 @@
             const monthlyRate = rate / 12;
             
             for (let year = 0; year <= years; year++) {
-                labels.push(Year ${year});
+                labels.push(`Year ${year}`);
                 
                 if (year === 0) {
                     contributionData.push(initial);
@@ -937,7 +937,7 @@
                                 label: function(context) {
                                     const total = initial + contributions + interest;
                                     const percentage = ((context.raw / total) * 100).toFixed(1);
-                                    return $${context.raw.toLocaleString()} (${percentage}%);
+                                    return `${context.raw.toLocaleString()} (${percentage}%)`;
                                 }
                             }
                         }
@@ -961,7 +961,7 @@
             const aggressiveData = [];
             
             for (let year = 0; year <= years; year += 5) {
-                labels.push(Year ${year});
+                labels.push(`Year ${year}`);
                 
                 if (year === 0) {
                     conservativeData.push(initial);
@@ -984,17 +984,17 @@
                     labels: labels,
                     datasets: [
                         {
-                            label: ${(conservative * 100).toFixed(1)}% Return,
+                            label: `${(conservative * 100).toFixed(1)}% Return`,
                             data: conservativeData,
                             backgroundColor: 'rgba(231, 76, 60, 0.8)'
                         },
                         {
-                            label: ${(moderate * 100).toFixed(1)}% Return,
+                            label: `${(moderate * 100).toFixed(1)}% Return`,
                             data: moderateData,
                             backgroundColor: 'rgba(52, 152, 219, 0.8)'
                         },
                         {
-                            label: ${(aggressive * 100).toFixed(1)}% Return,
+                            label: `${(aggressive * 100).toFixed(1)}% Return`,
                             data: aggressiveData,
                             backgroundColor: 'rgba(46, 204, 113, 0.8)'
                         }
@@ -1055,10 +1055,10 @@
         }
 
         // Initialize the calculator
-        window.onload = function() {
+        document.addEventListener('DOMContentLoaded', function() {
             calculateInvestment();
             compareScenarios();
-        };
+        });
     </script>
 </body>
 </html>

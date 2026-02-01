@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -587,7 +587,7 @@
                         </div>
                         <div class="idea-content">
                             <h4>Freelance Programming</h4>
-                            <p>Average rate: $50-150/hr • Build websites, apps, or software</p>
+                            <p>Average rate: $50-150/hr â€¢ Build websites, apps, or software</p>
                         </div>
                     </div>
                     <div class="idea-card">
@@ -596,7 +596,7 @@
                         </div>
                         <div class="idea-content">
                             <h4>Content Writing</h4>
-                            <p>Average rate: $25-100/hr • Blog posts, articles, copywriting</p>
+                            <p>Average rate: $25-100/hr â€¢ Blog posts, articles, copywriting</p>
                         </div>
                     </div>
                     <div class="idea-card">
@@ -605,7 +605,7 @@
                         </div>
                         <div class="idea-content">
                             <h4>Online Tutoring</h4>
-                            <p>Average rate: $20-60/hr • Teach subjects you're skilled in</p>
+                            <p>Average rate: $20-60/hr â€¢ Teach subjects you're skilled in</p>
                         </div>
                     </div>
                 </div>
@@ -856,84 +856,94 @@
         });
 
         // Switch between tabs
-        function switchTab(tabName) {
+        function switchTab(tabName, el) {
             // Update tab active states
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            event.target.classList.add('active');
+            if (el && el.classList) {
+                el.classList.add('active');
+            } else {
+                // fallback: find the tab element by its onclick attribute if `this` wasn't passed
+                const selector = ".tab[onclick=\"switchTab('" + tabName + "')\"]";
+                const tabEl = document.querySelector(selector);
+                if (tabEl) tabEl.classList.add('active');
+            }
             
             // Update tab content visibility
             document.querySelectorAll('.tab-pane').forEach(pane => {
                 pane.classList.remove('active');
             });
-            document.getElementById(${tabName}-tab).classList.add('active');
+            const paneId = tabName + '-tab';
+            const paneEl = document.getElementById(paneId);
+            if (paneEl) paneEl.classList.add('active');
         }
 
         // Calculate side hustle income
-        function calculateHustle() {
-            // Get input values
-            const hourlyRate = parseFloat(document.getElementById('hourly-rate').value);
-            const hoursPerWeek = parseFloat(document.getElementById('hours-week').value);
-            const weeksPerYear = parseFloat(document.getElementById('weeks-year').value);
-            const expenseRate = parseFloat(document.getElementById('expense-rate').value) / 100;
-            const taxRate = parseFloat(document.getElementById('tax-rate').value) / 100;
-            const incomeGoal = parseFloat(document.getElementById('income-goal').value);
-
-            // Calculate gross income
-            const grossAnnual = hourlyRate * hoursPerWeek * weeksPerYear;
-
-            // Calculate expenses
-            const annualExpenses = grossAnnual * expenseRate;
-
-            // Calculate income after expenses
-            const incomeAfterExpenses = grossAnnual - annualExpenses;
-
-            // Calculate taxes
-            const annualTaxes = incomeAfterExpenses * taxRate;
-
-            // Calculate net income
-            const netAnnual = incomeAfterExpenses - annualTaxes;
-
-            // Calculate monthly income
-            const monthlyIncome = netAnnual / 12;
-
-            // Update results
-            document.getElementById('annual-income').textContent = $${Math.round(netAnnual).toLocaleString()};
-            document.getElementById('income-description').textContent = After expenses and taxes;
-            document.getElementById('gross-income').textContent = $${Math.round(grossAnnual).toLocaleString()};
-            document.getElementById('after-expenses').textContent = $${Math.round(incomeAfterExpenses).toLocaleString()};
-            document.getElementById('after-taxes').textContent = $${Math.round(netAnnual).toLocaleString()};
-            document.getElementById('monthly-income').textContent = $${Math.round(monthlyIncome).toLocaleString()};
-
-            // Update tax setaside amount
-            document.getElementById('tax-setaside').textContent = $${Math.round(annualTaxes).toLocaleString()};
-
-            // Update goal alert
-            const goalAlert = document.getElementById('goal-alert');
-            if (monthlyIncome >= incomeGoal) {
-                goalAlert.style.display = 'block';
-                document.getElementById('goal-amount').textContent = $${Math.round(incomeGoal).toLocaleString()};
-            } else {
-                goalAlert.style.display = 'none';
-            }
-
-            // Update breakdown table
-            document.getElementById('gross-income-amount').textContent = $${Math.round(grossAnnual).toLocaleString()};
-            document.getElementById('gross-income-percent').textContent = '100%';
-            document.getElementById('expenses-amount').textContent = $${Math.round(annualExpenses).toLocaleString()};
-            document.getElementById('expenses-percent').textContent = ${(expenseRate * 100).toFixed(0)}%;
-            document.getElementById('taxes-amount').textContent = $${Math.round(annualTaxes).toLocaleString()};
-            document.getElementById('taxes-percent').textContent = ${((annualTaxes / grossAnnual) * 100).toFixed(1)}%;
-            document.getElementById('net-income-amount').textContent = $${Math.round(netAnnual).toLocaleString()};
-
-            // Update milestones
-            updateMilestones(netAnnual);
-
-            // Update charts
-            updateIncomeBreakdownChart(grossAnnual, annualExpenses, annualTaxes, netAnnual);
-            updateBreakdownChart(grossAnnual, annualExpenses, annualTaxes, netAnnual);
-        }
+                function calculateHustle() {
+                    // Get input values
+                    const hourlyRate = parseFloat(document.getElementById('hourly-rate').value);
+                    const hoursPerWeek = parseFloat(document.getElementById('hours-week').value);
+                    const weeksPerYear = parseFloat(document.getElementById('weeks-year').value);
+                    const expenseRate = parseFloat(document.getElementById('expense-rate').value) / 100;
+                    const taxRate = parseFloat(document.getElementById('tax-rate').value) / 100;
+                    const incomeGoal = parseFloat(document.getElementById('income-goal').value);
+        
+                    // Calculate gross income
+                    const grossAnnual = hourlyRate * hoursPerWeek * weeksPerYear;
+        
+                    // Calculate expenses
+                    const annualExpenses = grossAnnual * expenseRate;
+        
+                    // Calculate income after expenses
+                    const incomeAfterExpenses = grossAnnual - annualExpenses;
+        
+                    // Calculate taxes
+                    const annualTaxes = incomeAfterExpenses * taxRate;
+        
+                    // Calculate net income
+                    const netAnnual = incomeAfterExpenses - annualTaxes;
+        
+                    // Calculate monthly income
+                    const monthlyIncome = netAnnual / 12;
+        
+                    // Update results (use string concatenation to build display strings)
+                    document.getElementById('annual-income').textContent = '$' + Math.round(netAnnual).toLocaleString();
+                    document.getElementById('income-description').textContent = 'After expenses and taxes';
+                    document.getElementById('gross-income').textContent = '$' + Math.round(grossAnnual).toLocaleString();
+                    document.getElementById('after-expenses').textContent = '$' + Math.round(incomeAfterExpenses).toLocaleString();
+                    document.getElementById('after-taxes').textContent = '$' + Math.round(netAnnual).toLocaleString();
+                    document.getElementById('monthly-income').textContent = '$' + Math.round(monthlyIncome).toLocaleString();
+        
+                    // Update tax setaside amount
+                    document.getElementById('tax-setaside').textContent = '$' + Math.round(annualTaxes).toLocaleString();
+        
+                    // Update goal alert
+                    const goalAlert = document.getElementById('goal-alert');
+                    if (monthlyIncome >= incomeGoal) {
+                        goalAlert.style.display = 'block';
+                        document.getElementById('goal-amount').textContent = '$' + Math.round(incomeGoal).toLocaleString();
+                    } else {
+                        goalAlert.style.display = 'none';
+                    }
+        
+                    // Update breakdown table
+                    document.getElementById('gross-income-amount').textContent = '$' + Math.round(grossAnnual).toLocaleString();
+                    document.getElementById('gross-income-percent').textContent = '100%';
+                    document.getElementById('expenses-amount').textContent = '$' + Math.round(annualExpenses).toLocaleString();
+                    document.getElementById('expenses-percent').textContent = (expenseRate * 100).toFixed(0) + '%';
+                    document.getElementById('taxes-amount').textContent = '$' + Math.round(annualTaxes).toLocaleString();
+                    const taxesPercent = grossAnnual ? ((annualTaxes / grossAnnual) * 100).toFixed(1) : '0.0';
+                    document.getElementById('taxes-percent').textContent = taxesPercent + '%';
+                    document.getElementById('net-income-amount').textContent = '$' + Math.round(netAnnual).toLocaleString();
+        
+                    // Update milestones
+                    updateMilestones(netAnnual);
+        
+                    // Update charts
+                    updateIncomeBreakdownChart(grossAnnual, annualExpenses, annualTaxes, netAnnual);
+                    updateBreakdownChart(grossAnnual, annualExpenses, annualTaxes, netAnnual);
+                }
 
         // Update income milestones
         function updateMilestones(annualIncome) {
@@ -941,7 +951,8 @@
             
             milestones.forEach(months => {
                 const income = (annualIncome / 12) * months;
-                document.getElementById(milestone-${months}).textContent = $${Math.round(income).toLocaleString()};
+                const el = document.getElementById('milestone-' + months);
+                if (el) el.textContent = '$' + Math.round(income).toLocaleString();
             });
         }
 
@@ -968,11 +979,11 @@
             
             // Update comparison table
             document.getElementById('current-hustle').textContent = formatHustleType(currentHustle);
-            document.getElementById('current-hustle-income').textContent = $${Math.round(currentNet).toLocaleString()};
-            document.getElementById('current-hustle-rate').textContent = $${currentRate}/hr;
+            document.getElementById('current-hustle-income').textContent = '$' + Math.round(currentNet).toLocaleString();
+            document.getElementById('current-hustle-rate').textContent = '$' + currentRate + '/hr';
             document.getElementById('compare-hustle-display').textContent = formatHustleType(compareHustle);
-            document.getElementById('compare-hustle-income').textContent = $${Math.round(compareNet).toLocaleString()};
-            document.getElementById('compare-hustle-rate').textContent = $${compareRate}/hr;
+            document.getElementById('compare-hustle-income').textContent = '$' + Math.round(compareNet).toLocaleString();
+            document.getElementById('compare-hustle-rate').textContent = '$' + compareRate + '/hr';
             
             // Update comparison chart
             updateComparisonChart(currentHustle, compareHustle, currentNet, compareNet);
@@ -1067,7 +1078,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return ${context.label}: $${context.raw.toLocaleString()};
+                                    return context.label + ': $' + context.raw.toLocaleString();
                                 }
                             }
                         }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -564,36 +564,36 @@
             const timeSavings = currentPayoffTime - consolidationPayoffTime;
             
             // Update results
-            document.getElementById('current-monthly').textContent = $${totalMonthlyPayment.toFixed(2)};
-            document.getElementById('consolidated-monthly').textContent = $${consolidationPayment.toFixed(2)};
-            document.getElementById('interest-savings').textContent = $${interestSavings.toFixed(2)};
-            document.getElementById('time-savings').textContent = ${timeSavings.toFixed(1)} years faster;
+            document.getElementById('current-monthly').textContent = "$" + totalMonthlyPayment.toFixed(2);
+            document.getElementById('consolidated-monthly').textContent = "$" + consolidationPayment.toFixed(2);
+            document.getElementById('interest-savings').textContent = "$" + interestSavings.toFixed(2);
+            document.getElementById('time-savings').textContent = timeSavings.toFixed(1) + " years faster";
             
             // Update comparison table
-            document.getElementById('current-payment-cell').textContent = $${totalMonthlyPayment.toFixed(2)};
-            document.getElementById('consolidated-payment-cell').textContent = $${consolidationPayment.toFixed(2)};
-            document.getElementById('payment-difference-cell').textContent = -$${Math.abs(monthlySavings).toFixed(2)};
+            document.getElementById('current-payment-cell').textContent = "$" + totalMonthlyPayment.toFixed(2);
+            document.getElementById('consolidated-payment-cell').textContent = "$" + consolidationPayment.toFixed(2);
+            document.getElementById('payment-difference-cell').textContent = "-" + "$" + Math.abs(monthlySavings).toFixed(2);
             
-            document.getElementById('current-interest-cell').textContent = $${currentTotalInterest.toFixed(2)};
-            document.getElementById('consolidated-interest-cell').textContent = $${consolidationTotalInterest.toFixed(2)};
-            document.getElementById('interest-difference-cell').textContent = -$${Math.abs(interestSavings).toFixed(2)};
+            document.getElementById('current-interest-cell').textContent = "$" + currentTotalInterest.toFixed(2);
+            document.getElementById('consolidated-interest-cell').textContent = "$" + consolidationTotalInterest.toFixed(2);
+            document.getElementById('interest-difference-cell').textContent = "-" + "$" + Math.abs(interestSavings).toFixed(2);
             
-            document.getElementById('current-time-cell').textContent = ${currentPayoffTime.toFixed(1)} years;
-            document.getElementById('consolidated-time-cell').textContent = ${consolidationPayoffTime.toFixed(1)} years;
-            document.getElementById('time-difference-cell').textContent = ${timeSavings.toFixed(1)} years faster;
+            document.getElementById('current-time-cell').textContent = currentPayoffTime.toFixed(1) + " years";
+            document.getElementById('consolidated-time-cell').textContent = consolidationPayoffTime.toFixed(1) + " years";
+            document.getElementById('time-difference-cell').textContent = timeSavings.toFixed(1) + " years faster";
             
             const currentTotal = totalBalance + currentTotalInterest;
             const consolidatedTotal = totalBalance + consolidationTotalInterest + loanFee;
             const totalSavings = currentTotal - consolidatedTotal;
             
-            document.getElementById('current-total-cell').textContent = $${currentTotal.toFixed(2)};
-            document.getElementById('consolidated-total-cell').textContent = $${consolidatedTotal.toFixed(2)};
-            document.getElementById('total-difference-cell').textContent = -$${Math.abs(totalSavings).toFixed(2)};
+            document.getElementById('current-total-cell').textContent = "$" + currentTotal.toFixed(2);
+            document.getElementById('consolidated-total-cell').textContent = "$" + consolidatedTotal.toFixed(2);
+            document.getElementById('total-difference-cell').textContent = "-" + "$" + Math.abs(totalSavings).toFixed(2);
             
             // Update insights
-            document.getElementById('monthly-savings-text').textContent = $${Math.abs(monthlySavings).toFixed(2)};
-            document.getElementById('interest-savings-text').textContent = $${Math.abs(interestSavings).toFixed(2)};
-            document.getElementById('time-savings-text').textContent = ${timeSavings.toFixed(1)} years;
+            document.getElementById('monthly-savings-text').textContent = "$" + Math.abs(monthlySavings).toFixed(2);
+            document.getElementById('interest-savings-text').textContent = "$" + Math.abs(interestSavings).toFixed(2);
+            document.getElementById('time-savings-text').textContent = timeSavings.toFixed(1) + " years";
             
             // Update chart
             updateComparisonChart(totalBalance, currentTotalInterest, consolidationTotalInterest, loanFee);
@@ -675,7 +675,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return ${context.dataset.label}: $${context.raw.toFixed(2)};
+                                    return context.dataset.label + ': $' + context.raw.toFixed(2);
                                 }
                             }
                         }

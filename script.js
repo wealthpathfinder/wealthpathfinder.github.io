@@ -1120,7 +1120,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === #${current}) {
+            if (link.getAttribute('href') === `#${current}`) {
                 link.classList.add('active');
             }
         });
@@ -1141,17 +1141,17 @@ function shareArticle(platform) {
     let shareUrl;
     switch (platform) {
         case 'facebook':
-            shareUrl = https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)};
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
             break;
         case 'twitter':
-            shareUrl = https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)};
+            shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
             break;
         case 'linkedin':
-            shareUrl = https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)};
+            shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`;
             break;
         case 'pinterest':
             const image = document.querySelector('meta[property="og:image"]')?.content || '';
-            shareUrl = https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&media=${encodeURIComponent(image)}&description=${encodeURIComponent(title)};
+            shareUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&media=${encodeURIComponent(image)}&description=${encodeURIComponent(title)}`;
             break;
         default:
             return;
@@ -1169,7 +1169,7 @@ function copyToClipboard(text) {
 
 // Toggle FAQ answers
 function toggleFAQ(faqId) {
-    const answer = document.getElementById(faq-answer-${faqId});
+    const answer = document.getElementById(`faq-answer-${faqId}`);
     if (answer) {
         answer.classList.toggle('active');
     }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -609,17 +609,17 @@
             }
             
             // Update results
-            document.getElementById('utilization-ratio').textContent = ${overallUtilization.toFixed(1)}%;
+            document.getElementById('utilization-ratio').textContent = overallUtilization.toFixed(1) + '%';
             
             const statusElement = document.getElementById('utilization-status');
             statusElement.textContent = status;
-            statusElement.className = utilization-status ${statusClass};
+            statusElement.className = 'utilization-status ' + statusClass;
             
             document.getElementById('score-impact-text').textContent = scoreImpact;
-            document.getElementById('total-limit').textContent = $${totalLimit.toLocaleString()};
-            document.getElementById('total-balance').textContent = $${totalBalance.toLocaleString()};
+            document.getElementById('total-limit').textContent = '$' + totalLimit.toLocaleString();
+            document.getElementById('total-balance').textContent = '$' + totalBalance.toLocaleString();
             document.getElementById('high-util-cards').textContent = highUtilCards;
-            document.getElementById('recommended-balance').textContent = $${recommendedBalance.toLocaleString()};
+            document.getElementById('recommended-balance').textContent = '$' + recommendedBalance.toLocaleString();
             
             // Update charts
             updateUtilizationChart(cardData);
@@ -664,7 +664,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return Utilization: ${context.raw.toFixed(1)}%;
+                                    return 'Utilization: ' + context.raw.toFixed(1) + '%';
                                 }
                             }
                         }
@@ -693,7 +693,7 @@
             
             // Calculate needle position (0-180 degrees, where 0 is left, 90 is middle, 180 is right)
             const needleAngle = (utilization / 100) * 180;
-            document.getElementById('gauge-needle').style.transform = rotate(${needleAngle}deg);
+            document.getElementById('gauge-needle').style.transform = 'rotate(' + needleAngle + 'deg)';
             
             utilizationGauge = new Chart(ctx, {
                 type: 'doughnut',

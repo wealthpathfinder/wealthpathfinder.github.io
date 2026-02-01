@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -491,9 +491,9 @@
 
                 <div class="tab-container">
                     <div class="tabs">
-                        <div class="tab active" onclick="switchTab('breakdown')">Payment Breakdown</div>
-                        <div class="tab" onclick="switchTab('amortization')">Amortization</div>
-                        <div class="tab" onclick="switchTab('extra-payments')">Extra Payments</div>
+                        <div class="tab active" onclick="switchTab(event, 'breakdown')">Payment Breakdown</div>
+                        <div class="tab" onclick="switchTab(event, 'amortization')">Amortization</div>
+                        <div class="tab" onclick="switchTab(event, 'extra-payments')">Extra Payments</div>
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="breakdown-tab">
@@ -636,7 +636,7 @@
                 range.max = homePrice;
                 range.step = homePrice / 100;
                 minLabel.textContent = '$0';
-                maxLabel.textContent = $${homePrice.toLocaleString()};
+                maxLabel.textContent = `${homePrice.toLocaleString()}`;
             } else {
                 range.max = 100;
                 range.step = 1;
@@ -676,7 +676,7 @@
         });
 
         // Switch between tabs
-        function switchTab(tabName) {
+        function switchTab(event, tabName) {
             // Update tab active states
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
@@ -687,7 +687,7 @@
             document.querySelectorAll('.tab-pane').forEach(pane => {
                 pane.classList.remove('active');
             });
-            document.getElementById(${tabName}-tab).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
         }
 
         // Calculate mortgage payment
@@ -735,10 +735,10 @@
             const payoffString = payoffDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
             
             // Update results
-            document.getElementById('monthly-payment').textContent = $${totalMonthly.toFixed(2)};
-            document.getElementById('loan-amount').textContent = $${loanAmount.toLocaleString()};
-            document.getElementById('total-interest').textContent = $${Math.round(totalInterest).toLocaleString()};
-            document.getElementById('total-payments').textContent = $${Math.round(totalPayments).toLocaleString()};
+            document.getElementById('monthly-payment').textContent = `$${totalMonthly.toFixed(2)}`;
+            document.getElementById('loan-amount').textContent = `${loanAmount.toLocaleString()}`;
+            document.getElementById('total-interest').textContent = `${Math.round(totalInterest).toLocaleString()}`;
+            document.getElementById('total-payments').textContent = '$' + Math.round(totalPayments).toLocaleString();
             document.getElementById('payoff-date').textContent = payoffString;
             
             // Update payment breakdown
@@ -748,17 +748,17 @@
             const pmiPercent = (pmi / totalMonthly * 100).toFixed(1);
             const hoaPercent = (hoaFees / totalMonthly * 100).toFixed(1);
             
-            document.getElementById('pni-amount').textContent = $${monthlyPandI.toFixed(2)};
-            document.getElementById('pni-percent').textContent = ${pniPercent}%;
-            document.getElementById('tax-amount').textContent = $${propertyTax.toFixed(2)};
-            document.getElementById('tax-percent').textContent = ${taxPercent}%;
-            document.getElementById('insurance-amount').textContent = $${homeInsurance.toFixed(2)};
-            document.getElementById('insurance-percent').textContent = ${insurancePercent}%;
-            document.getElementById('pmi-amount').textContent = $${pmi.toFixed(2)};
-            document.getElementById('pmi-percent').textContent = ${pmiPercent}%;
-            document.getElementById('hoa-amount').textContent = $${hoaFees.toFixed(2)};
-            document.getElementById('hoa-percent').textContent = ${hoaPercent}%;
-            document.getElementById('total-monthly').textContent = $${totalMonthly.toFixed(2)};
+            document.getElementById('pni-amount').textContent = `$${monthlyPandI.toFixed(2)}`;
+            document.getElementById('pni-percent').textContent = `${pniPercent}%`;
+            document.getElementById('tax-amount').textContent = `$${propertyTax.toFixed(2)}`;
+            document.getElementById('tax-percent').textContent = `${taxPercent}%`;
+            document.getElementById('insurance-amount').textContent = `$${homeInsurance.toFixed(2)}`;
+            document.getElementById('insurance-percent').textContent = `${insurancePercent}%`;
+            document.getElementById('pmi-amount').textContent = `$${pmi.toFixed(2)}`;
+            document.getElementById('pmi-percent').textContent = `${pmiPercent}%`;
+            document.getElementById('hoa-amount').textContent = `$${hoaFees.toFixed(2)}`;
+            document.getElementById('hoa-percent').textContent = `${hoaPercent}%`;
+            document.getElementById('total-monthly').textContent = `$${totalMonthly.toFixed(2)}`;
             
             // Update charts
             updatePaymentBreakdownChart(monthlyPandI, propertyTax, homeInsurance, pmi, hoaFees);
@@ -789,7 +789,7 @@
             const estimatedHomePrice = estimatedLoanAmount / 0.8; // Add 20% down payment
             
             document.getElementById('affordability-result').textContent = 
-                You can afford a home up to $${Math.round(estimatedHomePrice).toLocaleString()};
+                "You can afford a home up to $" + Math.round(estimatedHomePrice).toLocaleString();
         }
 
         // Calculate with extra payments
@@ -810,7 +810,7 @@
             const newPayoffString = newPayoffDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
             
             document.getElementById('new-payoff-date').textContent = newPayoffString;
-            document.getElementById('interest-saved').textContent = $${interestSaved.toLocaleString()};
+            document.getElementById('interest-saved').textContent = `${interestSaved.toLocaleString()}`;
             document.getElementById('months-saved').textContent = monthsSaved;
         }
 
@@ -847,7 +847,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return $${context.raw.toFixed(2)} (${((context.raw / (pni+tax+insurance+pmi+hoa)) * 100).toFixed(1)}%);
+                                    return `${context.raw.toFixed(2)} (${((context.raw / (pni+tax+insurance+pmi+hoa)) * 100).toFixed(1)}%)`;
                                 }
                             }
                         }
@@ -888,7 +888,7 @@
                     remainingBalance -= principalPayment;
                 }
                 
-                labels.push(Year ${year});
+                labels.push(`Year ${year}`);
                 principalData.push(yearPrincipal);
                 interestData.push(yearInterest);
             }

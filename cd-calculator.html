@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -308,7 +308,7 @@
                 </div>
 
                 <div class="insights-section">
-                    <h3>💡 CD Investment Insights</h3>
+                    <h3>ðŸ’¡ CD Investment Insights</h3>
                     <div class="insight-item">
                         <strong>Safety First:</strong> Your CD is FDIC insured up to $250,000 per institution
                     </div>
@@ -376,10 +376,10 @@
             const apy = (Math.pow(1 + annualRate / compoundsPerYear, compoundsPerYear) - 1) * 100;
 
             // Update results
-            document.getElementById('totalValue').textContent = $${totalValue.toFixed(2)};
-            document.getElementById('totalInterest').textContent = $${totalInterest.toFixed(2)};
-            document.getElementById('afterTaxValue').textContent = $${afterTaxValue.toFixed(2)};
-            document.getElementById('apyValue').textContent = ${apy.toFixed(2)}%;
+            document.getElementById('totalValue').textContent = '$' + totalValue.toFixed(2);
+            document.getElementById('totalInterest').textContent = '$' + totalInterest.toFixed(2);
+            document.getElementById('afterTaxValue').textContent = '$' + afterTaxValue.toFixed(2);
+            document.getElementById('apyValue').textContent = apy.toFixed(2) + '%';
 
             // Update charts
             updateGrowthChart(principal, annualRate, years, compoundsPerYear);
@@ -399,7 +399,7 @@
             const interestData = [];
 
             for (let i = 0; i <= years; i++) {
-                labels.push(Year ${i});
+                labels.push('Year ' + i);
                 const value = principal * Math.pow(1 + rate / compoundsPerYear, compoundsPerYear * i);
                 principalData.push(principal);
                 interestData.push(value - principal);
@@ -434,7 +434,7 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return ${context.dataset.label}: $${context.raw.toFixed(2)};
+                                    return context.dataset.label + ': $' + context.raw.toFixed(2);
                                 }
                             }
                         }
@@ -475,7 +475,7 @@
             comparisonChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: terms.map(term => ${term} months),
+                    labels: terms.map(term => term + ' months'),
                     datasets: [{
                         label: 'CD Value at Maturity',
                         data: values,
